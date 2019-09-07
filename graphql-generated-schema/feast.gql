@@ -3,6 +3,13 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Empresa {
+  nome: String!
+  endereco: String!
+  imagem: String!
+}
+
 type Query {
   teste: String!
+  findAll: [Empresa!]!
 }
