@@ -1,0 +1,8 @@
+dispatch:
+  # Default service serves simple hostname request.
+  - url: "api.dalpham.tech/"
+    service: default
+    
+  # Default service serves simple hostname request.
+  - url: "api.dev.dalpham.tech/"
+    service: staging

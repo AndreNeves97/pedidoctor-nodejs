@@ -1,0 +1,58 @@
+stages:
+  - build
+  - deploy
+
+
+build:
+  image: node:10
+  stage: build
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - npm install --quiet
+    - npm run build
+  artifacts:
+    paths:
+      - dist
+
+deploy_production:
+  image: google/cloud-sdk:alpine
+  stage: deploy
+  environment: Production
+  only:
+  - production
+  script:
+  - echo $SERVICE_ACCOUNT > /tmp/$CI_PIPELINE_ID.json
+  - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_ID.json
+  - gcloud --quiet --project $PROJECT_ID app deploy app.yaml
+
+  
+deploy_staging:
+  image: google/cloud-sdk:alpine
+  stage: deploy
+  environment: Staging
+  only:
+  - staging
+  script:
+  - echo $SERVICE_ACCOUNT > /tmp/$CI_PIPELINE_ID.json
+  - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_ID.json
+  - gcloud --quiet --project $PROJECT_ID app deploy staging-app.yaml
+
+after_script:
+- rm /tmp/$CI_PIPELINE_ID.json
+
+  
+deploy_teste_nestjs:
+  image: google/cloud-sdk:alpine
+  stage: deploy
+  environment: TesteNestJs
+  only:
+  - teste-nest
+  script:
+  - echo $SERVICE_ACCOUNT > /tmp/$CI_PIPELINE_ID.json
+  - gcloud auth activate-service-account --key-file /tmp/$CI_PIPELINE_ID.json
+  - gcloud --quiet --project $PROJECT_ID app deploy teste-nestjs-app.yaml
+
+after_script:
+- rm /tmp/$CI_PIPELINE_ID.json
