@@ -13,6 +13,6 @@
 
 # [START gae_quickstart_yaml]
 runtime: nodejs10
-service: teste_nestjs
+service: teste-nestjs
 # [END gae_quickstart_yaml]
   
