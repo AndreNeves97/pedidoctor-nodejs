@@ -4,12 +4,34 @@
 # -----------------------------------------------
 
 type Empresa {
+  _id: ID!
   nome: String!
   endereco: String!
   imagem: String!
 }
 
+input EmpresaCreateInput {
+  nome: String!
+  endereco: String!
+  imagem: String!
+}
+
+input EmpresaUpdateInput {
+  nome: String
+  endereco: String
+  imagem: String
+}
+
+type Mutation {
+  createEmpresa(obj: EmpresaCreateInput!): Empresa!
+  deleteEmpresa(id: String!): Empresa
+  updateEmpresa(obj: EmpresaUpdateInput!, id: String!): Empresa
+}
+
 type Query {
-  teste: String!
-  findAll: [Empresa!]!
+  empresas: [Empresa!]!
+}
+
+type Subscription {
+  empresaCreated: Empresa!
 }

@@ -2,12 +2,14 @@
 import * as mongoose from 'mongoose';
 
 import { prop, Typegoose } from 'typegoose';
-import { IsString } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 import { FileFirebaseStorage } from 'src/utils/firebase/storage/file';
-import { ObjectType, Field } from 'type-graphql';
+import { ObjectType, Field, InputType, ID } from 'type-graphql';
 
 @ObjectType()
 export class Empresa extends Typegoose {
+    @Field(type => ID)
+    _id: string;
 
     @IsString()
     @prop({ required: true })
@@ -25,5 +27,29 @@ export class Empresa extends Typegoose {
     imagem: string;
 
     imagemFirebase: FileFirebaseStorage;
+}
 
+
+@InputType()
+export class EmpresaCreateInput {
+    @Field()
+    nome: string;
+
+    @Field()
+    endereco: string;
+
+    @Field()
+    imagem: string;
+}
+
+@InputType()
+export class EmpresaUpdateInput {
+    @Field({ nullable: true })
+    nome: string;
+
+    @Field({ nullable: true })
+    endereco: string;
+
+    @Field({ nullable: true })
+    imagem: string;
 }

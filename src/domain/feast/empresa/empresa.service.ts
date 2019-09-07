@@ -1,32 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
-import { Empresa } from './empresa.model';
+import { Empresa, EmpresaCreateInput, EmpresaUpdateInput } from './empresa.model';
 import { ModelType } from 'typegoose';
 
 @Injectable()
 export class EmpresaService {
     constructor(@InjectModel(Empresa) private readonly model : ModelType<Empresa>) { }
 
-    async create(obj: Empresa) : Promise<Empresa> {
-        return await this.model.create(obj);
-    }
 
     async findById(id: number) : Promise<Empresa> {
         return await this.model.findById(id);
     }
 
     async findAll() : Promise<Empresa[]> {
-        return await this.model.find().exec();
+        const query =
+            this.model
+            .find()
+            .sort({ nome: 'asc' })
+            .lean();
+
+        return query;
     }
 
     async find() {
     }
 
-    async delete(id: number) {
-
+    async create(obj: EmpresaCreateInput) : Promise<Empresa> {
+        return await this.model.create(obj);
     }
 
-    async update(obj: Empresa) {
+    async delete(id: string) {
+        return await this.model
+            .findByIdAndRemove(id);
+    }
 
+    async update(id: string, obj: EmpresaUpdateInput) {
+        return await this.model
+            .findByIdAndUpdate(id, obj, {lean: true});
     }
 }
