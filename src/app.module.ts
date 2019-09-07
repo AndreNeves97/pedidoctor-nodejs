@@ -9,8 +9,9 @@ import { TypegooseModule } from 'nestjs-typegoose';
 @Module({
     imports: [
         DomainModule,
+        //mongodb://localhost/nest  
         //mongodb://dalpham-admin:as2rk_13rf@ds131237.mlab.com:31237/dalpham-team-development
-        TypegooseModule.forRoot('mongodb://localhost/nest')
+        TypegooseModule.forRoot('mongodb://dalpham-admin:as2rk_13rf@ds131237.mlab.com:31237/dalpham-team-development')
     ],
     controllers: [AppController],
     providers: [AppService],
