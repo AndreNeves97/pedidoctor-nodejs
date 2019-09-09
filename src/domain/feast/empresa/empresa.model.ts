@@ -3,7 +3,6 @@ import * as mongoose from 'mongoose';
 
 import { prop, Typegoose } from 'typegoose';
 import { IsString, IsOptional } from 'class-validator';
-import { FileFirebaseStorage } from 'src/utils/firebase/storage/file';
 import { ObjectType, Field, InputType, ID } from 'type-graphql';
 
 @ObjectType()
@@ -26,7 +25,7 @@ export class Empresa extends Typegoose {
     @Field()
     imagem: string;
 
-    imagemFirebase: FileFirebaseStorage;
+    // imagemFirebase: FileFirebaseStorage;
 }
 
 
