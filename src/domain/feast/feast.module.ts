@@ -33,8 +33,15 @@ import { AppModule } from '../../app.module';
             installSubscriptionHandlers: true,
 
             autoSchemaFile: process.env.NODE_ENV == 'development'? 
-                'generated/feast.gql' : '/tmp/dalpham/feast.gql',  
-            path: '/graphql/feast'
+                'src/generated/feast.gql' : '/tmp/dalpham/feast.gql',  
+            path: '/graphql/feast',
+            
+            subscriptions: {
+                path: '/graphql/feast',
+                onConnect: (connectionParams, websocket) => {
+                    console.log('subscription connected', connectionParams, websocket)
+                }
+            }
         }),        
     ],
     controllers: [],
