@@ -32,7 +32,8 @@ import { AppModule } from '../../app.module';
             playground: true,
             installSubscriptionHandlers: true,
 
-            autoSchemaFile: 'graphql-generated-schema/feast.gql',  
+            autoSchemaFile: process.env.NODE_ENV == 'development'? 
+                'generated/feast.gql' : '/tmp/dalpham/feast.gql',  
             path: '/graphql/feast'
         }),        
     ],
