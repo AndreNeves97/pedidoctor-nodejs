@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { User } from './user.model';
-import { ModelType } from 'typegoose';
 import { InjectModel } from 'nestjs-typegoose';
+import { ModelType } from 'typegoose';
 
 @Injectable()
 export class UserService {

@@ -1,0 +1,13 @@
+{
+    "db": {
+        "development": {
+            "uri": "mongodb://dalpham-admin:as2rk_13rf@ds131237.mlab.com:31237/dalpham-team-development",
+            "label": "mlab-dalpham-team-development"
+        },
+
+        "production": {
+            "uri": "mongodb://dalpham-prod:_121252ddga2Asddggga22fg@ds131237.mlab.com:31237/dalpham-team-production",
+            "label": "mlab-dalpham-team-production"
+        }
+    }
+}

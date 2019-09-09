@@ -5,7 +5,13 @@ import { DomainModule } from './domain/domain.module';
 
 import { TypegooseModule } from 'nestjs-typegoose';
 import { GraphQLModule } from '@nestjs/graphql';
-import { SecurityModule } from './security/security.module';
+import { SecurityModule } from './common/security/security.module';
+import { ConfigModule } from './common/config/config.module';
+import { FirebaseModule } from './common/firebase/firebase.module';
+import { MonitoringModule } from './common/monitoring/monitoring.module';
+import { MonitoringService } from './common/monitoring/monitoring.service';
+import { SecurityService } from './common/security/security.service';
+import { DomainService } from './domain/domain.service';
 
 
 @Module({
@@ -16,12 +22,15 @@ import { SecurityModule } from './security/security.module';
         //mongodb://dalpham-admin:as2rk_13rf@ds131237.mlab.com:31237/dalpham-team-development
         TypegooseModule.forRoot('mongodb://dalpham-admin:as2rk_13rf@ds131237.mlab.com:31237/dalpham-team-development'),
         
-        SecurityModule
+        SecurityModule,
+        ConfigModule,
+        FirebaseModule,
+        MonitoringModule
     ],
     exports: [
-        SecurityModule
+        AppService
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [SecurityService, MonitoringService, DomainService, AppService],
 })
 export class AppModule { }
