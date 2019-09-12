@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+
 
 export DB_URI="mongodb://dalpham-admin:as2rk_13rf@ds131237.mlab.com:31237/dalpham-team-development";
 export DB_LABEL="mlab-dalpham-team-development";
