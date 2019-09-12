@@ -4,20 +4,24 @@ import { User } from './user/user.model'
 import { SecurityService } from './security.service';
 import { UserResolver } from './user/user.resolver';
 import { UserService } from './user/user.service';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { FirebaseService } from '../firebase/firebase.service';
+import { FirebaseModule } from '../firebase/firebase.module';
 
 @Module({
     imports: [
-        TypegooseModule.forFeature([{
-            typegooseClass: User,
-            schemaOptions: {
-                collection: 'Pedilandia_User'
-            }
-        }])
+        AuthModule,
+        UserModule,
+        FirebaseModule,
     ],
     exports: [
-        TypegooseModule
+        UserService,
+        FirebaseService
+
     ],
-    providers: [UserService, SecurityService, UserResolver]
+    providers: [SecurityService, UserService, FirebaseService]
 
 })
 export class SecurityModule {}
