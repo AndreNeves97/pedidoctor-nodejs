@@ -14,9 +14,7 @@ import { PromocaoService } from './promocao/promocao.service';
 import { PromocaoResolver } from './promocao/promocao.resolver';
 import { PedidoResolver } from './pedido/pedido.resolver';
 import { PedidoService } from './pedido/pedido.service';
-import { AppService } from '../../app.service';
-import { AppModule } from '../../app.module';
-import { tmpDir } from 'src/common/config/config.service';
+import { tmpDir } from '../../common/config/config.service';
 
 @Module({
     imports: [
