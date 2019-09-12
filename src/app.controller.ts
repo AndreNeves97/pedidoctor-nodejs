@@ -1,12 +1,51 @@
-import { Controller, Get } from '@nestjs/common';
+
+import { Controller, Request, Post, UseGuards, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { AuthGuard } from '@nestjs/passport';
+import { AuthService } from './common/security/auth/auth.service';
+import { ConfigService } from './common/config/config.service';
+
+
 
 @Controller()
 export class AppController {
-  constructor(private readonly service: AppService) {}
+    constructor(
+        private readonly service: AppService,
+        private readonly authService: AuthService,
+        private readonly configService: ConfigService
+    ) {
 
-  @Get()
-  index() {
-    return this.service.index();
-  }
+    }
+
+    @Get()
+    index() {
+        return this.service.index();
+    }
+
+
+    @UseGuards(AuthGuard('local'))
+    @Post('login')
+    async login(@Request() req) {
+
+        console.log('testes testes');
+
+        return this.authService.login(req.user);
+    }
+
+
+
+    @UseGuards(AuthGuard('firebase'))
+    @Post('login-firebase')
+    async loginFirebase(@Request() req) {
+
+        console.log('aaaa');
+
+        return this.authService.login(req.user);
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Get('me')
+    getProfile(@Request() req) {
+        return req.user;
+    }
 }

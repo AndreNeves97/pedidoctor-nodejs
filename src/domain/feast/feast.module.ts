@@ -16,6 +16,7 @@ import { PedidoResolver } from './pedido/pedido.resolver';
 import { PedidoService } from './pedido/pedido.service';
 import { AppService } from '../../app.service';
 import { AppModule } from '../../app.module';
+import { tmpDir } from 'src/common/config/config.service';
 
 @Module({
     imports: [
@@ -32,8 +33,8 @@ import { AppModule } from '../../app.module';
             playground: true,
             installSubscriptionHandlers: true,
 
-            autoSchemaFile: process.env.NODE_ENV == 'development'? 
-                'src/generated/feast.gql' : '/tmp/dalpham/feast.gql',  
+            autoSchemaFile: `${tmpDir}/feast.gql`,
+
             path: '/graphql/feast',
             
             subscriptions: {

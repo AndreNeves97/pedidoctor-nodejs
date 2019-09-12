@@ -6,6 +6,7 @@ import { ControleEstoqueModule } from './controle-estoque/controle-estoque.modul
 import { AppService } from '../app.service';
 import { AppModule } from '../app.module';
 import { DomainService } from './domain.service';
+import { PagamentosModule } from './pagamentos/pagamentos.module';
 
 @Module({
     imports: [
@@ -13,6 +14,7 @@ import { DomainService } from './domain.service';
         FeastModule,
         SupperModule,
         ControleEstoqueModule,
+        PagamentosModule,
 
     ],
     providers: [

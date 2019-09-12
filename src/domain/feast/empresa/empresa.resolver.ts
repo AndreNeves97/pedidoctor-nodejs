@@ -2,6 +2,7 @@ import { Resolver, Query, Args, Mutation, Subscription } from '@nestjs/graphql';
 import { Empresa, EmpresaCreateInput, EmpresaUpdateInput } from './empresa.model';
 import { EmpresaService } from './empresa.service';
 import { PubSub } from 'graphql-subscriptions';
+import { UseGuards } from '@nestjs/common';
 
 
 @Resolver(of => Empresa)
@@ -14,7 +15,7 @@ export class EmpresaResolver {
     ) { }
     
     @Query(returns => [Empresa])
-    async empresas() {
+    async empresa() {
         const objs = await this.service.findAll();
         return objs;
     }

@@ -6,7 +6,9 @@ import { ModelType } from 'typegoose';
 @Injectable()
 export class EmpresaService {
 
-    constructor(@InjectModel(Empresa) private readonly model : ModelType<Empresa>) { }
+    constructor(
+        @InjectModel(Empresa) private readonly model : ModelType<Empresa>
+    ) { }
 
 
     async findById(id: number) : Promise<Empresa> {

@@ -12,6 +12,8 @@ import { MonitoringModule } from './common/monitoring/monitoring.module';
 import { MonitoringService } from './common/monitoring/monitoring.service';
 import { SecurityService } from './common/security/security.service';
 import { DomainService } from './domain/domain.service';
+import { AuthService } from './common/security/auth/auth.service';
+import { ConfigService } from './common/config/config.service';
 
 
 @Module({
@@ -21,7 +23,7 @@ import { DomainService } from './domain/domain.service';
         //mongodb://localhost/nest  
         //mongodb://dalpham-admin:as2rk_13rf@ds131237.mlab.com:31237/dalpham-team-development
         TypegooseModule.forRoot('mongodb://dalpham-admin:as2rk_13rf@ds131237.mlab.com:31237/dalpham-team-development'),
-        
+
         SecurityModule,
         ConfigModule,
         FirebaseModule,
@@ -31,6 +33,14 @@ import { DomainService } from './domain/domain.service';
         AppService
     ],
     controllers: [AppController],
-    providers: [SecurityService, MonitoringService, DomainService, AppService],
+    providers: [
+        ConfigService,
+        SecurityService, 
+        MonitoringService, 
+        DomainService, 
+        AppService, 
+        AuthService
+    ],
+
 })
 export class AppModule { }
