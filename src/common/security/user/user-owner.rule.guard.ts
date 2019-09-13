@@ -20,22 +20,35 @@ export class UserOwnerRuleGuard implements CanActivate {
     constructor(private readonly reflector: Reflector) { }
 
     canActivate(context: ExecutionContext): boolean {
+        /**
+         * Obtenção da função que define a regra de definição de propriedade
+         */
         const rule = this.reflector.get<Function>('userOwnerRule', context.getHandler());
 
+        /**
+         * Decorator não foi usado
+         */
         if (!rule) {
             return true;
         }
 
 
+        /**
+         * TODO: Obtenção do usuário ativo no request
+         */
         const user = {
             id: "5d7b2496c1a48e44d95eae45"
         };
 
 
+        /**
+         * Obter argumentos passados para a função
+         */
         const args = context.getArgs()[1];
-        console.log(args);
         
-
+        /**
+         * Executar a regra passada por parâmetro
+         */
         return rule(user, args);
     }
 }

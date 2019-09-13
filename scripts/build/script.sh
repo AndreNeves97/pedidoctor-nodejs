@@ -46,12 +46,3 @@ echo $FIREBASE_KEY > $FILE
 
 
 echo "Config files generated..."
-
-echo "database.json:"
-cat $BASEDIR/../../generated/database.json
-
-echo "jwt.json:"
-cat $BASEDIR/../../generated/jwt.json
-
-echo "firebase-key.json:"
-cat $BASEDIR/../../generated/firebase-key.json
