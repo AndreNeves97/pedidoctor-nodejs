@@ -3,6 +3,7 @@ import { Empresa, EmpresaCreateInput, EmpresaUpdateInput } from './empresa.model
 import { EmpresaService } from './empresa.service';
 import { PubSub } from 'graphql-subscriptions';
 import { UseGuards } from '@nestjs/common';
+import { Roles, RolesGuard } from '../../../common/security/user/roles.guard';
 
 
 @Resolver(of => Empresa)
@@ -14,7 +15,14 @@ export class EmpresaResolver {
         private readonly service: EmpresaService
     ) { }
     
-    @Query(returns => [Empresa])
+    @Query(returns => [Empresa]) 
+    @Roles('cliente', 'gerente')
+    async empresas() {
+        const objs = await this.service.findAll();
+        return objs;
+    }
+
+    @Query(returns => [Empresa]) 
     async empresa() {
         const objs = await this.service.findAll();
         return objs;

@@ -13,11 +13,10 @@ export class FirebaseService {
         if(FirebaseService.firebaseApp != undefined) {
             return;
         }
-        
+
         FirebaseService.firebaseApp = admin.initializeApp({
             credential: admin.credential.applicationDefault()
         });
-
     }   
 
 

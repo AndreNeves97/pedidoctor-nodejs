@@ -14,6 +14,8 @@ import { SecurityService } from './common/security/security.service';
 import { DomainService } from './domain/domain.service';
 import { AuthService } from './common/security/auth/auth.service';
 import { ConfigService, database } from './common/config/config.service';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './common/security/user/roles.guard';
 
 
 @Module({
@@ -31,6 +33,11 @@ import { ConfigService, database } from './common/config/config.service';
     ],
     controllers: [AppController],
     providers: [
+        {
+          provide: APP_GUARD,
+          useClass: RolesGuard,
+        },
+        
         ConfigService,
         SecurityService, 
         MonitoringService, 
