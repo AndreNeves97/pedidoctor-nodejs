@@ -16,6 +16,7 @@ import { AuthService } from './common/security/auth/auth.service';
 import { ConfigService, database } from './common/config/config.service';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './common/security/user/roles.guard';
+import { UserOwnerRuleGuard } from './common/security/user/user-owner.rule.guard';
 
 
 @Module({
@@ -34,15 +35,19 @@ import { RolesGuard } from './common/security/user/roles.guard';
     controllers: [AppController],
     providers: [
         {
-          provide: APP_GUARD,
-          useClass: RolesGuard,
+            provide: APP_GUARD,
+            useClass: RolesGuard,
         },
-        
+        {
+            provide: APP_GUARD,
+            useClass: UserOwnerRuleGuard,
+        },
+
         ConfigService,
-        SecurityService, 
-        MonitoringService, 
-        DomainService, 
-        AppService, 
+        SecurityService,
+        MonitoringService,
+        DomainService,
+        AppService,
         AuthService
     ],
 

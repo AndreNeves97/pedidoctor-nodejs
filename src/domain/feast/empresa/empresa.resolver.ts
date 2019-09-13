@@ -2,8 +2,9 @@ import { Resolver, Query, Args, Mutation, Subscription } from '@nestjs/graphql';
 import { Empresa, EmpresaCreateInput, EmpresaUpdateInput } from './empresa.model';
 import { EmpresaService } from './empresa.service';
 import { PubSub } from 'graphql-subscriptions';
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, SetMetadata } from '@nestjs/common';
 import { Roles, RolesGuard } from '../../../common/security/user/roles.guard';
+import { UserOwnerRule } from '../../../common/security/user/user-owner.rule.guard';
 
 
 @Resolver(of => Empresa)
@@ -44,6 +45,7 @@ export class EmpresaResolver {
     }
 
     @Mutation(returns => Empresa, { nullable: true })
+    @UserOwnerRule( (user, args) => user.id === args.id || true)
     async updateEmpresa(
         @Args('id') id : string, 
         @Args('obj') obj  : EmpresaUpdateInput
