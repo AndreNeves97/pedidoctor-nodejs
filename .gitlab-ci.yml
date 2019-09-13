@@ -15,6 +15,7 @@ build:
   artifacts:
     paths:
       - dist
+      - generated
 
 deploy_production:
   image: google/cloud-sdk:alpine
