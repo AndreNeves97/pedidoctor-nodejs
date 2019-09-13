@@ -9,11 +9,11 @@ export const tmpDir =
         'tmp' : 
         '/tmp/dalpham';
 
-        console.log(tmpDir);
 
-const database = require(`../../../${generatedDir}/database.json`);
-const firebaseKey = require(`../../../${generatedDir}/firebase-key.json`);
-const jwt = require(`../../../${generatedDir}/jwt.json`);
+export const database = require(`../../../${generatedDir}/database.json`);
+export const firebaseKey = require(`../../../${generatedDir}/firebase-key.json`);
+export const jwt = require(`../../../${generatedDir}/jwt.json`);
+
 
 /**
  * Classe que fornece parâmetros de configuração
@@ -22,31 +22,24 @@ const jwt = require(`../../../${generatedDir}/jwt.json`);
  * gerados automaticamente no processo de `deploy`
  */
 @Injectable()
-export class ConfigService implements JwtOptionsFactory {
-
-    constructor() {
-    }
-
-
-
-
-    mongoDbInfo(): { uri: string, label: string } {
-        return {
-            uri: "mongodb://dalpham-admin:as2rk_13rf@ds131237.mlab.com:31237/dalpham-team-development",
-            label: "mlab-dalpham-team-development"
-        };
-    }
+export class ConfigService {// implements JwtOptionsFactory {
+    // mongoDbInfo(): { uri: string, label: string } {
+    //     return {
+    //         uri: "mongodb://dalpham-admin:as2rk_13rf@ds131237.mlab.com:31237/dalpham-team-development",
+    //         label: "mlab-dalpham-team-development"
+    //     };
+    // }
     
-    createJwtOptions(): JwtModuleOptions {
-        return {
-            secret: 'affsgdssdaff23__3##31rfa',
-            signOptions: { expiresIn: '1h' },
-        };
-    }
+    // createJwtOptions(): JwtModuleOptions {
+    //     return {
+    //         secret: 'affsgdssdaff23__3##31rfa',
+    //         signOptions: { expiresIn: '1h' },
+    //     };
+    // }
 
-    jwtSecretKey(): string {
-        return '';
-    }
+    // jwtSecretKey(): string {
+    //     return '';
+    // }
 
 
 }

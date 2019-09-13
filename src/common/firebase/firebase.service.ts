@@ -1,19 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Scope } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 
 
 
-@Injectable()
+@Injectable({scope: Scope.DEFAULT})
 export class FirebaseService {
 
-    //para app de producao limitar o acesso que esse backend pode ter,para apenas funcoes necessarias,vide https://firebase.google.com/docs/database/admin/start/?hl=pt-br
-    public static inicializa() {
-        let serviceAccount = __dirname+'/chavesFirebase.json';
+    static firebaseApp;
 
-        admin.initializeApp({
-            credential: admin.credential.applicationDefault(),
-            databaseURL: "https://dalpham-dev.firebaseio.com"
+    //para app de producao limitar o acesso que esse backend pode ter,para apenas funcoes necessarias,vide https://firebase.google.com/docs/database/admin/start/?hl=pt-br
+    public constructor() {
+        if(FirebaseService.firebaseApp != undefined) {
+            return;
+        }
+        
+        FirebaseService.firebaseApp = admin.initializeApp({
+            credential: admin.credential.applicationDefault()
         });
+
     }   
 
 
