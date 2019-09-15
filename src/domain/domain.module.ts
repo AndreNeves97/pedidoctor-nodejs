@@ -7,16 +7,24 @@ import { AppService } from '../app.service';
 import { AppModule } from '../app.module';
 import { DomainService } from './domain.service';
 import { PagamentosModule } from './pagamentos/pagamentos.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { tmpDir } from '../common/config/config.service';
 // import { CoreModule } from './core/core.module';
 
 @Module({
     imports: [
-        PedilandiaModule,
         FeastModule,
         SupperModule,
+        PedilandiaModule,
         ControleEstoqueModule,
         PagamentosModule,
         // CoreModule,
+        GraphQLModule.forRoot({
+            playground: true,
+            installSubscriptionHandlers: true,
+            autoSchemaFile: `${tmpDir}/feast.gql`,
+            path: '/graphql',
+        }),  
 
     ],
     providers: [
