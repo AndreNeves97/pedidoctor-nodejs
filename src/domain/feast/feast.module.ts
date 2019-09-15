@@ -27,16 +27,15 @@ import { tmpDir } from '../../common/config/config.service';
         }]),
 
         
-        GraphQLModule.forRoot({
-            playground: true,
-            installSubscriptionHandlers: true,
-            autoSchemaFile: `${tmpDir}/feast.gql`,
-            path: '/graphql/feast',
-        }),        
+        // GraphQLModule.forRoot({
+        //     playground: true,
+        //     installSubscriptionHandlers: true,
+        //     autoSchemaFile: `${tmpDir}/feast.gql`,
+        //     path: '/graphql/feast',
+        // }),        
     ],
     controllers: [],
-    exports: [
-    ],
+    exports: [],
     providers: [
 
         EmpresaResolver, EmpresaService, 
