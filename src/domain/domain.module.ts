@@ -7,6 +7,7 @@ import { AppService } from '../app.service';
 import { AppModule } from '../app.module';
 import { DomainService } from './domain.service';
 import { PagamentosModule } from './pagamentos/pagamentos.module';
+// import { CoreModule } from './core/core.module';
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { PagamentosModule } from './pagamentos/pagamentos.module';
         SupperModule,
         ControleEstoqueModule,
         PagamentosModule,
+        // CoreModule,
 
     ],
     providers: [

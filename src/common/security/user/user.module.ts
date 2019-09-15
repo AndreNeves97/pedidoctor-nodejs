@@ -6,7 +6,6 @@ import { User } from './user.model';
 
 @Module({
     imports: [
-
         TypegooseModule.forFeature([{
             typegooseClass: User,
             schemaOptions: {
@@ -18,7 +17,9 @@ import { User } from './user.model';
         TypegooseModule,
         UserService
     ],
-    providers: [UserService, UserResolver]
-
+    providers: [
+        UserService, 
+        UserResolver
+    ]
 })
 export class UserModule {}
