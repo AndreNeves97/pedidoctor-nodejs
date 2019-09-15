@@ -4,7 +4,7 @@ import { prop, Typegoose } from 'typegoose';
 import { IsString, IsOptional } from 'class-validator';
 import { ObjectType, Field, InputType, ID } from 'type-graphql';
 
-import { User } from '../../../common/security/user/user.model';
+import { User, UserInputRef } from '../../../common/security/user/user.model';
 
 @ObjectType()
 export class Consulta extends Typegoose{
@@ -51,8 +51,8 @@ export class ConsultaCreateInput {
     @Field()
     dataConsulta: Date;
 
-    @Field(type => User)
-    paciente: User;
+    @Field(type => UserInputRef)
+    paciente: UserInputRef;
 
     @Field()
     tipoConsulta: string;
