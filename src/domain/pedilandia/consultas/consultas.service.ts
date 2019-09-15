@@ -17,7 +17,10 @@ export class ConsultasService {
     }
 
     async create(obj: ConsultaCreateInput): Promise<Consulta> {
-        return await this.model.create(obj);
+        return await this.model.create({
+            ...obj,
+            dataRegistro: new Date()
+        });
     }
 
     async delete(id: string) {
