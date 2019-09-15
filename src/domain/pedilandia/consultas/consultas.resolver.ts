@@ -20,7 +20,7 @@ export class ConsultasResolver {
 
     @Query(returns => Consulta)
     @Roles('cliente', 'gerente')
-    async empresa(@Args('id') id: string) {
+    async consulta(@Args('id') id: string) {
         return await this.service.findById(id);
     }
 
