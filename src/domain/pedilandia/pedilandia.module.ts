@@ -1,7 +1,33 @@
 import { Module } from '@nestjs/common';
-import { ConsultasModule } from './consultas/consultas.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ConsultasResolver } from './consultas/consultas.resolver';
+import { ConsultasService } from './consultas/consultas.service';
+import { tmpDir } from '../../common/config/config.service';
+import { TypegooseModule } from 'nestjs-typegoose';
+import { Consulta } from './consultas/consulta.model';
 
 @Module({
-  imports: [ConsultasModule]
+  imports: [
+
+    TypegooseModule.forFeature([{
+      typegooseClass: Consulta,
+      schemaOptions: {
+        collection: 'Feast_Consulta'
+      }
+    }]),
+
+    // GraphQLModule.forRoot({
+    //   playground: true,
+    //   installSubscriptionHandlers: true,
+    //   autoSchemaFile: `${tmpDir}/pedilandia.gql`,
+    //   path: '/graphql/pedilandia',
+    // })
+  ],
+  controllers: [],
+  exports: [],
+  providers: [
+    ConsultasResolver, 
+    ConsultasService
+  ]
 })
 export class PedilandiaModule {}
