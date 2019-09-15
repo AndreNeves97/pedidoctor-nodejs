@@ -12,7 +12,8 @@ import { Consulta } from './consultas/consulta.model';
     TypegooseModule.forFeature([{
       typegooseClass: Consulta,
       schemaOptions: {
-        collection: 'Feast_Consulta'
+        collection: 'Pedilandia_Consulta',
+        timestamps: true
       }
     }]),
 

@@ -22,7 +22,8 @@ import { tmpDir } from '../../common/config/config.service';
         TypegooseModule.forFeature([{
             typegooseClass: Empresa,
             schemaOptions: {
-                collection: 'Feast_Empresa'
+                collection: 'Feast_Empresa',
+                timestamps: true
             }
         }]),
 
