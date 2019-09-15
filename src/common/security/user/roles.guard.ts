@@ -31,7 +31,7 @@ export class RolesGuard implements CanActivate {
         const user = {
             roles: [
                 'admin',
-                //'cliente'
+                'cliente'
             ]
         };
 
