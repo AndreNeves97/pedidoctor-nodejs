@@ -6,6 +6,7 @@ import { User } from './user.model';
 
 @Module({
     imports: [
+        // TODO: Criar índice único para firebaseUid
         TypegooseModule.forFeature([{
             typegooseClass: User,
             schemaOptions: {

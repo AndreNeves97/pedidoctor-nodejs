@@ -6,12 +6,12 @@ import { JwtService } from '@nestjs/jwt';
 import { FirebaseService } from '../../firebase/firebase.service';
 
 import { jwt as jwtInfo } from '../../config/config.service';
+import { User } from '../user/user.model';
 
 @Injectable()
 export class AuthService {
 
     constructor(
-        private readonly usersService: UserService,
         private readonly firebaseService: FirebaseService
     ) { }
 
@@ -24,14 +24,11 @@ export class AuthService {
 
 
 
-    async login(user: any) {
-
+    async login(user: User) {
         const payload = { 
-            uid: user.uid
+            uid: user.firebaseUid
         };
 
-        return {
-            accessToken: jwt.sign(payload, jwtInfo.secret, jwtInfo.signOptions),
-        };
+        return jwt.sign(payload, jwtInfo.secret, jwtInfo.signOptions);
     }
 }

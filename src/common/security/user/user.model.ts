@@ -11,16 +11,13 @@ export class User extends Typegoose {
 
     @IsString()
     @prop({ required: true })
+    @Field()
     firebaseUid: string;
 
     @IsString()
-    @prop( { required: true })
+    @prop( { required: true } )
     @Field()
-    username: string
-
-    @IsString()
-    @prop( { required: true })
-    password: string
+    nome: string
 
     @IsString()
     @prop({ required: true })
@@ -28,9 +25,16 @@ export class User extends Typegoose {
     email: string;
 
     @IsString()
-    @prop({ required: true })
+    @prop({ required: false })
     @Field()
     telefone: string;
+
+    @IsString()
+    @prop({ required: false })
+    @Field()
+    fotoUrl: string;
+
+
 }
 
 
@@ -39,3 +43,12 @@ export class UserInputRef extends Typegoose {
     @Field(type => ID)
     _id: string;
 }
+
+export class UserCreateFromFirebaseInput {    
+    firebaseUid: string;
+    nome: string
+    email: string;
+    fotoUrl: string;
+}
+
+
