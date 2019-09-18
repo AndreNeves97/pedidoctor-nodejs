@@ -16,7 +16,10 @@ export class UserService {
                 firebaseUid: userFb.uid,
                 nome: userFb.name,
                 email: userFb.email,
-                fotoUrl: userFb.picture
+                fotoUrl: userFb.picture,
+                roles: [
+                    'user'
+                ]
             });
 
         }
@@ -28,7 +31,7 @@ export class UserService {
     async findByFirebaseUid(uid: string): Promise<User> {
         const filter = {firebaseUid: uid};
 
-        return await this.model.findOne(filter);
+        return await this.model.find(filter).lean();
     }
 
     async findById(id: string): Promise<User> {

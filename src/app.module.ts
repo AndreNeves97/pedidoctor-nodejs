@@ -2,9 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DomainModule } from './domain/domain.module';
-
 import { TypegooseModule } from 'nestjs-typegoose';
-import { GraphQLModule } from '@nestjs/graphql';
 import { SecurityModule } from './common/security/security.module';
 import { ConfigModule } from './common/config/config.module';
 import { FirebaseModule } from './common/firebase/firebase.module';
@@ -17,7 +15,7 @@ import { ConfigService, database } from './common/config/config.service';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './common/security/user/roles.guard';
 import { UserOwnerRuleGuard } from './common/security/user/user-owner.rule.guard';
-
+import { JwtAuthGuard } from './common/security/auth/jwt.guard';
 
 @Module({
     imports: [
@@ -36,13 +34,17 @@ import { UserOwnerRuleGuard } from './common/security/user/user-owner.rule.guard
     providers: [
         {
             provide: APP_GUARD,
+            useClass: JwtAuthGuard,
+
+        },
+        {
+            provide: APP_GUARD,
             useClass: RolesGuard,
         },
         {
             provide: APP_GUARD,
             useClass: UserOwnerRuleGuard,
         },
-
         ConfigService,
         SecurityService,
         MonitoringService,
@@ -50,6 +52,5 @@ import { UserOwnerRuleGuard } from './common/security/user/user-owner.rule.guard
         AppService,
         AuthService
     ],
-
 })
 export class AppModule { }

@@ -1,8 +1,9 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable } from '@nestjs/common';
+import { Injectable, ExecutionContext } from '@nestjs/common';
 import { jwt as jwtInfo } from '../../config/config.service';
 import { UserService } from '../user/user.service';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -17,6 +18,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     async validate(payload: any) {
-        return this.userService.findByFirebaseUid( payload.uid );
+        return await this.userService.findByFirebaseUid( payload.uid );
     }
 }

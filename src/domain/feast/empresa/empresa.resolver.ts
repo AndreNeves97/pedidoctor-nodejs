@@ -2,8 +2,7 @@ import { Resolver, Query, Args, Mutation, Subscription } from '@nestjs/graphql';
 import { Empresa, EmpresaCreateInput, EmpresaUpdateInput } from './empresa.model';
 import { EmpresaService } from './empresa.service';
 import { PubSub } from 'graphql-subscriptions';
-import { UseGuards, SetMetadata } from '@nestjs/common';
-import { Roles, RolesGuard } from '../../../common/security/user/roles.guard';
+import { Roles } from '../../../common/security/user/roles.guard';
 import { UserOwnerRule } from '../../../common/security/user/user-owner.rule.guard';
 
 
@@ -17,13 +16,13 @@ export class EmpresaResolver {
     ) { }
     
     @Query(returns => [Empresa]) 
-    @Roles('cliente', 'gerente')
+    @Roles('user')
     async empresas() {
         const objs = await this.service.findAll();
         return objs;
     }
 
-    @Query(returns => [Empresa]) 
+    @Query(returns => [Empresa])
     async empresa() {
         const objs = await this.service.findAll();
         return objs;
@@ -35,7 +34,7 @@ export class EmpresaResolver {
         const created = await this.service.create(obj);
 
         this.pubSub.publish('empresaCreated', {empresaCreated: created});
-
+        
         return created;
     }
 
@@ -57,5 +56,4 @@ export class EmpresaResolver {
     empresaCreated() {
         return this.pubSub.asyncIterator('empresaCreated');
     }
-
 }

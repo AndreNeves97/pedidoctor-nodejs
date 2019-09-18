@@ -16,28 +16,31 @@ export class AppController {
         private readonly authService: AuthService,
         private readonly userService: UserService,
         private readonly configService: ConfigService
-    ) {
-
-    }
+    ) { }
 
     @Get()
     index() {
         return this.service.index();
     }
 
-
     @UseGuards(AuthGuard('firebase'))
     @Post('login')
     async loginFirebase(@Request() req) {
         const user : User = await this.userService.findOrCreateFromFirebase(req.user);
-        return this.authService.login(user);
+        const {_id, nome, email, fotoUrl} = user;
+
+        const jwt = await this.authService.login(user);
+
+        return {
+            jwt,
+            user : {_id,  nome, email, fotoUrl}    
+        }
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Get('me')
-    getProfile(@Request() req) {
+    getProfile(@Request() req) {        
         const {nome, email, fotoUrl} = req.user;
-        
         return {nome, email, fotoUrl};
     }
 }

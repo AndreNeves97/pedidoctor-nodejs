@@ -5,16 +5,12 @@ import {
     FastifyAdapter,
     NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { RolesGuard } from './common/security/user/roles.guard';
-
 
 async function bootstrap() {
     const app = await NestFactory.create<NestFastifyApplication>(
         AppModule,
         new FastifyAdapter()
     );
-
-
 
     app.enableCors({
         origin: 'http://localhost:4200'

@@ -17,9 +17,7 @@ export class AuthService {
 
 
     async validateFirebaseUser(idToken: string): Promise<any> {
-        const firebaseUser = await this.firebaseService.validate(idToken);
-
-        return firebaseUser; 
+        return await this.firebaseService.validate(idToken); 
     }
 
 
