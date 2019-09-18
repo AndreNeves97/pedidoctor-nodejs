@@ -21,11 +21,9 @@ export class FirebaseService {
 
 
 
-    async validate(firebaseToken: string) : Promise<string> {
-        return "uid teste";
-
-        let tokenDecodificado = await admin.auth().verifyIdToken(firebaseToken);
-        return tokenDecodificado.uid;
+    async validate(idToken: string) : Promise<any> {
+        let tokenDecodificado = await admin.auth().verifyIdToken(idToken);        
+        return tokenDecodificado;
     }
     
 }

@@ -17,6 +17,7 @@ import { FirebaseModule } from '../firebase/firebase.module';
         FirebaseModule,
     ],
     exports: [
+        AuthModule,
         UserService,
         FirebaseService
 

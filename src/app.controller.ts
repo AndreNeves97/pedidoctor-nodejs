@@ -23,23 +23,10 @@ export class AppController {
     }
 
 
-    @UseGuards(AuthGuard('local'))
-    @Post('login')
-    async login(@Request() req) {
-
-        console.log('testes testes');
-
-        return this.authService.login(req.user);
-    }
-
-
-
     @UseGuards(AuthGuard('firebase'))
-    @Post('login-firebase')
+    @Post('login')
     async loginFirebase(@Request() req) {
-
-        console.log('aaaa');
-
+        console.log('logged in');
         return this.authService.login(req.user);
     }
 
