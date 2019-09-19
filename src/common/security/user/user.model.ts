@@ -25,12 +25,12 @@ export class User extends Typegoose {
 
     @IsString()
     @prop({ required: false })
-    @Field()
+    @Field({ nullable: true })
     telefone: string;
 
     @IsString()
     @prop({ required: false })
-    @Field()
+    @Field({ nullable: true })
     fotoUrl: string;
 
     @IsArray()

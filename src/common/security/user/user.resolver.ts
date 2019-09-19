@@ -1,6 +1,7 @@
 import { Resolver, Query } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './user.model';
+import { Roles } from './roles.guard';
 
 @Resolver('User')
 export class UserResolver {
@@ -41,8 +42,12 @@ export class UserResolver {
     }
 
     @Query(returns => [ User ])
+    @Roles('admin-system', 'admin-clinica', )
     async users () {
-        return await this.service.findAll();
+        const users = await this.service.findAll();
+        console.log(users);
+        
+        return users;
     }
 
 }
