@@ -1,5 +1,5 @@
 
-import { Controller, Request, Post, UseGuards, Get } from '@nestjs/common';
+import { Controller, Request, Post, UseGuards, Get, HttpCode } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './common/security/auth/auth.service';
@@ -25,6 +25,7 @@ export class AppController {
 
     @UseGuards(AuthGuard('firebase'))
     @Post('login')
+    @HttpCode(200)
     async loginFirebase(@Request() req) {
         const user : User = await this.userService.findOrCreateFromFirebase(req.user);
         const {_id, nome, email, fotoUrl} = user;
@@ -37,10 +38,17 @@ export class AppController {
         }
     }
 
-    @UseGuards(AuthGuard('jwt'))
     @Get('me')
-    getProfile(@Request() req) {        
+    getProfile(@Request() req) {
+        if(req.user == undefined)
+            return {
+                user: 'nao-conectado'
+            };
+        
         const {nome, email, fotoUrl} = req.user;
-        return {nome, email, fotoUrl};
+        
+        return {
+            user: {nome, email, fotoUrl},
+        };
     }
 }

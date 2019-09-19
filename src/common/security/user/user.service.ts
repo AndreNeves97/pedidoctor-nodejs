@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadGatewayException } from '@nestjs/common';
 import { User, UserCreateFromFirebaseInput } from './user.model';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from 'typegoose';
@@ -10,7 +10,7 @@ export class UserService {
 
     async findOrCreateFromFirebase(userFb : any) : Promise<User> {
         let user = await this.findByFirebaseUid(userFb.uid);
-
+        
         if(user == null) {
             user = await this.create({
                 firebaseUid: userFb.uid,
@@ -31,7 +31,7 @@ export class UserService {
     async findByFirebaseUid(uid: string): Promise<User> {
         const filter = {firebaseUid: uid};
 
-        return await this.model.find(filter).lean();
+        return await this.model.findOne(filter).lean();
     }
 
     async findById(id: string): Promise<User> {
