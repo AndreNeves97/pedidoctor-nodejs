@@ -1,8 +1,13 @@
-import { Resolver } from '@nestjs/graphql';
+import { Resolver, Query } from '@nestjs/graphql';
+import { UserService } from './user.service';
+import { User } from './user.model';
 
 @Resolver('User')
 export class UserResolver {
 
+    constructor (
+        private readonly service: UserService
+    ) {}
 
     public static async login ( parent, { email, password }, context, ingo ) {
 
@@ -33,6 +38,11 @@ export class UserResolver {
         // }
 
         // return logged_usuario;
+    }
+
+    @Query(returns => [ User ])
+    async users () {
+        return await this.service.findAll();
     }
 
 }
