@@ -73,3 +73,18 @@ export class ItemEstoqueCreateInput {
     @Field(type => ItemEstoqueCat )
     categoria: ItemEstoqueCat;
 }
+
+@InputType()
+export class ItemEstoqueUpdateInput {
+    @Field(type => Int,{nullable: true})
+    quantidade: number;
+
+    @Field({nullable: true})
+    fornecedor: string;
+
+    @Field({nullable: true})
+    validade: string;
+
+    @Field(type => ItemEstoqueCat,{nullable: true} )
+    categoria: ItemEstoqueCat;
+}
