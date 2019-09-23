@@ -13,7 +13,7 @@ export class ConsultasResolver {
     ) { }
 
     @Query(returns => [ Consulta ])
-    @Roles('cliente', 'gerente')
+    @Roles('user', 'cliente', 'gerente')
     async consultas () {
         return await this.service.findAll();
     }

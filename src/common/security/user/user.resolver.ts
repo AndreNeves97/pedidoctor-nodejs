@@ -42,11 +42,9 @@ export class UserResolver {
     }
 
     @Query(returns => [ User ])
-    @Roles('admin-system', 'admin-clinica', )
+    @Roles('user', 'admin-system', 'admin-clinica')
     async users () {
-        const users = await this.service.findAll();
-        console.log(users);
-        
+        const users = await this.service.findAll();        
         return users;
     }
 
