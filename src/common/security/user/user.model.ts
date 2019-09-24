@@ -42,6 +42,11 @@ export class User extends Typegoose {
 
 @InputType()
 export class UserInputRef extends Typegoose {
+    constructor(_id: string) {
+        super();
+        this._id = _id;
+    }
+
     @Field(type => ID)
     _id: string;
 }

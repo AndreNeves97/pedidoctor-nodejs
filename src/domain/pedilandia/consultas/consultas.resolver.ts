@@ -1,9 +1,10 @@
-import { Resolver, Query, Args, Mutation, Subscription } from '@nestjs/graphql';
-import { Consulta, ConsultaCreateInput } from './consulta.model';
+import { Resolver, Query, Args, Mutation, Subscription, Context } from '@nestjs/graphql';
+import { Consulta, ConsultaCreateInput, AgendamentoCreateInput } from './consulta.model';
 import { ConsultasService } from './consultas.service';
 import { UseGuards, SetMetadata } from '@nestjs/common';
 import { Roles, RolesGuard } from '../../../common/security/user/roles.guard';
 import { UserOwnerRule } from '../../../common/security/user/user-owner.rule.guard';
+import { UserInputRef } from '../../../common/security/user/user.model';
 
 @Resolver(of => Consulta)
 export class ConsultasResolver {
@@ -19,15 +20,32 @@ export class ConsultasResolver {
     }
 
     @Query(returns => Consulta)
-    @Roles('cliente', 'gerente')
+    @Roles('user', 'cliente', 'gerente')
     async consulta(@Args('id') id: string) {
         return await this.service.findById(id);
     }
 
     @Mutation(returns => Consulta)
-    @Roles('cliente', 'gerente')
+    @Roles('user', 'gerente')
     async createConsulta(@Args('obj') obj: ConsultaCreateInput ) {
         return await this.service.create(obj);
+    }
+
+    /**
+     * Resolver chamado pelo cliente
+     * @param obj 
+     */
+    @Mutation(returns => Consulta)
+    @Roles('user', 'cliente')
+    async createAgendamento(
+        @Args('obj') obj: AgendamentoCreateInput,
+        @Context() ctx 
+    ) {
+
+        return await this.service.create({
+            ...obj,
+            paciente: new UserInputRef(ctx.req.user._id)
+        });
     }
 
     @Mutation(returns => Consulta, { nullable : true })

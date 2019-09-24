@@ -70,3 +70,25 @@ export class ConsultaCreateInput {
     @Field(type => [String], { nullable: true })
     informacoesAdicionais: string[];
 }
+
+
+@InputType()
+export class AgendamentoCreateInput {
+    @Field()
+    dataConsulta: Date;
+
+    @Field()
+    tipoConsulta: string;
+
+    @Field(type => [String], { nullable: true })
+    sintomasObservados: string[];
+    
+    @Field(type => [String], { nullable: true })
+    medicamentosQueToma: string[];
+
+    @Field(type => [String], { nullable: true })
+    doencasRecentes: string[];
+
+    @Field(type => [String], { nullable: true })
+    informacoesAdicionais: string[];
+}
