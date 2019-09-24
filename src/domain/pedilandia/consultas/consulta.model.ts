@@ -16,10 +16,6 @@ export class Consulta extends Typegoose{
     @Field()
     dataConsulta: Date;
 
-    @prop({ required: true })
-    @Field()
-    dataRegistro: Date;
-
     @prop({ required: true, ref: User })
     @Field(type => User)
     paciente: User;
@@ -43,6 +39,11 @@ export class Consulta extends Typegoose{
     @prop({ required: false })
     @Field(type => [String], { nullable: true })
     informacoesAdicionais: string[];
+
+
+    @prop()
+    @Field()
+    createdAt: Date;
 
 }
 
