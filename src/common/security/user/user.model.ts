@@ -10,7 +10,7 @@ export class User extends Typegoose {
     _id: string;
 
     @IsString()
-    @prop({ required: true })
+    @prop()
     firebaseUid: string;
 
     @IsString()
@@ -19,7 +19,7 @@ export class User extends Typegoose {
     nome: string
 
     @IsString()
-    @prop({ required: true })
+    @prop({ required: true, unique: true })
     @Field()
     email: string;
 
@@ -58,5 +58,27 @@ export class UserCreateFromFirebaseInput {
     fotoUrl: string;
     roles: string[];
 }
+
+
+@InputType()
+export class ClienteCreateInput {
+    @Field(type => String, { nullable: false })
+    nome: string
+
+    @Field(type => String, { nullable: false })
+    email: string;
+}
+
+
+
+@InputType()
+export class UserUpdateInput {
+    @Field(type => String, { nullable: true })
+    nome: string
+
+    @Field(type => String, { nullable: true })
+    email: string;
+}
+
 
 

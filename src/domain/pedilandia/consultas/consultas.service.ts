@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
-import { Consulta, ConsultaCreateInput } from './consulta.model';
+import { Consulta, ConsultaCreateInput, ConsultaUpdateInput } from './consulta.model';
 import { ModelType } from 'typegoose';
 
 @Injectable()
@@ -26,6 +26,15 @@ export class ConsultasService {
     }
 
     async delete(id: string) {
-        return await this.model.findByIdAndRemove(id);
+        return await this.model
+            .findOneAndRemove({_id: id})
+            .populate('paciente');
+    }
+
+
+    async update(id: string, obj: ConsultaUpdateInput) {    
+        return await this.model
+            .findOneAndUpdate({_id: id}, obj, {lean: true})
+            .populate('paciente');
     }
 }

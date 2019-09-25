@@ -1,5 +1,5 @@
 import { Resolver, Query, Args, Mutation, Subscription, Context } from '@nestjs/graphql';
-import { Consulta, ConsultaCreateInput, AgendamentoCreateInput } from './consulta.model';
+import { Consulta, ConsultaCreateInput, AgendamentoCreateInput, ConsultaUpdateInput } from './consulta.model';
 import { ConsultasService } from './consultas.service';
 import { UseGuards, SetMetadata } from '@nestjs/common';
 import { Roles, RolesGuard } from '../../../common/security/user/roles.guard';
@@ -53,5 +53,12 @@ export class ConsultasResolver {
         return await this.service.delete(id);
     }
 
+    @Mutation(returns => Consulta, { nullable: true })
+    async updateConsulta(
+        @Args('id') id : string, 
+        @Args('obj') obj  : ConsultaUpdateInput
+    ) {
+        return this.service.update(id, obj);
+    }
 }
 

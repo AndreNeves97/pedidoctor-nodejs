@@ -1,5 +1,5 @@
 import { Injectable, BadGatewayException } from '@nestjs/common';
-import { User, UserCreateFromFirebaseInput } from './user.model';
+import { User, UserCreateFromFirebaseInput, ClienteCreateInput, UserUpdateInput } from './user.model';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from 'typegoose';
 
@@ -17,9 +17,7 @@ export class UserService {
                 nome: userFb.name,
                 email: userFb.email,
                 fotoUrl: userFb.picture,
-                roles: [
-                    'user'
-                ]
+                roles: ['user'] 
             });
 
         }
@@ -45,7 +43,7 @@ export class UserService {
             .lean();
     }
 
-    async create(obj: UserCreateFromFirebaseInput): Promise<User> {
+    async create(obj: UserCreateFromFirebaseInput | ClienteCreateInput): Promise<User> {
         const created = await this.model.create(obj);
         return this.findById(created._id);
     }
@@ -55,6 +53,10 @@ export class UserService {
     }
     
 
+    async update(id: string, obj: UserUpdateInput) {
+        return await this.model
+            .findByIdAndUpdate(id, obj, {lean: true});
+    }
 
 
 }
