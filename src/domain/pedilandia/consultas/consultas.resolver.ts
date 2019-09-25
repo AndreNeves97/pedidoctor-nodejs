@@ -60,5 +60,18 @@ export class ConsultasResolver {
     ) {
         return this.service.update(id, obj);
     }
+
+
+    @Mutation(returns => Consulta, { nullable: true })
+    async reportagemFinalizacao(
+        @Args('id') id : string, 
+        @Args('observacoesMedico') observacoesMedico  : string
+    ) {
+        const params : any = {} ;
+        params.realizada = true;
+        params.observacoesMedico = observacoesMedico;
+
+        return this.service.update(id, params);
+    }
 }
 

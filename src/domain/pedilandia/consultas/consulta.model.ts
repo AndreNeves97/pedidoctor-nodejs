@@ -42,6 +42,15 @@ export class Consulta extends Typegoose{
 
 
     @prop()
+    @Field(type => Boolean, { nullable: true })
+    realizada: boolean;
+
+    @prop()
+    @Field(type => String, { nullable: true })
+    observacoesMedico: string;
+
+
+    @prop()
     @Field()
     createdAt: Date;
 
@@ -96,6 +105,7 @@ export class AgendamentoCreateInput {
 
 @InputType()
 export class ConsultaUpdateInput {
+
     @Field(type => Date, { nullable: true })
     dataConsulta: Date;
 
@@ -113,4 +123,11 @@ export class ConsultaUpdateInput {
 
     @Field(type => [String], { nullable: true })
     informacoesAdicionais: string[];
+
+
+    @Field(type => Boolean, { nullable: true })
+    realizada: boolean;
+
+    @Field(type => String, { nullable: true })
+    observacoesMedico: string;
 }
