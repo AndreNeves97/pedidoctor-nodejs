@@ -11,6 +11,11 @@ export class UserResolver {
         private readonly service: UserService
     ) {}
 
+    @Query(returns => User)
+    @Roles('user', 'admin-system', 'admin-clinica')
+    async user(@Args('id') id: string) {
+        return await this.service.findById(id);
+    }
 
     @Query(returns => [ User ])
     @Roles('user', 'admin-system', 'admin-clinica')
