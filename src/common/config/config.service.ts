@@ -22,24 +22,4 @@ export const jwt = require(`../../../${generatedDir}/jwt.json`);
  * gerados automaticamente no processo de `deploy`
  */
 @Injectable()
-export class ConfigService {// implements JwtOptionsFactory {
-    // mongoDbInfo(): { uri: string, label: string } {
-    //     return {
-    //         uri: "mongodb://dalpham-admin:as2rk_13rf@ds131237.mlab.com:31237/dalpham-team-development",
-    //         label: "mlab-dalpham-team-development"
-    //     };
-    // }
-    
-    // createJwtOptions(): JwtModuleOptions {
-    //     return {
-    //         secret: 'affsgdssdaff23__3##31rfa',
-    //         signOptions: { expiresIn: '1h' },
-    //     };
-    // }
-
-    // jwtSecretKey(): string {
-    //     return '';
-    // }
-
-
-}
+export class ConfigService { }

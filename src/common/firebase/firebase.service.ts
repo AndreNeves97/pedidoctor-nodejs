@@ -8,7 +8,12 @@ export class FirebaseService {
 
     static firebaseApp;
 
-    //para app de producao limitar o acesso que esse backend pode ter,para apenas funcoes necessarias,vide https://firebase.google.com/docs/database/admin/start/?hl=pt-br
+    /**
+     * TODO: Para app de produção, limitar o acesso que esse backend pode ter.
+     * Permitir apenas funcoes necessárias.
+     * 
+     * https://firebase.google.com/docs/database/admin/start/?hl=pt-br
+     */
     public constructor() {
         if(FirebaseService.firebaseApp != undefined) {
             return;

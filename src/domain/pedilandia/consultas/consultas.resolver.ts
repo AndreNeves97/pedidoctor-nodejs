@@ -3,7 +3,7 @@ import { Consulta, ConsultaCreateInput, AgendamentoCreateInput, ConsultaUpdateIn
 import { ConsultasService } from './consultas.service';
 import { UseGuards, SetMetadata } from '@nestjs/common';
 import { Roles, RolesGuard } from '../../../common/security/user/roles.guard';
-import { UserOwnerRule } from '../../../common/security/user/user-owner.rule.guard';
+import { UserHaveAccessRule } from '../../../common/security/user/user-have-access.rule.guard';
 import { UserInputRef } from '../../../common/security/user/user.model';
 
 @Resolver(of => Consulta)

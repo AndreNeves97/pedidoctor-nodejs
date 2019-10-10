@@ -2,7 +2,18 @@ import { Injectable, CanActivate, ExecutionContext, SetMetadata } from '@nestjs/
 import { Reflector } from '@nestjs/core';
 
 
-export const UserOwnerRule = (rule) => SetMetadata('userOwnerRule', rule);
+/**
+ * Usar, em vez disso, UserHaveAccessRole
+ * 
+ * Have Access:
+ *  - Administrador da clínica pode adicionar médicos à clinica (tem Acesso à clínica)
+ *    - Clinica.isAdmin(user)
+ *  - Secretário / Médico pode marcar consulas para aquela clínica
+ *    - Clinica.isSecretario(user)   |  Clinica.isMedico(user)
+ *  - Enfermeiro pode finalizar consulta e reportar informações
+ *    - Clinica.isEnfermeiro(user)
+ */
+export const UserHaveAccessRule = (rule) => SetMetadata('userOwnerRule', rule);
 
 /**
  * Guard responsável por avaliar se usuário tem permissão de acesso à funções onde

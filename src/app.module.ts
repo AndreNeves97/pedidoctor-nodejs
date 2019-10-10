@@ -14,7 +14,7 @@ import { AuthService } from './common/security/auth/auth.service';
 import { ConfigService, database } from './common/config/config.service';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './common/security/user/roles.guard';
-import { UserOwnerRuleGuard } from './common/security/user/user-owner.rule.guard';
+import { UserOwnerRuleGuard } from './common/security/user/user-have-access.rule.guard';
 import { JwtGuard } from './common/security/auth/jwt.guard';
 
 @Module({

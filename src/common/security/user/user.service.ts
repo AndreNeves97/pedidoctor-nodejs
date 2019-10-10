@@ -11,16 +11,23 @@ export class UserService {
     async findOrCreateFromFirebase(userFb : any) : Promise<User> {
         let user = await this.findByFirebaseUid(userFb.uid);
         
-        if(user == null) {
-            user = await this.create({
-                firebaseUid: userFb.uid,
-                nome: userFb.name,
-                email: userFb.email,
-                fotoUrl: userFb.picture,
-                roles: ['user'] 
-            });
+        if(user != null)
+            return user;
+           
+            
+        user = await this.findByEmail(userFb.email);
+        
+        if(user != null)
+            return user;
 
-        }
+
+        user = await this.create({
+            firebaseUid: userFb.uid,
+            nome: userFb.name,
+            email: userFb.email,
+            fotoUrl: userFb.picture,
+            roles: ['user'] 
+        });
         
         return user;
     }
@@ -28,6 +35,12 @@ export class UserService {
 
     async findByFirebaseUid(uid: string): Promise<User> {
         const filter = {firebaseUid: uid};
+
+        return await this.model.findOne(filter).lean();
+    }
+
+    async findByEmail(email: string ) : Promise<User> {
+        const filter = {email};
 
         return await this.model.findOne(filter).lean();
     }
