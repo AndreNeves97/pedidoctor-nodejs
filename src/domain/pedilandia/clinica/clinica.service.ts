@@ -55,7 +55,8 @@ export class ClinicaService {
             .populate('secretarios')
             .populate('medicos')
             .populate('enfermeiros')
-            .populate('clientes');
+            .populate('clientes')
+            .lean();
     }
 
 }
