@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 
 import { prop, Typegoose } from 'typegoose';
 import { IsString, IsArray } from 'class-validator';
-import { ObjectType, InputType, Field, ID } from 'type-graphql';
+import { ObjectType, InputType, Field, ID, registerEnumType } from 'type-graphql';
 import { FileFirebaseStorage } from 'src/common/storage/file-firebase-storage.model';
 
 /**
@@ -31,9 +31,22 @@ import { FileFirebaseStorage } from 'src/common/storage/file-firebase-storage.mo
  *    - Exemplo: Sintomas de autismo
  *      - Hipersensibilidade a determinados tipos de sons
  */
+export enum CategoriaAcontecimentoTipo {
+    ALTERACAO_GERAL = 'alteracao-geral',
+    DESENV_HABILID  = 'desenvolvimento-habilidade',
+    ACOMENT_DOENCA  = 'acometimento-doenca'
+}
+
+registerEnumType(CategoriaAcontecimentoTipo, { name : 'CategoriaAcontecimentoTipo' });
+
+
+@ObjectType()
 export class AcontecimentoTipo extends Typegoose {
+    @Field(type => CategoriaAcontecimentoTipo)
     categoria : CategoriaAcontecimentoTipo;
+    @Field()
     nome : string;
+    @Field()
     descricao : string;
 
     /**
@@ -41,19 +54,48 @@ export class AcontecimentoTipo extends Typegoose {
      * desenvolvida, considera-se a faixa de idade ideal (em meses)
      * que tal desenvolvimento deve acontecer 
      */
+    @Field()
     idadePadraoMin : number;
+    @Field()
     idadePadraoMax : number;
 
     /**
      * Usado em casos de alteração de peso ou altura
      */
+    @Field()
     valoresReferenciaPorIdade : number;
 }
 
 
 
-export enum CategoriaAcontecimentoTipo {
-    ALTERACAO_GERAL = 'alteracao-geral',
-    DESENV_HABILID  = 'desenvolvimento-habilidade',
-    ACOMENT_DOENCA  = 'acometimento-doenca'
+@InputType()
+export class AcontecimentoTipoInput {
+    @Field(type => CategoriaAcontecimentoTipo)
+    categoria : CategoriaAcontecimentoTipo;
+    @Field()
+    nome : string;
+    @Field()
+    descricao : string;
+    @Field()
+    idadePadraoMin : number;
+    @Field()
+    idadePadraoMax : number;
+    @Field()
+    valoresReferenciaPorIdade : number;
+}
+
+@InputType()
+export class AcontecimentoTipoUpdate {
+    @Field(type => CategoriaAcontecimentoTipo)
+    categoria : CategoriaAcontecimentoTipo;
+    @Field()
+    nome : string;
+    @Field()
+    descricao : string;
+    @Field()
+    idadePadraoMin : number;
+    @Field()
+    idadePadraoMax : number;
+    @Field()
+    valoresReferenciaPorIdade : number;
 }
