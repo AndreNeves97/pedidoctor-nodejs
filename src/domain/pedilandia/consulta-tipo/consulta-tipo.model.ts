@@ -12,8 +12,27 @@ import { Diagnostico } from '../diagnostico/diagnostico.model';
  * - Consulta de rotina
  * - Motivada por algum sintoma
  */
+@ObjectType()
 export class ConsultaTipo extends Typegoose{
+    @Field()
     nome : string;
+    @Field()
+    descricao : string;
+}
+
+@InputType()
+export class ConsultaTipoInput {
+    @Field()
+    nome : string;
+    @Field()
+    descricao : string;
+}
+
+@InputType()
+export class ConsultaTipoUpdate {
+    @Field()
+    nome : string;
+    @Field()
     descricao : string;
 }
 
