@@ -8,6 +8,7 @@ import { ConsultaAgendamento } from '../consulta-agendamento/consulta-agendament
 import { Doenca } from '../doenca/doenca.model';
 import { Exame } from '../exame/exame.model';
 import { Vacina } from '../vacina/vacina.model';
+import { Medicamento } from '../medicamento/medicamento.model';
 
 
 export class Diagnostico extends Typegoose {
@@ -16,8 +17,23 @@ export class Diagnostico extends Typegoose {
 
     remarcacaoConsulta : ConsultaAgendamento;
 
+
+    /**
+     * Doenças diagnosticadas anteriormente que agora
+     * foram consideradas como curadas
+     */
+    doencasCuradas : Doenca[];
+    
+    /**
+     * Usado em caso de haver algum diagnóstico anterior no qual
+     * foram reportados problemas específicas, e de acordo com o 
+     * diagnóstico atual, foram dadas como resolvidos
+     */
+    diagnosticosAnterioresResolvidos : Diagnostico;
+
     doencasDiagnosticadas : Doenca[];
     examesExigidos : Exame[];
     vacinasExigidas : Vacina[];
+    medicamentosReceitados : Medicamento[];
 }
 
