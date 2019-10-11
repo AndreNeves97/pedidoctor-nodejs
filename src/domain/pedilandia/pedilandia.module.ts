@@ -1,10 +1,20 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ConsultasResolver } from './consultas/consultas.resolver';
-import { ConsultasService } from './consultas/consultas.service';
 import { tmpDir } from '../../common/config/config.service';
 import { TypegooseModule } from 'nestjs-typegoose';
+
+
+
+import { ConsultasResolver } from './consultas/consultas.resolver';
+import { ClinicaResolver } from './clinica/clinica.resolver';
+
+
+import { ConsultasService } from './consultas/consultas.service';
+import { ClinicaService } from './clinica/clinica.service';
+
+
 import { Consulta } from './consultas/consulta.model';
+import { Clinica } from './clinica/clinica.model';
 
 @Module({
   imports: [
@@ -13,6 +23,14 @@ import { Consulta } from './consultas/consulta.model';
       typegooseClass: Consulta,
       schemaOptions: {
         collection: 'Pedilandia_Consulta',
+        timestamps: true
+      }
+    }]),
+
+    TypegooseModule.forFeature([{
+      typegooseClass: Clinica,
+      schemaOptions: {
+        collection: 'Pedilandia_Clinica',
         timestamps: true
       }
     }]),
@@ -27,8 +45,13 @@ import { Consulta } from './consultas/consulta.model';
   controllers: [],
   exports: [],
   providers: [
+
     ConsultasResolver, 
-    ConsultasService
+    ClinicaResolver,
+
+    ConsultasService,
+    ClinicaService,
+  
   ]
 })
 export class PedilandiaModule {}
