@@ -18,7 +18,7 @@ export class UsoMedicamento extends Typegoose {
 }
 
 @InputType()
-export class UsoMedicamentoInput extends Typegoose {
+export class UsoMedicamentoInput{
     @Field(type => MedicamentoInput)
     medicamento: MedicamentoInput;
     @Field()
@@ -28,7 +28,7 @@ export class UsoMedicamentoInput extends Typegoose {
 }
 
 @InputType()
-export class UsoMedicamentoUpdate extends Typegoose {
+export class UsoMedicamentoUpdate {
     @Field(type => MedicamentoUpdate)
     medicamento: MedicamentoUpdate;
     @Field()
