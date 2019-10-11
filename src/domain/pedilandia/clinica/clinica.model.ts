@@ -7,14 +7,14 @@ import { Usuario } from '../usuario/usuario.model';
 
 export class Clinica extends Typegoose {
     nome: string;
-
     endereco: string;
 
+    /**
+     * TODO : Criar um modelo de localização
+     */
     googleMapsLocalId: string
-
     coordGeo: {lat: string, long: string};
     
-
     secretarios : Usuario[];
     medicos : Usuario[];
     enfermeiros : Usuario[];

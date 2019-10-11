@@ -9,12 +9,16 @@ import { Usuario } from '../usuario/usuario.model';
 import { Diagnostico } from '../diagnostico/diagnostico.model';
 import { ConsultaTipo } from '../consulta-tipo/consulta-tipo.model';
 import { Sintoma } from '../sintoma/sintoma.model';
-import { AgendamentoRealizacao } from './agendamento-realizacao.model';
+import { Clinica } from '../clinica/clinica.model';
 
 export class ConsultaAgendamento extends Typegoose{
     dataAgendada: Date;
-    paciente: Usuario;
     
+    paciente : Usuario;
+    
+    clinica : Clinica;
+    medico : Usuario; 
+
     tipo: ConsultaTipo;
 
     sintomasObservados: Sintoma[];
@@ -28,4 +32,12 @@ export class ConsultaAgendamento extends Typegoose{
     @prop()
     @Field()
     createdAt: Date;
+}
+
+
+export class AgendamentoRealizacao extends Typegoose{
+    horarioInicio: Date;
+    horarioFinalizacao : Date;
+
+    diagnostico: Diagnostico;
 }

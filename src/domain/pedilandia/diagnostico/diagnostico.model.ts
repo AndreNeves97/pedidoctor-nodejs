@@ -16,7 +16,7 @@ export class Diagnostico extends Typegoose {
 
     remarcacaoConsulta : ConsultaAgendamento;
 
-    doencaDiagnosticada : Doenca;
+    doencasDiagnosticadas : Doenca[];
     examesExigidos : Exame[];
     vacinasExigidas : Vacina[];
 }

@@ -6,10 +6,12 @@ import { ObjectType, InputType, Field, ID } from 'type-graphql';
 import { Sintoma } from '../sintoma/sintoma.model';
 import { ExameTipo } from '../exame-tipo/exame-tipo.model';
 import { ConsultaAgendamento } from '../consulta-agendamento/consulta-agendamento.model';
+import { Diagnostico } from '../diagnostico/diagnostico.model';
 
 
 export class Exame extends Typegoose {
     tipo : ExameTipo;
     consultaParaApresentacao : ConsultaAgendamento;
+    diagnostico : Diagnostico;
 }
 
