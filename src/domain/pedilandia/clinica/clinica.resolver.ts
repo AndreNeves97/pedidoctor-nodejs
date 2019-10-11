@@ -37,7 +37,7 @@ export class ClinicaResolver {
     @Mutation(returns => Clinica, { nullable : true })
     @Roles('user', 'cliente', 'gerente')
     async updateClinica ( @Args('id') id:string, @Args('obj') obj: ClinicaUpdateInput ) {
-        return this.service.update(id, obj);
+        return await this.service.update(id, obj);
     }
 
 }
