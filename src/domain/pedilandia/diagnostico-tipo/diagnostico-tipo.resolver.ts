@@ -14,31 +14,31 @@ export class DiagnosticoTipoResolver {
     @Query(returns => [ DiagnosticoTipo ])
     @Roles('user', 'cliente', 'gerente')   
     async diagnosticosTipo ( ) {
-        return this.service.findAll();
+        return await this.service.findAll();
     }
 
     @Query(returns => DiagnosticoTipo)
     @Roles('user', 'cliente', 'gerente')   
     async diagnosticoTipo ( @Args('id') id: string )  {
-        return this.service.findById(id);
+        return await this.service.findById(id);
     }
 
     @Mutation(returns => DiagnosticoTipo)
     @Roles('user', 'cliente', 'gerente')   
     async createDiagnosticoTipo ( @Args('obj') obj: DiagnosticoTipoInput ) {
-        return this.service.create(obj);
+        return await this.service.create(obj);
     }
 
     @Mutation(returns => DiagnosticoTipo, { nullable : true })
     @Roles('user', 'cliente', 'gerente')   
     async deleteDiagnosticoTipo (@Args('id') id: string) {
-        return this.service.delete(id);
+        return await this.service.delete(id);
     }
 
     @Mutation(returns => DiagnosticoTipo, { nullable : true })
     @Roles('user', 'cliente', 'gerente')   
     async updateDiagnosticoTipo (@Args('id') id: string, @Args('obj') obj: DiagnosticoTipoUpdate) {
-        return this.service.update(id, obj);
+        return await this.service.update(id, obj);
     }
 
 }
