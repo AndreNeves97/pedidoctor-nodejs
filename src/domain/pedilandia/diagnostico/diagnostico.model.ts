@@ -52,7 +52,7 @@ export class Diagnostico extends Typegoose {
 export class DiagnosticoInput {
     @Field(type => [DoencaInput])
     doencasCuradas : DoencaInput[];
-    @Field(type => DiagnosticoInput)
+    @Field(type => DiagnosticoInput, { nullable : true })
     diagnosticosAnterioresResolvidos : DiagnosticoInput;
     @Field()
     descricao: string;
@@ -72,7 +72,7 @@ export class DiagnosticoInput {
 export class DiagnosticoUpdate {
     @Field(type => [DoencaUpdate])
     doencasCuradas : DoencaUpdate[];
-    @Field(type => DiagnosticoUpdate)
+    @Field(type => DiagnosticoUpdate, { nullable : true })
     diagnosticosAnterioresResolvidos : DiagnosticoUpdate;
     @Field()
     descricao: string;
