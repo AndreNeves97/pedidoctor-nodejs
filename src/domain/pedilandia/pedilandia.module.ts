@@ -18,6 +18,9 @@ import { Consulta } from './consultas/consulta.model';
 import { Clinica } from './clinica/clinica.model';
 import { UsuarioService } from './usuario/usuario.service';
 import { UsuarioResolver } from './usuario/usuario.resolver';
+import { ConsultaTipoService } from './consulta-tipo/consulta-tipo.service';
+import { ConsultaTipoResolver } from './consulta-tipo/consulta-tipo.resolver';
+import { ConsultaTipo } from './consulta-tipo/consulta-tipo.model';
 
 @Module({
   imports: [
@@ -46,6 +49,14 @@ import { UsuarioResolver } from './usuario/usuario.resolver';
       }
     }]),
 
+    TypegooseModule.forFeature([{
+      typegooseClass: ConsultaTipo,
+      schemaOptions: {
+        collection: 'Pedilandia_ConsultaTipo',
+        timestamps: true
+      }
+    }]),
+
     // GraphQLModule.forRoot({
     //   playground: true,
     //   installSubscriptionHandlers: true,
@@ -59,11 +70,13 @@ import { UsuarioResolver } from './usuario/usuario.resolver';
 
 
     ConsultasResolver, 
+    ConsultaTipoResolver,
     ClinicaResolver,
     UsuarioResolver,
 
 
     ConsultasService,
+    ConsultaTipoService,
     ClinicaService,
     UsuarioService,
   
