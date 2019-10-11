@@ -5,31 +5,34 @@ import { TypegooseModule } from 'nestjs-typegoose';
 
 
 
-import { ConsultasResolver } from './consultas/consultas.resolver';
 import { ClinicaResolver } from './clinica/clinica.resolver';
-
-
-import { ConsultasService } from './consultas/consultas.service';
-import { ClinicaService } from './clinica/clinica.service';
-
-
-import { Usuario } from './usuario/usuario.model';
-import { Consulta } from './consultas/consulta.model';
-import { Clinica } from './clinica/clinica.model';
-import { UsuarioService } from './usuario/usuario.service';
-import { UsuarioResolver } from './usuario/usuario.resolver';
-import { ConsultaTipoService } from './consulta-tipo/consulta-tipo.service';
+import { ConsultasResolver } from './consultas/consultas.resolver';
 import { ConsultaTipoResolver } from './consulta-tipo/consulta-tipo.resolver';
-import { ConsultaTipo } from './consulta-tipo/consulta-tipo.model';
-import { DiagnosticoTipoService } from './diagnostico-tipo/diagnostico-tipo.service';
 import { DiagnosticoTipoResolver } from './diagnostico-tipo/diagnostico-tipo.resolver';
-import { DiagnosticoTipo } from './diagnostico-tipo/diagnostico-tipo.model';
-import { ExameTipoService } from './exame-tipo/exame-tipo.service';
-import { ExameTipoResolver } from './exame-tipo/exame-tipo.resolver';
-import { ExameTipo } from './exame-tipo/exame-tipo.model';
-import { DoencaService } from './doenca/doenca.service';
 import { DoencaResolver } from './doenca/doenca.resolver';
+import { ExameTipoResolver } from './exame-tipo/exame-tipo.resolver';
+import { SintomaResolver } from './sintoma/sintoma.resolver';
+import { UsuarioResolver } from './usuario/usuario.resolver';
+
+
+import { ClinicaService } from './clinica/clinica.service';
+import { ConsultasService } from './consultas/consultas.service';
+import { ConsultaTipoService } from './consulta-tipo/consulta-tipo.service';
+import { DiagnosticoTipoService } from './diagnostico-tipo/diagnostico-tipo.service';
+import { DoencaService } from './doenca/doenca.service';
+import { ExameTipoService } from './exame-tipo/exame-tipo.service';
+import { SintomaService } from './sintoma/sintoma.service';
+import { UsuarioService } from './usuario/usuario.service';
+
+
+import { Clinica } from './clinica/clinica.model';
+import { Consulta } from './consultas/consulta.model';
+import { ConsultaTipo } from './consulta-tipo/consulta-tipo.model';
+import { DiagnosticoTipo } from './diagnostico-tipo/diagnostico-tipo.model';
 import { Doenca } from './doenca/doenca.model';
+import { ExameTipo } from './exame-tipo/exame-tipo.model';
+import { Sintoma } from './sintoma/sintoma.model';
+import { Usuario } from './usuario/usuario.model';
 
 @Module({
   imports: [
@@ -90,12 +93,14 @@ import { Doenca } from './doenca/doenca.model';
       }
     }]),
 
-    // GraphQLModule.forRoot({
-    //   playground: true,
-    //   installSubscriptionHandlers: true,
-    //   autoSchemaFile: `${tmpDir}/pedilandia.gql`,
-    //   path: '/graphql/pedilandia',
-    // })
+    TypegooseModule.forFeature([{
+      typegooseClass: Sintoma,
+      schemaOptions: {
+        collection: 'Pedilandia_Sintoma',
+        timestamps: true
+      }
+    }]),
+
   ],
   controllers: [],
   exports: [],
@@ -108,6 +113,7 @@ import { Doenca } from './doenca/doenca.model';
     DiagnosticoTipoResolver,
     DoencaResolver,
     ExameTipoResolver,
+    SintomaResolver,
     UsuarioResolver,
 
 
@@ -117,6 +123,7 @@ import { Doenca } from './doenca/doenca.model';
     DiagnosticoTipoService,
     DoencaService,
     ExameTipoService,
+    SintomaService,
     UsuarioService,
   
   ]
