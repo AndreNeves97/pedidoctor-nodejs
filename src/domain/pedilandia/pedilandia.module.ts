@@ -13,8 +13,11 @@ import { ConsultasService } from './consultas/consultas.service';
 import { ClinicaService } from './clinica/clinica.service';
 
 
+import { Usuario } from './usuario/usuario.model';
 import { Consulta } from './consultas/consulta.model';
 import { Clinica } from './clinica/clinica.model';
+import { UsuarioService } from './usuario/usuario.service';
+import { UsuarioResolver } from './usuario/usuario.resolver';
 
 @Module({
   imports: [
@@ -35,6 +38,14 @@ import { Clinica } from './clinica/clinica.model';
       }
     }]),
 
+    TypegooseModule.forFeature([{
+      typegooseClass: Usuario,
+      schemaOptions: {
+        collection: 'Pedilandia_Usuario',
+        timestamps: true
+      }
+    }]),
+
     // GraphQLModule.forRoot({
     //   playground: true,
     //   installSubscriptionHandlers: true,
@@ -46,11 +57,15 @@ import { Clinica } from './clinica/clinica.model';
   exports: [],
   providers: [
 
+
     ConsultasResolver, 
     ClinicaResolver,
+    UsuarioResolver,
+
 
     ConsultasService,
     ClinicaService,
+    UsuarioService,
   
   ]
 })
