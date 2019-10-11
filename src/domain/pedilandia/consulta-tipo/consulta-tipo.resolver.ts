@@ -37,7 +37,7 @@ export class ConsultaTipoResolver {
     @Query(returns => ConsultaTipo, { nullable : true })
     @Roles('user', 'cliente', 'gerente')
     async updateConsultaTipo (@Args('id') id: string, @Args('obj') obj: ConsultaTipoUpdate) {
-        return this.service.update(id, obj);
+        return await this.service.update(id, obj);
     }
 
 }
