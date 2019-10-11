@@ -51,8 +51,7 @@ export class UsuarioService {
             .findOneAndUpdate({ _id : id }, obj, { lean : true })
             .populate('responsavelPor')
             .populate('usoMedicamentos')
-            .populate('acontecimentos')
-            .lean();
+            .populate('acontecimentos');
         }
 
 }
