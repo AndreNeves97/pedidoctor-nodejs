@@ -24,6 +24,9 @@ import { ConsultaTipo } from './consulta-tipo/consulta-tipo.model';
 import { DiagnosticoTipoService } from './diagnostico-tipo/diagnostico-tipo.service';
 import { DiagnosticoTipoResolver } from './diagnostico-tipo/diagnostico-tipo.resolver';
 import { DiagnosticoTipo } from './diagnostico-tipo/diagnostico-tipo.model';
+import { ExameTipoService } from './exame-tipo/exame-tipo.service';
+import { ExameTipoResolver } from './exame-tipo/exame-tipo.resolver';
+import { ExameTipo } from './exame-tipo/exame-tipo.model';
 
 @Module({
   imports: [
@@ -68,6 +71,14 @@ import { DiagnosticoTipo } from './diagnostico-tipo/diagnostico-tipo.model';
       }
     }]),
 
+    TypegooseModule.forFeature([{
+      typegooseClass: ExameTipo,
+      schemaOptions: {
+        collection: 'Pedilandia_ExameTipo',
+        timestamps: true
+      }
+    }]),
+
     // GraphQLModule.forRoot({
     //   playground: true,
     //   installSubscriptionHandlers: true,
@@ -84,6 +95,7 @@ import { DiagnosticoTipo } from './diagnostico-tipo/diagnostico-tipo.model';
     ConsultaTipoResolver,
     ClinicaResolver,
     DiagnosticoTipoResolver,
+    ExameTipoResolver,
     UsuarioResolver,
 
 
@@ -91,6 +103,7 @@ import { DiagnosticoTipo } from './diagnostico-tipo/diagnostico-tipo.model';
     ConsultaTipoService,
     ClinicaService,
     DiagnosticoTipoService,
+    ExameTipoService,
     UsuarioService,
   
   ]
