@@ -39,7 +39,8 @@ export class SintomaService {
 
     async update ( id: string, obj: SintomaUpdate ) {
         return this.model   
-            .findOneAndUpdate({ _id : id }, obj, { lean : true });
+            .findOneAndUpdate({ _id : id }, obj)
+            .lean();
     }
 
 }
