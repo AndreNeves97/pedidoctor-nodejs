@@ -39,7 +39,8 @@ export class ConsultaTipoService {
 
     async update ( id: string, obj: ConsultaTipoUpdate ) {
         return await this.model
-            .findOneAndUpdate({ _id : id }, obj, { lean : true });
+            .findOneAndUpdate({ _id : id }, obj)
+            .lean();
     }
 
 }
