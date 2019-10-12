@@ -68,7 +68,8 @@ export class UserService {
 
     async update(id: string, obj: UserUpdateInput) {
         return await this.model
-            .findByIdAndUpdate(id, obj, {lean: true});
+            .findByIdAndUpdate(id, obj)
+            .lean();
     }
 
 
