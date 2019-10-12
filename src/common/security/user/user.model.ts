@@ -4,8 +4,7 @@ import { prop, Typegoose } from 'typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
 
-@ObjectType()
-export class User extends Typegoose {
+export abstract class User extends Typegoose {
     @Field(type => ID)
     _id: string;
 
@@ -60,8 +59,7 @@ export class UserCreateFromFirebaseInput {
 }
 
 
-@InputType()
-export class ClienteCreateInput {
+export class UserInput {
     @Field(type => String, { nullable: false })
     nome: string
 
@@ -71,8 +69,7 @@ export class ClienteCreateInput {
 
 
 
-@InputType()
-export class UserUpdateInput {
+export class UserUpdate {
     @Field(type => String, { nullable: true })
     nome: string
 

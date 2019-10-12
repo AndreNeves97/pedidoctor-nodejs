@@ -1,12 +1,8 @@
-import { Injectable, BadGatewayException } from '@nestjs/common';
-import { User, UserCreateFromFirebaseInput, ClienteCreateInput, UserUpdateInput } from './user.model';
-import { InjectModel } from 'nestjs-typegoose';
+import { User, UserCreateFromFirebaseInput, UserInput, UserUpdate } from '../../../common/security/user/user.model';
 import { ModelType } from 'typegoose';
 
-@Injectable()
-export class UserService {
-    constructor(@InjectModel(User) private readonly model: ModelType<User>) { }
-
+export abstract class UserService {
+    constructor(private userModel : ModelType<User>) { }
 
     async findOrCreateFromFirebase(userFb : any) : Promise<User> {
         let user = await this.findByFirebaseUid(userFb.uid);
@@ -36,38 +32,37 @@ export class UserService {
     async findByFirebaseUid(uid: string): Promise<User> {
         const filter = {firebaseUid: uid};
 
-        return await this.model.findOne(filter).lean();
+        return await this.userModel.findOne(filter).lean();
     }
 
     async findByEmail(email: string ) : Promise<User> {
         const filter = {email};
 
-        return await this.model.findOne(filter).lean();
+        return await this.userModel.findOne(filter).lean();
     }
 
     async findById(id: string): Promise<User> {
-        return await this.model.findById(id);
+        return await this.userModel.findById(id);
     }
 
     async findAll(): Promise<User> {
-        return this.model
+        return this.userModel
             .find()
             .sort({ nome: 'desc' })
             .lean();
     }
 
-    async create(obj: UserCreateFromFirebaseInput | ClienteCreateInput): Promise<User> {
-        const created = await this.model.create(obj);
+    async create(obj: UserCreateFromFirebaseInput | UserInput): Promise<User> {
+        const created = await this.userModel.create(obj);
         return this.findById(created._id);
     }
 
     async delete(id: string) {
-        return await this.model.findByIdAndRemove(id);
+        return await this.userModel.findByIdAndRemove(id);
     }
     
-
-    async update(id: string, obj: UserUpdateInput) {
-        return await this.model
+    async update(id: string, obj: UserUpdate) {
+        return await this.userModel
             .findByIdAndUpdate(id, obj)
             .lean();
     }

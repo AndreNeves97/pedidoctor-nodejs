@@ -2,13 +2,17 @@ import { Usuario, UsuarioInput, UsuarioUpdate } from './usuario.model';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from 'typegoose';
+import { UserService } from '../../../common/security/user/user.service';
+import { User, UserCreateFromFirebaseInput } from '../../../common/security/user/user.model';
 
 @Injectable()
-export class UsuarioService {
+export class UsuarioService extends UserService {
 
     constructor (
         @InjectModel(Usuario) private model: ModelType<Usuario>
-    ) { }
+    ) { 
+        super(model);
+    }
 
     async findById ( id: string ): Promise<Usuario> {
         return await this.model
@@ -29,7 +33,7 @@ export class UsuarioService {
             
     }
 
-    async create ( obj: UsuarioInput ): Promise<Usuario> {
+    async create ( obj: UserCreateFromFirebaseInput | UsuarioInput ): Promise<Usuario> {
         const created = await this.model.create({
             obj
         });
@@ -53,6 +57,5 @@ export class UsuarioService {
             .populate('usoMedicamentos')
             .populate('acontecimentos')
             .lean();
-        }
-
+    }
 }

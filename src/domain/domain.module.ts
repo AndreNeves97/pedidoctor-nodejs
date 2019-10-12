@@ -7,7 +7,19 @@ import { DomainService } from './domain.service';
 import { PagamentosModule } from './pagamentos/pagamentos.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { tmpDir } from '../common/config/config.service';
+import { UserService } from '../common/security/user/user.service';
+import { UsuarioService } from './pedilandia/usuario/usuario.service';
 // import { CoreModule } from './core/core.module';
+
+
+/**
+ * A classe provisionada depende de qual domínio de aplicação estará ativo.
+ * Nesse caso, pedilândia
+ */
+export const userServiceProvider = {
+    provide: UserService,
+    useClass: UsuarioService
+}
 
 @Module({
     imports: [
@@ -25,6 +37,9 @@ import { tmpDir } from '../common/config/config.service';
             context: ({ req }) => ({ req }),
         }),  
 
+    ],
+    exports: [
+      PedilandiaModule
     ],
     providers: [
         DomainService

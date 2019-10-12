@@ -5,6 +5,7 @@ import { IsString, IsOptional } from 'class-validator';
 import { ObjectType, Field, InputType, ID } from 'type-graphql';
 
 import { User, UserInputRef } from '../../../common/security/user/user.model';
+import { Usuario } from '../usuario/usuario.model';
 
 @ObjectType()
 export class Consulta extends Typegoose{
@@ -16,9 +17,9 @@ export class Consulta extends Typegoose{
     @Field()
     dataConsulta: Date;
 
-    @prop({ required: true, ref: User })
-    @Field(type => User)
-    paciente: User;
+    @prop({ required: true, ref: Usuario })
+    @Field(type => Usuario)
+    paciente: Usuario;
 
     @prop({ required: true })
     @Field()

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from '../user/user.module';
 import { PassportModule } from '@nestjs/passport';
-import { UserService } from '../user/user.service';
+import { userServiceProvider, DomainModule } from '../../../domain/domain.module';
 import { JwtStrategy } from './jwt.strategy';
 import { AuthService } from './auth.service';
 import { FirebaseService } from '../../firebase/firebase.service';
@@ -11,13 +10,13 @@ import { FirebaseStrategy } from './firebase.strategy';
 
 @Module({
     imports: [
-        UserModule,
         FirebaseModule,
-        PassportModule
+        PassportModule,
+        DomainModule
     ],
     providers: [
         AuthService,
-        UserService,
+        userServiceProvider,
 
         JwtStrategy,
         FirebaseStrategy,

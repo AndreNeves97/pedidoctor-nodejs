@@ -1,28 +1,22 @@
 import { Module } from '@nestjs/common';
-import { TypegooseModule } from 'nestjs-typegoose';
-import { User } from './user/user.model'
 import { SecurityService } from './security.service';
-import { UserResolver } from './user/user.resolver';
-import { UserService } from './user/user.service';
 import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
-import { JwtModule, JwtService } from '@nestjs/jwt';
 import { FirebaseService } from '../firebase/firebase.service';
 import { FirebaseModule } from '../firebase/firebase.module';
+import { DomainModule, userServiceProvider } from '../../domain/domain.module';
 
 @Module({
     imports: [
         AuthModule,
-        UserModule,
         FirebaseModule,
+        DomainModule
     ],
     exports: [
         AuthModule,
-        UserService,
-        FirebaseService
-
+        FirebaseService,
+        userServiceProvider
     ],
-    providers: [SecurityService, UserService, FirebaseService]
+    providers: [SecurityService, userServiceProvider, FirebaseService]
 
 })
 export class SecurityModule {}
