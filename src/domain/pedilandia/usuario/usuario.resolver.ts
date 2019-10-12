@@ -25,7 +25,10 @@ export class UsuarioResolver {
     @Mutation(returns => Usuario)
     @Roles('user', 'cliente', 'gerente')
     async createUsuario ( @Args('obj') obj: UsuarioInput ) {    
-        return await this.service.create(obj);
+        return await this.service.create({
+            ...obj,
+            roles: ['user', 'cliente']
+        });
     }
 
     @Mutation(returns => Usuario, { nullable : true })
