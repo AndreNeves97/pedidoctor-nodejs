@@ -38,7 +38,8 @@ export class ConsultasService {
 
     async update(id: string, obj: ConsultaUpdateInput) {    
         return await this.model
-            .findOneAndUpdate({_id: id}, obj, {lean: true})
-            .populate('paciente');
+            .findOneAndUpdate({_id: id}, obj)
+            .populate('paciente')
+            .lean();
     }
 }
