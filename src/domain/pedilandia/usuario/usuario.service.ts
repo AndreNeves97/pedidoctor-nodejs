@@ -48,10 +48,11 @@ export class UsuarioService {
 
     async update ( id: string, obj: UsuarioUpdate ) {
         return await this.model
-            .findOneAndUpdate({ _id : id }, obj, { lean : true })
+            .findOneAndUpdate({ _id : id }, obj)
             .populate('responsavelPor')
             .populate('usoMedicamentos')
-            .populate('acontecimentos');
+            .populate('acontecimentos')
+            .lean();
         }
 
 }
