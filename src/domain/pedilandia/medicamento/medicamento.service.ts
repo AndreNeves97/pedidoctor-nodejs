@@ -42,7 +42,8 @@ export class MedicamentoService {
 
     async update ( id: string, obj: MedicamentoUpdate ) {
         return await this.model
-            .findOneAndUpdate({ _id : id }, obj, { lean: true })
-            .populate('indicadoPara');
+            .findOneAndUpdate({ _id : id }, obj)
+            .populate('indicadoPara')
+            .lean();
     }
 }   
