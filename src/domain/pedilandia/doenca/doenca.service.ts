@@ -42,8 +42,9 @@ export class DoencaService {
 
     async update ( id: string, obj: DoencaUpdate ) {
         return this.model
-            .findOneAndUpdate({ _id : id }, obj, { lean : true })
-            .populate('sintomas');
+            .findOneAndUpdate({ _id : id }, obj)
+            .populate('sintomas')
+            .lean();
     }
 
 }
