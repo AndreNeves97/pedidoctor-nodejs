@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { tmpDir } from '../../common/config/config.service';
 import { TypegooseModule } from 'nestjs-typegoose';
 
 
@@ -56,6 +54,7 @@ import { Usuario } from './usuario/usuario.model';
       }
     }]),
 
+    // TODO: Criar índice único para firebaseUid
     TypegooseModule.forFeature([{
       typegooseClass: Usuario,
       schemaOptions: {
@@ -114,7 +113,11 @@ import { Usuario } from './usuario/usuario.model';
 
   ],
   controllers: [],
-  exports: [],
+  exports: [
+    // userModelModule,
+    TypegooseModule,
+    UsuarioService
+  ],
   providers: [
 
 

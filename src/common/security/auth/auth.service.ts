@@ -1,8 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 
 import { Injectable } from '@nestjs/common';
-import { UserService } from '../user/user.service';
-import { JwtService } from '@nestjs/jwt';
 import { FirebaseService } from '../../firebase/firebase.service';
 
 import { jwt as jwtInfo } from '../../config/config.service';
