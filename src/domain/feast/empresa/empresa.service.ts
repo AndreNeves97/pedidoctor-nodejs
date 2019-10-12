@@ -39,6 +39,7 @@ export class EmpresaService {
 
     async update(id: string, obj: EmpresaUpdateInput) {
         return await this.model
-            .findByIdAndUpdate(id, obj, {lean: true});
+            .findByIdAndUpdate(id, obj)
+            .lean();
     }
 }
