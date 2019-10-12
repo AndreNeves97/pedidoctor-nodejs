@@ -51,7 +51,8 @@ export class ClinicaService {
 
     async update ( id: string, obj: ClinicaUpdateInput ) {
         return await this.model
-            .findOneAndUpdate({ _id : id }, obj, { lean : true })
+            .findOneAndUpdate({ _id : id }, obj)
+            .lean()
             .populate('secretarios')
             .populate('medicos')
             .populate('enfermeiros')
