@@ -9,77 +9,54 @@ import { Usuario } from '../usuario/usuario.model';
 
 @ObjectType()
 export class Clinica extends Typegoose {
+    @Field(type => ID)
+    _id: string;
+
     @Field()
+    @prop()
     nome: string;
+
     @Field()
+    @prop()
     endereco: string;
 
     /**
      * TODO : Criar um modelo de localização
      */
-    @Field()
+    @Field(type => String, { nullable: true })
+    @prop()
     googleMapsLocalId: string
-    @Field(type => CoordenadaGeografica)
+
+    @Field(type => CoordenadaGeografica, { nullable: true })
+    @prop()
     coordGeo: CoordenadaGeografica;
-    @Field(type => [Usuario])
+
+    @Field(type => [Usuario], { nullable: true })
+    @prop()
     secretarios : Usuario[];
-    @Field(type => [Usuario])
+    
+    @Field(type => [Usuario], { nullable: true })
+    @prop()
     medicos : Usuario[];
-    @Field(type => [Usuario])
+    
+    @Field(type => [Usuario], { nullable: true })
+    @prop()
     enfermeiros : Usuario[];
-    @Field(type => [Usuario])
+    
+    @Field(type => [Usuario], { nullable: true })
+    @prop()
     clientes : Usuario[];
 }
 
 @InputType()
-export class ClinicaInput {
-    @Field()
-    nome: string;
-    @Field()
-    endereco: string;
-    @Field()
-    googleMapsLocalId: string
-    @Field(type => CoordenadaGeograficaInput)
-    coordGeo: CoordenadaGeograficaInput;
-    @Field(type => [UsuarioInput])
-    secretarios : UsuarioInput[];
-    @Field(type => [UsuarioInput])
-    medicos : UsuarioInput[];
-    @Field(type => [UsuarioInput])
-    enfermeiros : UsuarioInput[];
-    @Field(type => [UsuarioInput])
-    clientes : UsuarioInput[];
-}
-
-@InputType()
-export class ClinicaUpdate {
-    @Field()
-    nome: string;
-    @Field()
-    endereco: string;
-    @Field()
-    googleMapsLocalId: string
-    @Field(type => CoordenadaGeograficaUpdate)
-    coordGeo: CoordenadaGeograficaUpdate;
-    @Field(type => [UsuarioUpdate])
-    secretarios : UsuarioUpdate[];
-    @Field(type => [UsuarioUpdate])
-    medicos : UsuarioUpdate[];
-    @Field(type => [UsuarioUpdate])
-    enfermeiros : UsuarioUpdate[];
-    @Field(type => [UsuarioUpdate])
-    clientes : UsuarioUpdate[];
-}
-
-@InputType()
 export class ClinicaCreateInput {
-    @Field()
+    @Field({ nullable: true })
     nome: string;
-    @Field()
+    @Field({ nullable: true })
     endereco: string;
-    @Field()
+    @Field({ nullable: true })
     googleMapsLocalId: string
-    @Field(type => CoordenadaGeograficaInput)
+    @Field(type => CoordenadaGeograficaInput, { nullable: true })
     coordGeo: CoordenadaGeograficaInput;
     @Field(type => [UsuarioInput], { nullable: true })
     secretarios : UsuarioInput[];
@@ -93,13 +70,13 @@ export class ClinicaCreateInput {
 
 @InputType()
 export class ClinicaUpdateInput {
-    @Field()
+    @Field({ nullable: true })
     nome: string;
-    @Field()
+    @Field({ nullable: true })
     endereco: string;
-    @Field()
+    @Field({ nullable: true })
     googleMapsLocalId: string
-    @Field(type => CoordenadaGeograficaUpdate)
+    @Field(type => CoordenadaGeograficaUpdate, { nullable: true })
     coordGeo: CoordenadaGeograficaUpdate;
     @Field(type => [UsuarioUpdate], { nullable: true })
     secretarios : UsuarioUpdate[];

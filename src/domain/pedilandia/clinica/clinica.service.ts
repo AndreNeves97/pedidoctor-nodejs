@@ -32,9 +32,10 @@ export class ClinicaService {
     }
 
     async create (obj: ClinicaCreateInput): Promise<Clinica> {
-        const created = await this.model.create({
-            obj
-        });
+
+        console.log(obj, this.model);
+
+        const created = await this.model.create(obj);
 
         return this.findById(created._id);
     }

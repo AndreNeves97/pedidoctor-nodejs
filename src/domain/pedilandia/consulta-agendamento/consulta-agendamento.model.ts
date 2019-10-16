@@ -3,7 +3,6 @@ import { AgendamentoRealizacao } from './agendamento-realizacao.model';
 import { DiagnosticoInput, DiagnosticoUpdate } from './../diagnostico/diagnostico.model';
 import { SintomaInput, SintomaUpdate } from './../sintoma/sintoma.model';
 import { ConsultaTipoInput, ConsultaTipoUpdate } from './../consulta-tipo/consulta-tipo.model';
-import { ClinicaInput, ClinicaUpdate } from './../clinica/clinica.model';
 import { UsuarioInput, UsuarioUpdate } from './../usuario/usuario.model';
 import * as mongoose from 'mongoose';
 
@@ -17,6 +16,7 @@ import { Diagnostico } from '../diagnostico/diagnostico.model';
 import { ConsultaTipo } from '../consulta-tipo/consulta-tipo.model';
 import { Sintoma } from '../sintoma/sintoma.model';
 import { Clinica } from '../clinica/clinica.model';
+import { InputRef } from '../../../common/general/shared/input-ref.model';
 
 @ObjectType()
 export class ConsultaAgendamento extends Typegoose {
@@ -47,8 +47,8 @@ export class ConsultaAgendamentoInput {
     dataAgendada: Date;
     @Field(type => UsuarioInput)
     paciente : UsuarioInput;
-    @Field(type => ClinicaInput)
-    clinica : ClinicaInput;
+    @Field(type => InputRef)
+    clinica : InputRef;
     @Field(type => UsuarioInput)
     medico : UsuarioInput; 
     @Field(type => ConsultaTipoInput)
@@ -69,8 +69,8 @@ export class ConsultaAgendamentoUpdate {
     dataAgendada: Date;
     @Field(type => UsuarioUpdate)
     paciente : UsuarioUpdate;
-    @Field(type => ClinicaUpdate)
-    clinica : ClinicaUpdate;
+    @Field(type => InputRef)
+    clinica : InputRef;
     @Field(type => UsuarioUpdate)
     medico : UsuarioUpdate; 
     @Field(type => ConsultaTipoUpdate)
