@@ -1,9 +1,9 @@
 import * as mongoose from 'mongoose';
 
-import { Typegoose } from '@hasezoey/typegoose';
+import { Typegoose } from '@typegoose/typegoose';
 import { InputType, Field, ID } from 'type-graphql';
 
-export abstract class User {
+export abstract class User extends Typegoose {
     _id: string;
     firebaseUid: string;
     nome: string;

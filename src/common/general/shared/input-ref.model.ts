@@ -1,5 +1,5 @@
 import { InputType, Field, ID } from "type-graphql";
-import { Typegoose } from "@hasezoey/typegoose";
+import { Typegoose } from "@typegoose/typegoose";
 
 @InputType()
 export class InputRef {

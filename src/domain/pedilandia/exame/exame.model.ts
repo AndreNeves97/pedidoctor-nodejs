@@ -3,7 +3,7 @@ import { DiagnosticoUpdate, DiagnosticoInput } from './../diagnostico/diagnostic
 import { ExameTipoInput, ExameTipoUpdate } from './../exame-tipo/exame-tipo.model';
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from '@hasezoey/typegoose';
+import { prop, Typegoose } from '@typegoose/typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
 import { Sintoma } from '../sintoma/sintoma.model';
@@ -12,7 +12,7 @@ import { ConsultaAgendamento } from '../consulta-agendamento/consulta-agendament
 import { Diagnostico } from '../diagnostico/diagnostico.model';
 
 @ObjectType()
-export class Exame {
+export class Exame extends Typegoose {
     @Field(type => ExameTipo)
     tipo : ExameTipo;
     @Field(type => ConsultaAgendamento)

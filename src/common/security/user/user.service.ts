@@ -1,5 +1,5 @@
 import { User, UserCreateFromFirebaseInput, UserInput, UserUpdate } from '../../../common/security/user/user.model';
-import { ModelType } from '@hasezoey/typegoose';
+import { ModelType } from 'typegoose';
 
 export abstract class UserService<T extends User> {
     constructor(private userModel : ModelType<T>) { }
