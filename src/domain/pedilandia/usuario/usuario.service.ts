@@ -35,7 +35,7 @@ export class UsuarioService extends UserService<Usuario> {
 
     async create ( obj: UserCreateFromFirebaseInput | UsuarioInput ): Promise<Usuario> {
         const created = await this.model.create({
-            obj
+            ...obj
         });
 
         return this.findById(created._id);
