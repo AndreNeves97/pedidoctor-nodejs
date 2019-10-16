@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
+import { prop, Typegoose } from '@typegoose/typegoose';
 import { IsString, IsOptional } from 'class-validator';
 import { ObjectType, Field, InputType, ID } from 'type-graphql';
 
