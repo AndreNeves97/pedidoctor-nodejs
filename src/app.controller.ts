@@ -14,7 +14,7 @@ export class AppController {
     constructor(
         private readonly service: AppService,
         private readonly authService: AuthService,
-        private readonly userService: UserService,
+        private readonly userService: UserService<User>,
         private readonly configService: ConfigService
     ) { }
 
@@ -30,7 +30,10 @@ export class AppController {
         const user : User = await this.userService.findOrCreateFromFirebase(req.user);
         const {_id, nome, email, fotoUrl} = user;
 
+
         const jwt = await this.authService.login(user);
+
+        console.log(jwt);
 
         return {
             jwt,

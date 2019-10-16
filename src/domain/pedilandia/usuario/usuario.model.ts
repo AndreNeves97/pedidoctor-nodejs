@@ -5,9 +5,45 @@ import { AcontecimentoInput, AcontecimentoUpdate } from './../acontecimento/acon
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
 import { Acontecimento } from '../acontecimento/acontecimento.model';
 import { User, UserUpdate, UserInput } from '../../../common/security/user/user.model';
+import { IsString, IsArray } from 'class-validator';
+import { prop, Typegoose } from '@typegoose/typegoose';
 
 @ObjectType()
-export class Usuario extends User {
+export class Usuario extends Typegoose {
+
+    @Field(type => ID)
+    _id: string;
+
+    @IsString()
+    @prop()
+    firebaseUid: string;
+
+    @IsString()
+    @prop( { required: true } )
+    @Field()
+    nome: string
+
+    @IsString()
+    @prop({ required: true, unique: true })
+    @Field()
+    email: string;
+
+    @IsString()
+    @prop({ required: false })
+    @Field({ nullable: true })
+    telefone: string;
+
+    @IsString()
+    @prop({ required: false })
+    @Field({ nullable: true })
+    fotoUrl: string;
+
+    @IsArray()
+    @prop({ required: false })
+    @Field(type => [String], { nullable: false })
+    roles: string[];
+
+    
     /**
      * Usuário pode ser o pai ou a criança.
      * Se for criança, isPaciente = true
@@ -15,37 +51,53 @@ export class Usuario extends User {
     @Field()
     isPaciente: boolean;
     
-    @Field(type => [Usuario])
+    @Field(type => [Usuario], { nullable: true} )
     responsavelPor : Usuario[];
     
-    @Field(type => [UsoMedicamento])
+    @Field(type => [UsoMedicamento], { nullable: true} )
     usoMedicamentos : UsoMedicamento[];
 
-    @Field(type => [Acontecimento])
+    @Field(type => [Acontecimento], { nullable: true} )
     acontecimentos : Acontecimento[];
 }
 
 @InputType()
-export class UsuarioInput extends UserInput {
+export class UsuarioInput {
+
+    @Field(type => String, { nullable: false })
+    nome: string
+
+    @Field(type => String, { nullable: false })
+    email: string;
+
     @Field()
     isPaciente: boolean;
-    @Field(type => [UsuarioInput] )
+
+    @Field(type => [UsuarioInput], { nullable: true} )
     responsavelPor : Usuario[];
-    @Field(type => [UsoMedicamentoInput])
+
+    @Field(type => [UsoMedicamentoInput], { nullable: true} )
     usoMedicamentos : UsoMedicamentoInput[];
-    @Field(type => [AcontecimentoInput])
+
+    @Field(type => [AcontecimentoInput], { nullable: true} )
     acontecimentos : AcontecimentoInput[];
 }
 
 @InputType()
-export class UsuarioUpdate extends UserUpdate {
-    @Field()
+export class UsuarioUpdate {
+    @Field(type => String, { nullable: true })
+    nome: string
+
+    @Field(type => String, { nullable: true })
+    email: string;
+
+    @Field(type => Boolean, { nullable: true} )
     isPaciente: boolean;
-    @Field(type => [UsuarioUpdate])
+    @Field(type => [UsuarioUpdate], { nullable: true} )
     responsavelPor : Usuario[];
-    @Field(type => [UsoMedicamentoUpdate])
+    @Field(type => [UsoMedicamentoUpdate], { nullable: true} )
     usoMedicamentos : UsoMedicamentoUpdate[];
-    @Field(type => [AcontecimentoUpdate])
+    @Field(type => [AcontecimentoUpdate], { nullable: true} )
     acontecimentos : AcontecimentoUpdate[];
 }
 

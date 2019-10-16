@@ -1,9 +1,8 @@
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
+import { prop, Typegoose } from '@hasezoey/typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID, registerEnumType } from 'type-graphql';
-import { FileFirebaseStorage } from 'src/common/storage/file-firebase-storage.model';
 
 /**
  * Tipos de informação sobre desenvolvimento:

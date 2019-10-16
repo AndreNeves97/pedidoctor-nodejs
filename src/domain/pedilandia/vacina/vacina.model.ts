@@ -2,14 +2,14 @@ import { VacinaTipoInput, VacinaTipoUpdate } from './../vacina-tipo/vacina-tipo.
 import { DoencaInput, DoencaUpdate } from './../doenca/doenca.model';
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
+import { prop, Typegoose } from '@hasezoey/typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
 import { VacinaTipo } from '../vacina-tipo/vacina-tipo.model';
 import { Doenca } from '../doenca/doenca.model';
 
 @ObjectType()
-export class Vacina extends Typegoose {
+export class Vacina {
     @Field()
     nome : string;
     @Field()

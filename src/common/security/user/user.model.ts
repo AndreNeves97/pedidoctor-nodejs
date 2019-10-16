@@ -1,48 +1,22 @@
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
-import { IsString, IsArray } from 'class-validator';
-import { ObjectType, InputType, Field, ID } from 'type-graphql';
+import { Typegoose } from '@hasezoey/typegoose';
+import { InputType, Field, ID } from 'type-graphql';
 
-export abstract class User extends Typegoose {
-    @Field(type => ID)
+export abstract class User {
     _id: string;
-
-    @IsString()
-    @prop()
     firebaseUid: string;
-
-    @IsString()
-    @prop( { required: true } )
-    @Field()
-    nome: string
-
-    @IsString()
-    @prop({ required: true, unique: true })
-    @Field()
+    nome: string;
     email: string;
-
-    @IsString()
-    @prop({ required: false })
-    @Field({ nullable: true })
     telefone: string;
-
-    @IsString()
-    @prop({ required: false })
-    @Field({ nullable: true })
     fotoUrl: string;
-
-    @IsArray()
-    @prop({ required: false })
-    @Field(type => [String], { nullable: false })
     roles: string[];
 }
 
 
 @InputType()
-export class UserInputRef extends Typegoose {
+export class UserInputRef {
     constructor(_id: string) {
-        super();
         this._id = _id;
     }
 
@@ -59,21 +33,15 @@ export class UserCreateFromFirebaseInput {
 }
 
 
-export class UserInput {
-    @Field(type => String, { nullable: false })
+export abstract class UserInput {
     nome: string
-
-    @Field(type => String, { nullable: false })
     email: string;
 }
 
 
 
-export class UserUpdate {
-    @Field(type => String, { nullable: true })
+export abstract class UserUpdate {
     nome: string
-
-    @Field(type => String, { nullable: true })
     email: string;
 }
 

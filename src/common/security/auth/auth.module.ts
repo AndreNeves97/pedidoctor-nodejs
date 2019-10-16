@@ -22,7 +22,7 @@ import { FirebaseStrategy } from './firebase.strategy';
         FirebaseStrategy,
         
         FirebaseService
-    ],
+    ],  
 
     exports: [AuthService],
     

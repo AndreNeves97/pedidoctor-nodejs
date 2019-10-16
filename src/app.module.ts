@@ -20,7 +20,13 @@ import { JwtGuard } from './common/security/auth/jwt.guard';
 @Module({
     imports: [
         DomainModule,
-        TypegooseModule.forRoot(database.uri),
+        TypegooseModule.forRoot(
+            database.uri, 
+            {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            }
+        ),
 
         SecurityModule,
         ConfigModule,

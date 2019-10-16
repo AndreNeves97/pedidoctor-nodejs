@@ -1,15 +1,15 @@
 import { User, UserCreateFromFirebaseInput, UserInput, UserUpdate } from '../../../common/security/user/user.model';
-import { ModelType } from 'typegoose';
+import { ModelType } from '@hasezoey/typegoose';
 
-export abstract class UserService {
-    constructor(private userModel : ModelType<User>) { }
+export abstract class UserService<T extends User> {
+    constructor(private userModel : ModelType<T>) { }
 
-    async findOrCreateFromFirebase(userFb : any) : Promise<User> {
+    async findOrCreateFromFirebase(userFb : any) : Promise<T> {
         let user = await this.findByFirebaseUid(userFb.uid);
         
         if(user != null)
             return user;
-           
+        
             
         user = await this.findByEmail(userFb.email);
         
@@ -29,30 +29,30 @@ export abstract class UserService {
     }
 
 
-    async findByFirebaseUid(uid: string): Promise<User> {
+    async findByFirebaseUid(uid: string): Promise<T> {
         const filter = {firebaseUid: uid};
 
         return await this.userModel.findOne(filter).lean();
     }
 
-    async findByEmail(email: string ) : Promise<User> {
-        const filter = {email};
+    async findByEmail(email: string ) : Promise<T> {
+        const filter = {email: email};
 
         return await this.userModel.findOne(filter).lean();
     }
 
-    async findById(id: string): Promise<User> {
+    async findById(id: string): Promise<T> {
         return await this.userModel.findById(id);
     }
 
-    async findAll(): Promise<User> {
+    async findAll(): Promise<T> {
         return this.userModel
             .find()
             .sort({ nome: 'desc' })
             .lean();
     }
 
-    async create(obj: UserCreateFromFirebaseInput | UserInput): Promise<User> {
+    async create(obj: UserCreateFromFirebaseInput | UserInput): Promise<T> {
         const created = await this.userModel.create(obj);
         return this.findById(created._id);
     }

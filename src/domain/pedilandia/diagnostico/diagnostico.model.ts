@@ -5,7 +5,7 @@ import { DiagnosticoTipoInput, DiagnosticoTipoUpdate } from './../diagnostico-ti
 import { ExameUpdate, ExameInput } from './../exame/exame.model';
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
+import { prop, Typegoose } from '@hasezoey/typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
 import { DiagnosticoTipo } from '../diagnostico-tipo/diagnostico-tipo.model';

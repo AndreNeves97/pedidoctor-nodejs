@@ -3,6 +3,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { jwt as jwtInfo } from '../../../common/config/config.service';
 import * as jwt from 'jsonwebtoken';
 import { UserService } from '../user/user.service';
+import { User } from '../user/user.model';
 
 
 
@@ -14,7 +15,7 @@ import { UserService } from '../user/user.service';
  */
 @Injectable()
 export class JwtGuard implements CanActivate {
-    constructor(private readonly userService: UserService) { }
+    constructor(private readonly userService: UserService<User>) { }
     
     getRequest(context: ExecutionContext) : Request {
         let req = context.switchToHttp().getRequest();

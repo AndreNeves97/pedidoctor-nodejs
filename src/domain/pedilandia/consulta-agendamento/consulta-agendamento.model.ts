@@ -7,7 +7,7 @@ import { ClinicaInput, ClinicaUpdate } from './../clinica/clinica.model';
 import { UsuarioInput, UsuarioUpdate } from './../usuario/usuario.model';
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
+import { prop, Typegoose } from '@hasezoey/typegoose';
 import { IsString, IsOptional } from 'class-validator';
 import { ObjectType, Field, InputType, ID } from 'type-graphql';
 
@@ -19,7 +19,7 @@ import { Sintoma } from '../sintoma/sintoma.model';
 import { Clinica } from '../clinica/clinica.model';
 
 @ObjectType()
-export class ConsultaAgendamento extends Typegoose{
+export class ConsultaAgendamento {
     @Field()
     dataAgendada: Date;
     @Field(type => Usuario)

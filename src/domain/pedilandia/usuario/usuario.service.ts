@@ -6,7 +6,7 @@ import { UserService } from '../../../common/security/user/user.service';
 import { User, UserCreateFromFirebaseInput } from '../../../common/security/user/user.model';
 
 @Injectable()
-export class UsuarioService extends UserService {
+export class UsuarioService extends UserService<Usuario> {
 
     constructor (
         @InjectModel(Usuario) private model: ModelType<Usuario>

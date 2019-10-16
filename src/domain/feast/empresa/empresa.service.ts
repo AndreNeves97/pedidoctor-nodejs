@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { Empresa, EmpresaCreateInput, EmpresaUpdateInput } from './empresa.model';
-import { ModelType } from 'typegoose';
+import { ModelType } from '@hasezoey/typegoose';
 
 @Injectable()
 export class EmpresaService {

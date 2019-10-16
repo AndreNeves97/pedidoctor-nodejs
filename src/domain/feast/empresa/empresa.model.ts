@@ -1,12 +1,12 @@
 
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
-import { IsString, IsOptional } from 'class-validator';
+import { prop, Typegoose } from '@hasezoey/typegoose';
+import { IsString } from 'class-validator';
 import { ObjectType, Field, InputType, ID } from 'type-graphql';
 
 @ObjectType()
-export class Empresa extends Typegoose {
+export class Empresa  {
     @Field(type => ID)
     _id: string;
 

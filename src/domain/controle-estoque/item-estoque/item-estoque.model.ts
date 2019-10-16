@@ -25,14 +25,14 @@
 
 import * as mongoose from 'mongoose'
 
-import { prop , Typegoose } from 'typegoose';
+import { prop , Typegoose } from '@hasezoey/typegoose';
 import { IsString , IsPositive , IsInt , ValidateNested } from 'class-validator';
 import { ObjectType , Field , InputType , ID , Int} from 'type-graphql';
 
 import { ItemEstoqueCat } from '../item-estoque-cat/item-estoque-cat.model';
 
 @ObjectType()
-export class ItemEstoque extends Typegoose {
+export class ItemEstoque {
    @Field(type => ID)
    _id: string;
 

@@ -5,10 +5,9 @@ import { SintomaUpdate, SintomaInput } from './../sintoma/sintoma.model';
 import { DoencaUpdate, DoencaInput } from './../doenca/doenca.model';
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
+import { prop, Typegoose } from '@hasezoey/typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
-import { FileFirebaseStorage } from 'src/common/storage/file-firebase-storage.model';
 import { AcontecimentoTipo } from '../acontecimento-tipo/acontecimento-tipo.model';
 import { Exame } from '../exame/exame.model';
 import { Vacina } from '../vacina/vacina.model';

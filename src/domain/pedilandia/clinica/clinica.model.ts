@@ -2,13 +2,13 @@ import { UsuarioInput, UsuarioUpdate } from './../usuario/usuario.model';
 import { CoordenadaGeografica, CoordenadaGeograficaInput, CoordenadaGeograficaUpdate } from './../util/coordenadaGeografica';
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
+import { prop, Typegoose } from '@hasezoey/typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
 import { Usuario } from '../usuario/usuario.model';
 
 @ObjectType()
-export class Clinica extends Typegoose {
+export class Clinica {
     @Field()
     nome: string;
     @Field()
