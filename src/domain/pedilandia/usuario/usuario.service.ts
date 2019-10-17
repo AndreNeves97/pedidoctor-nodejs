@@ -62,7 +62,13 @@ export class UsuarioService extends UserService<Usuario> {
             },   
         ]);
 
-        console.log(result);
+        result.map(
+            ( res ) => {
+                res.qtConsultas = res.qtConsultas == null ? 0 : res.qtConsultas;
+            }
+        )
+
+        // console.log(result);
         
         return result;
         

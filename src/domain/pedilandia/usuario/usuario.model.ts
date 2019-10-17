@@ -85,6 +85,9 @@ export class UsuarioInput {
     @Field(type => Int)
     tipo: number;
 
+    @Field(type => Int, { nullable: true })
+    qtConsultas: number = 0;
+
     @Field()
     isPaciente: boolean;
 
@@ -107,6 +110,8 @@ export class UsuarioUpdate {
     nome: string
     @Field({ nullable: true })
     telefone: string;
+    @Field(type => Int, { nullable: true })
+    qtConsultas: number = 0;
     @Field(type => String, { nullable: true })
     email: string;
     @Field(type => Int)
