@@ -45,7 +45,7 @@ export abstract class UserService<T extends User> {
         return await this.userModel.findById(id);
     }
 
-    async findAll(): Promise<T> {
+    async findAll(): Promise<T[]> {
         return this.userModel
             .find()
             .sort({ nome: 'desc' })

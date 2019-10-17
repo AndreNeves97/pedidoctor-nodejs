@@ -2,7 +2,7 @@ import { UsoMedicamentoInput, UsoMedicamentoUpdate } from './usomedicamento.mode
 import { UsoMedicamento } from './usomedicamento.model';
 import { AcontecimentoInput, AcontecimentoUpdate } from './../acontecimento/acontecimento.model';
 
-import { ObjectType, InputType, Field, ID } from 'type-graphql';
+import { ObjectType, InputType, Field, ID, Int } from 'type-graphql';
 import { Acontecimento } from '../acontecimento/acontecimento.model';
 import { User, UserUpdate, UserInput } from '../../../common/security/user/user.model';
 import { IsString, IsArray } from 'class-validator';
@@ -10,6 +10,12 @@ import { prop, Typegoose } from '@typegoose/typegoose';
 
 @ObjectType()
 export class Usuario extends Typegoose {
+
+    constructor(values = null) {
+        super();
+
+        Object.assign(this, values);
+    }
 
     @Field(type => ID)
     _id: string;
@@ -43,6 +49,8 @@ export class Usuario extends Typegoose {
     @Field(type => [String], { nullable: false })
     roles: string[];
 
+    @Field(type => Int, { nullable: true })
+    qtConsultas: number;
     
     /**
      * Usuário pode ser o pai ou a criança.

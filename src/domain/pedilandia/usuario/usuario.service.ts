@@ -23,13 +23,56 @@ export class UsuarioService extends UserService<Usuario> {
             .lean();
     }
     
-    async findAll ( ): Promise<Usuario> {
-        return await this.model
-            .find()
-            .populate('responsavelPor')
-            .populate('usoMedicamentos')
-            .populate('acontecimentos')
-            .lean();
+    async findAll ( ): Promise<Usuario[]> {
+        let result = await this.model.aggregate([
+            {
+                $lookup: {            
+                    from: "Pedilandia_Consulta",
+                    let: {"paciente_id": "$_id"},
+                    pipeline: [ 
+                        { $match:
+                             { $expr:
+                                { $and:
+                                   [    
+                                     { $eq: [ "$paciente",  "$$paciente_id" ] },
+                                   ]
+                                }
+                             }
+                        },
+                        {
+                            $count: "paciente"
+                        }
+                    ],
+                    as: "consultas"
+                }
+            },
+            
+            {
+                $project : {
+                    "_id" : 1,
+                    "roles" : 1,
+                    "firebaseUid" : 1,
+                    "nome" : 1,
+                    "email" : 1,
+                    "fotoUrl" : 1,
+                    "createdAt" : 1,
+                    "updatedAt" : 1,
+                    "qtConsultas": {$max: "$consultas.paciente"}
+                }
+            },   
+        ]);
+
+        console.log(result);
+        
+        return result;
+        
+
+        // return await this.model
+        //     .find()
+        //     .populate('responsavelPor')
+        //     .populate('usoMedicamentos')
+        //     .populate('acontecimentos')
+        //     .lean();
             
     }
 
