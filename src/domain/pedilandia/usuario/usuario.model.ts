@@ -49,6 +49,10 @@ export class Usuario extends Typegoose {
     @Field(type => [String], { nullable: false })
     roles: string[];
 
+    @prop({ required: true })
+    @Field(type => Int)
+    tipo: number = 0;
+
     @Field(type => Int, { nullable: true })
     qtConsultas: number;
     
@@ -78,8 +82,14 @@ export class UsuarioInput {
     @Field(type => String, { nullable: false })
     email: string;
 
+    @Field(type => Int)
+    tipo: number;
+
     @Field()
     isPaciente: boolean;
+
+    @Field({ nullable: true })
+    telefone: string;
 
     @Field(type => [UsuarioInput], { nullable: true} )
     responsavelPor : Usuario[];
@@ -95,10 +105,12 @@ export class UsuarioInput {
 export class UsuarioUpdate {
     @Field(type => String, { nullable: true })
     nome: string
-
+    @Field({ nullable: true })
+    telefone: string;
     @Field(type => String, { nullable: true })
     email: string;
-
+    @Field(type => Int)
+    tipo: number;
     @Field(type => Boolean, { nullable: true} )
     isPaciente: boolean;
     @Field(type => [UsuarioUpdate], { nullable: true} )

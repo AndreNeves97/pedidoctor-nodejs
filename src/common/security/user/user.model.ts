@@ -11,6 +11,7 @@ export abstract class User extends Typegoose {
     telefone: string;
     fotoUrl: string;
     roles: string[];
+    tipo: number = 0;
 }
 
 
@@ -30,19 +31,22 @@ export class UserCreateFromFirebaseInput {
     email: string;
     fotoUrl: string;
     roles: string[];
+    tipo: number = 0;
 }
 
 
 export abstract class UserInput {
-    nome: string
+    nome: string;
     email: string;
+    tipo: number = 0;
 }
 
 
 
 export abstract class UserUpdate {
-    nome: string
+    nome: string;
     email: string;
+    tipo: number = 0;
 }
 
 

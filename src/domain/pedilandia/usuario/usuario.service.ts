@@ -101,4 +101,13 @@ export class UsuarioService extends UserService<Usuario> {
             .populate('acontecimentos')
             .lean();
     }
+
+    async findByTipo ( tipo: number ) {
+        return await this.model
+            .find({ tipo : tipo })
+            .populate('responsavelPor')
+            .populate('usoMedicamentos')
+            .populate('acontecimentos')
+            .lean();
+    }
 }

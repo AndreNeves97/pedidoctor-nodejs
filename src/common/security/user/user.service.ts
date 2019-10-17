@@ -22,7 +22,8 @@ export abstract class UserService<T extends User> {
             nome: userFb.name,
             email: userFb.email,
             fotoUrl: userFb.picture,
-            roles: ['user'] 
+            roles: ['user'],
+            tipo: 0
         });
         
         return user;

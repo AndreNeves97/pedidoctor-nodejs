@@ -43,4 +43,10 @@ export class UsuarioResolver {
         return await this.service.update(id, obj);
     }
 
+    @Query(returns => Usuario, { nullable : true })
+    @Roles('user', 'cliente', 'gerente')
+    async findByTipo ( @Args('tipo') tipo: number ) {
+        return await this.service.findByTipo( tipo );
+    }
+
 }
