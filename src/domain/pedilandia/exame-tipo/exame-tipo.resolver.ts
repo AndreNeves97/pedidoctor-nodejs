@@ -12,7 +12,7 @@ export class ExameTipoResolver {
 
     @Query(returns => [ ExameTipo ])
     @Roles('user', 'cliente', 'gerente')
-    async examesTipo () {
+    async exameTipos () {
         return await this.service.findAll();
     }
 
