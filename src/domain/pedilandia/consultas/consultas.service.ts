@@ -13,11 +13,14 @@ export class ConsultasService {
     }
 
     async findAll(): Promise<Consulta> {
-        return this.model
+        const res = await this.model
             .find()
-            .sort({ dataConnsulta: 'desc' })
+            .sort({ dataConsulta: 'desc' })
             .populate('paciente')
             .lean();
+
+
+        return res;
     }
 
     async create(obj: ConsultaCreateInput): Promise<Consulta> {

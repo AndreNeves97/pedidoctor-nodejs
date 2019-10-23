@@ -42,7 +42,7 @@ export class JwtGuard implements CanActivate {
                         s[1], 
                         jwtInfo.secret, 
                         {
-                            ignoreExpiration: false
+                            ignoreExpiration: process.env.NODE_ENV == 'development'
                         }
                     );
 

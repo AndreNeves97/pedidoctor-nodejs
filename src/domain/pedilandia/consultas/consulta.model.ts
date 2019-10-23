@@ -18,7 +18,7 @@ export class Consulta extends Typegoose{
     dataConsulta: Date;
 
     @prop({ required: true, ref: Usuario })
-    @Field(type => Usuario)
+    @Field(type => Usuario, { nullable: true })
     paciente: Usuario;
 
     @prop({ required: true })
