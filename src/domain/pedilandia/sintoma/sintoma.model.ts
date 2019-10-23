@@ -6,6 +6,8 @@ import { ObjectType, InputType, Field, ID } from 'type-graphql';
 
 @ObjectType()
 export class Sintoma extends Typegoose {
+    @Field(type => ID)
+    _id: string;
     @Field()
     nome: string;
     @Field()

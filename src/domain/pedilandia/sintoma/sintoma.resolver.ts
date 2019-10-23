@@ -25,6 +25,7 @@ export class SintomaResolver {
     @Mutation(returns => Sintoma)
     @Roles('user', 'cliente', 'gerente')
     async createSintoma ( @Args('obj') obj: SintomaInput ) {
+        console.log(obj);
         return await this.service.create(obj);
     }
 
