@@ -27,7 +27,7 @@ export class DoencaService {
 
     async create ( obj: DoencaInput ): Promise<Doenca> {
         const created = await this.model.create({
-            obj
+            ...obj
         });
 
         return this.findById(created._id);
