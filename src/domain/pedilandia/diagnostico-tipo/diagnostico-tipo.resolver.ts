@@ -13,7 +13,7 @@ export class DiagnosticoTipoResolver {
 
     @Query(returns => [ DiagnosticoTipo ])
     @Roles('user', 'cliente', 'gerente')   
-    async diagnosticosTipo ( ) {
+    async diagnosticoTipos ( ) {
         return await this.service.findAll();
     }
 

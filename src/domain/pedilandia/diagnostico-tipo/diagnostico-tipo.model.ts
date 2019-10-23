@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
+import { arrayProp, prop } from '@typegoose/typegoose';
+import { Typegoose } from 'typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
 
@@ -12,9 +13,15 @@ import { ObjectType, InputType, Field, ID } from 'type-graphql';
  */
 @ObjectType()
 export class DiagnosticoTipo extends Typegoose {
+    @Field(type => ID)
+    _id: string;
+    
     @Field()
+    @prop({required : true})
     nome: string;
+
     @Field()
+    @prop({required : true})
     descricao: string;
 }
 
@@ -28,9 +35,10 @@ export class DiagnosticoTipoInput {
 
 @InputType()
 export class DiagnosticoTipoUpdate {
-    @Field()
+    @Field({nullable: true})
     nome: string;
-    @Field()
+
+    @Field({nullable: true})
     descricao: string;
 }
 
