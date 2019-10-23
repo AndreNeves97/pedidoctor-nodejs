@@ -1,16 +1,21 @@
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
+import {  Typegoose } from 'typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
+import { prop } from '@typegoose/typegoose';
 
 @ObjectType()
 export class Sintoma extends Typegoose {
     @Field(type => ID)
     _id: string;
+
     @Field()
+    @prop({required : true})
     nome: string;
+    
     @Field()
+    @prop({required : true})
     descricao: string;
 }
 
@@ -24,9 +29,9 @@ export class SintomaInput extends Typegoose {
 
 @InputType()
 export class SintomaUpdate extends Typegoose {
-    @Field()
+    @Field({nullable : true})
     nome: string;
-    @Field()
+    @Field({nullable : true})
     descricao: string;
 }
 

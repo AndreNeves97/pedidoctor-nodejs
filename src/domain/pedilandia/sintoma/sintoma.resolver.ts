@@ -19,7 +19,7 @@ export class SintomaResolver {
     @Query(returns => Sintoma)
     @Roles('user', 'cliente', 'gerente')
     async sintoma ( @Args('id') id: string ) {
-        return await this.service.findAll();
+        return await this.service.findById(id);
     }
 
     @Mutation(returns => Sintoma)

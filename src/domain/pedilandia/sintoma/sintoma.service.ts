@@ -25,7 +25,7 @@ export class SintomaService {
 
     async create ( obj: SintomaInput ): Promise<Sintoma> {
         const created = await this.model.create({
-            obj
+            ...obj
         });
 
         return this.findById(created._id);
