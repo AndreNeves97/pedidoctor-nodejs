@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from 'typegoose';
+import { prop } from '@typegoose/typegoose';
+import { Typegoose } from 'typegoose';
 import { IsString, IsOptional } from 'class-validator';
 import { ObjectType, Field, InputType, ID } from 'type-graphql';
 
@@ -14,8 +15,14 @@ import { Diagnostico } from '../diagnostico/diagnostico.model';
  */
 @ObjectType()
 export class ConsultaTipo extends Typegoose{
+    @Field(type => ID)
+    _id: string;
+
     @Field()
+    @prop({required : true})
     nome : string;
+
+    @prop({required : true})
     @Field()
     descricao : string;
 }
@@ -30,9 +37,9 @@ export class ConsultaTipoInput {
 
 @InputType()
 export class ConsultaTipoUpdate {
-    @Field()
+    @Field({nullable : true})
     nome : string;
-    @Field()
+    @Field({nullable : true})
     descricao : string;
 }
 

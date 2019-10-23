@@ -25,7 +25,7 @@ export class ConsultaTipoService {
 
     async create ( obj: ConsultaTipoInput ): Promise<ConsultaTipo> {
         const created = await this.model.create({
-            obj
+            ...obj
         });
 
         return this.findById(created._id);
