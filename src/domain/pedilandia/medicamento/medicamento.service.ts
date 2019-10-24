@@ -13,21 +13,27 @@ export class MedicamentoService {
     async findById ( id: string ): Promise<Medicamento> {
         return await this.model
             .findById(id)
-            .populate('indicadoPara')
+            .populate({
+                path: 'indicadoPara',
+                populate: {path: 'sintomas'}
+            })
             .lean();
     }
 
     async findAll (): Promise<Medicamento> {
         return await this.model
             .find()
-            .populate('indicadoPara')
+            .populate({
+                path: 'indicadoPara',
+                populate: {path: 'sintomas'}
+            })
             .sort({ nome : 'asc' })
             .lean();
     }
 
     async create ( obj: MedicamentoInput ): Promise<Medicamento> {
         const created = await this.model.create({
-            obj
+            ...obj
         });
 
         return this.findById(created._id);
@@ -36,14 +42,20 @@ export class MedicamentoService {
     async delete ( id: string ) {
         return await this.model
             .findOneAndRemove({ _id: id })
-            .populate('indicadoPara')
+            .populate({
+                path: 'indicadoPara',
+                populate: {path: 'sintomas'}
+            })
             .lean();
     }
 
     async update ( id: string, obj: MedicamentoUpdate ) {
         return await this.model
             .findOneAndUpdate({ _id : id }, obj)
-            .populate('indicadoPara')
+            .populate({
+                path: 'indicadoPara',
+                populate: {path: 'sintomas'}
+            })
             .lean();
     }
 }   
