@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { DiagnosticoTipo, DiagnosticoTipoInput, DiagnosticoTipoUpdate } from './diagnostico-tipo.model';
-import { ModelType } from '@hasezoey/typegoose';
+import { ModelType } from 'typegoose';
 
 @Injectable()
 export class DiagnosticoTipoService {

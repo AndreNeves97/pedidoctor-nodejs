@@ -21,7 +21,7 @@ export class ClinicaService {
     }
 
     async findAll (): Promise<Clinica[]> {
-        const itens = await this.model
+        return await this.model
             .find()
             .populate('secretarios')
             .populate('medicos')
@@ -29,8 +29,6 @@ export class ClinicaService {
             .populate('clientes')
             .sort({ nome: 'asc' })
             .lean();
-        
-        return itens;
     }
 
     async create (obj: ClinicaCreateInput): Promise<Clinica> {

@@ -12,15 +12,12 @@ export class ConsultasService {
         return await this.model.findById(id).populate('paciente');
     }
 
-    async findAll(): Promise<Consulta> {
-        const res = await this.model
+    async findAll(): Promise<Consulta[]> {
+        return await this.model
             .find()
             .sort({ dataConsulta: 'desc' })
             .populate('paciente')
             .lean();
-
-
-        return res;
     }
 
     async create(obj: ConsultaCreateInput): Promise<Consulta> {

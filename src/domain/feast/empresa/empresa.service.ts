@@ -16,13 +16,10 @@ export class EmpresaService {
     }
 
     async findAll() : Promise<Empresa[]> {
-        const query =
-            this.model
+        return this.model
             .find()
             .sort({ nome: 'asc' })
             .lean();
-
-        return query;
     }
 
     async find() {

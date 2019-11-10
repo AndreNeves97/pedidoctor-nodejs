@@ -57,10 +57,6 @@ export abstract class UserService<T extends User> {
         const created = await this.userModel.create(obj);
         return this.findById(created._id);
     }
-
-    async delete(id: string) {
-        return await this.userModel.findByIdAndRemove(id);
-    }
     
     async update(id: string, obj: UserUpdate) {
         return await this.userModel

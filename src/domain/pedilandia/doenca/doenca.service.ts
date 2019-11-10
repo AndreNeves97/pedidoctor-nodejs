@@ -17,7 +17,7 @@ export class DoencaService {
             .lean();
     }
 
-    async findAll ( ): Promise<Doenca> {
+    async findAll ( ): Promise<Doenca[]> {
         return await this.model 
             .find()
             .populate('sintomas')
