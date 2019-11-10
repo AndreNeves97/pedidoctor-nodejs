@@ -2,6 +2,7 @@ import { Clinica, ClinicaCreateInput, ClinicaUpdateInput } from './clinica.model
 import { ClinicaService } from './clinica.service';
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { Roles, RolesGuard } from '../../../common/security/user/roles.guard';
+import { ObjectId } from 'bson';
 
 @Resolver(of => Clinica)
 export class ClinicaResolver {
@@ -38,6 +39,48 @@ export class ClinicaResolver {
     @Roles('user', 'cliente', 'gerente')
     async updateClinica ( @Args('id') id:string, @Args('obj') obj: ClinicaUpdateInput ) {
         return await this.service.update(id, obj);
+    }
+
+
+   /**
+    * 
+    * @param idClinica 
+    * @param idUsuario 
+    * @param grupo :
+    *   - O grupo ao qual adicionar o usuário. Deve ser:
+    *     - secretarios
+    *     - medicos
+    *     - enfermeiros
+    *     - clientes
+    * 
+    *   - A API não filtrará valores inválidos, mas a inserção gerará lixo no banco
+    */ 
+    @Mutation(returns => Clinica)
+    async atribuirUsuarioClinica ( 
+        @Args('idClinica') idClinica : string ,
+        @Args('idUsuario') idUsuario : string  ,
+        @Args('grupo') grupo : string 
+    ) {
+        const addToSet = {};
+        addToSet[grupo] = new ObjectId(idUsuario);
+
+        return await this.service.update(idClinica, {
+            $addToSet: addToSet
+        });
+    }
+
+    @Mutation(returns => Clinica)
+    async removerUsuarioClinica(
+        @Args('idClinica') idClinica : string ,
+        @Args('idUsuario') idUsuario : string  ,
+        @Args('grupo') grupo : string 
+    ) {
+        const pull = {};
+        pull[grupo] = new ObjectId(idUsuario);
+
+        return await this.service.update(idClinica, {
+            $pull: pull
+        });
     }
 
 }

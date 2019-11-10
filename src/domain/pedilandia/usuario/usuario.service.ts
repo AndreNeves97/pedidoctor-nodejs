@@ -8,13 +8,13 @@ import { User, UserCreateFromFirebaseInput } from '../../../common/security/user
 @Injectable()
 export class UsuarioService extends UserService<Usuario> {
 
-    constructor (
+    constructor(
         @InjectModel(Usuario) private model: ModelType<Usuario>
-    ) { 
+    ) {
         super(model);
     }
 
-    async findById ( id: string ): Promise<Usuario> {
+    async findById(id: string): Promise<Usuario> {
         return await this.model
             .findById(id)
             .populate('responsavelPor')
@@ -22,22 +22,41 @@ export class UsuarioService extends UserService<Usuario> {
             .populate('acontecimentos')
             .lean();
     }
-    
-    async findAll ( ): Promise<Usuario[]> {
+
+    async findAll(conditions = {}, projection = {}, offset = 0, limit = 0): Promise<Usuario[]> {
         let result = await this.model.aggregate([
             {
-                $lookup: {            
+                $match: {
+                    ...conditions
+                }
+            },
+            {
+                $sort: {
+                    nome: 1
+                },
+            },
+            {
+                $skip: offset
+            },
+            {
+                $limit: limit
+            },
+            {
+                $lookup: {
                     from: "Pedilandia_Consulta",
-                    let: {"paciente_id": "$_id"},
-                    pipeline: [ 
-                        { $match:
-                             { $expr:
-                                { $and:
-                                   [    
-                                     { $eq: [ "$paciente",  "$$paciente_id" ] },
-                                   ]
+                    let: { "paciente_id": "$_id" },
+                    pipeline: [
+                        {
+                            $match:
+                            {
+                                $expr:
+                                {
+                                    $and:
+                                        [
+                                            { $eq: ["$paciente", "$$paciente_id"] },
+                                        ]
                                 }
-                             }
+                            }
                         },
                         {
                             $count: "paciente"
@@ -46,32 +65,33 @@ export class UsuarioService extends UserService<Usuario> {
                     as: "consultas"
                 }
             },
-            
+
             {
-                $project : {
-                    "_id" : 1,
-                    "roles" : 1,
-                    "firebaseUid" : 1,
-                    "nome" : 1,
-                    "email" : 1,
-                    "fotoUrl" : 1,
-                    "createdAt" : 1,
-                    "updatedAt" : 1,
-                    "qtConsultas": {$max: "$consultas.paciente"}
+                $project: {
+                    "_id": 1,
+                    "roles": 1,
+                    "firebaseUid": 1,
+                    "nome": 1,
+                    "email": 1,
+                    "fotoUrl": 1,
+                    "createdAt": 1,
+                    "updatedAt": 1,
+                    "qtConsultas": { $max: "$consultas.paciente" },
+                    ...projection
                 }
-            },   
+            },
         ]);
 
         result.map(
-            ( res ) => {
+            (res) => {
                 res.qtConsultas = res.qtConsultas == null ? 0 : res.qtConsultas;
             }
         )
 
         // console.log(result);
-        
+
         return result;
-        
+
 
         // return await this.model
         //     .find()
@@ -79,10 +99,10 @@ export class UsuarioService extends UserService<Usuario> {
         //     .populate('usoMedicamentos')
         //     .populate('acontecimentos')
         //     .lean();
-            
+
     }
 
-    async create ( obj: UserCreateFromFirebaseInput | UsuarioInput ): Promise<Usuario> {
+    async create(obj: UserCreateFromFirebaseInput | UsuarioInput): Promise<Usuario> {
         const created = await this.model.create({
             ...obj
         });
@@ -90,27 +110,27 @@ export class UsuarioService extends UserService<Usuario> {
         return this.findById(created._id);
     }
 
-    async delete ( id: string ) {
+    async delete(id: string) {
         return await this.model
-            .findOneAndRemove({ _id : id })
+            .findOneAndRemove({ _id: id })
             .populate('responsavelPor')
             .populate('usoMedicamentos')
             .populate('acontecimentos')
             .lean();
     }
 
-    async update ( id: string, obj: UsuarioUpdate ) {
+    async update(id: string, obj: UsuarioUpdate) {
         return await this.model
-            .findOneAndUpdate({ _id : id }, obj)
+            .findOneAndUpdate({ _id: id }, obj)
             .populate('responsavelPor')
             .populate('usoMedicamentos')
             .populate('acontecimentos')
             .lean();
     }
 
-    async findByTipo ( tipo: number ) {
+    async findByTipo(tipo: number) {
         return await this.model
-            .find({ tipo : tipo })
+            .find({ tipo: tipo })
             .populate('responsavelPor')
             .populate('usoMedicamentos')
             .populate('acontecimentos')

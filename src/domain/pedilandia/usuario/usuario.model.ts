@@ -6,6 +6,8 @@ import { ObjectType, InputType, Field, ID, Int } from 'type-graphql';
 import { Acontecimento } from '../acontecimento/acontecimento.model';
 import { IsString, IsArray } from 'class-validator';
 import { prop, Typegoose, arrayProp } from '@typegoose/typegoose';
+import { BaseUpdate } from '../../../common/general/shared/base-update.model';
+
 
 @ObjectType()
 export class Usuario extends Typegoose {
@@ -106,23 +108,23 @@ export class UsuarioInput {
 }
 
 @InputType()
-export class UsuarioUpdate {
+export class UsuarioUpdate extends BaseUpdate {
     @Field(type => String, { nullable: true })
-    nome: string
+    nome?: string
     @Field({ nullable: true })
-    telefone: string;
+    telefone?: string;
     @Field(type => Int, { nullable: true })
-    qtConsultas: number = 0;
+    qtConsultas?: number = 0;
     @Field(type => String, { nullable: true })
-    email: string;
+    email? : string;
     @Field(type => Int)
-    tipo: number;
+    tipo? : number;
     @Field(type => Boolean, { nullable: true} )
-    isPaciente: boolean;
+    isPaciente? : boolean;
     @Field(type => [UsuarioUpdate], { nullable: true} )
-    responsavelPor : Usuario[];
+    responsavelPor? : Usuario[];
     @Field(type => [UsoMedicamentoUpdate], { nullable: true} )
-    usoMedicamentos : UsoMedicamentoUpdate[];
+    usoMedicamentos? : UsoMedicamentoUpdate[];
     @Field(type => [AcontecimentoUpdate], { nullable: true} )
-    acontecimentos : AcontecimentoUpdate[];
+    acontecimentos? : AcontecimentoUpdate[];
 }

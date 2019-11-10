@@ -6,6 +6,7 @@ import { prop, Typegoose } from '@typegoose/typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
 import { Usuario } from '../usuario/usuario.model';
+import { BaseUpdate } from '../../../common/general/shared/base-update.model';
 
 @ObjectType()
 export class Clinica extends Typegoose {
@@ -69,22 +70,22 @@ export class ClinicaCreateInput {
 }
 
 @InputType()
-export class ClinicaUpdateInput {
+export class ClinicaUpdateInput extends BaseUpdate {
     @Field({ nullable: true })
-    nome: string;
+    nome? : string;
     @Field({ nullable: true })
-    endereco: string;
+    endereco? : string;
     @Field({ nullable: true })
-    googleMapsLocalId: string
+    googleMapsLocalId? : string
     @Field(type => CoordenadaGeograficaUpdate, { nullable: true })
-    coordGeo: CoordenadaGeograficaUpdate;
+    coordGeo? : CoordenadaGeograficaUpdate;
     @Field(type => [UsuarioUpdate], { nullable: true })
-    secretarios : UsuarioUpdate[];
+    secretarios? : UsuarioUpdate[];
     @Field(type => [UsuarioUpdate], { nullable: true })
-    medicos : UsuarioUpdate[];
+    medicos? : UsuarioUpdate[];
     @Field(type => [UsuarioUpdate], { nullable: true })
-    enfermeiros : UsuarioUpdate[];
+    enfermeiros? : UsuarioUpdate[];
     @Field(type => [UsuarioUpdate], { nullable: true })
-    clientes : UsuarioUpdate[];
+    clientes? : UsuarioUpdate[];
 }
 
