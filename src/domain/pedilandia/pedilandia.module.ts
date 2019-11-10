@@ -34,6 +34,8 @@ import { ExameTipo } from './exame-tipo/exame-tipo.model';
 import { Medicamento } from './medicamento/medicamento.model';
 import { Sintoma } from './sintoma/sintoma.model';
 import { Usuario } from './usuario/usuario.model';
+import { ConsultaAgendamento } from './consulta-agendamento/consulta-agendamento.model';
+import { UsuarioDTO } from './usuario/usuario.dto';
 
 @Module({
   imports: [
@@ -42,6 +44,14 @@ import { Usuario } from './usuario/usuario.model';
       typegooseClass: Consulta,
       schemaOptions: {
         collection: 'Pedilandia_Consulta',
+        timestamps: true
+      }
+    }]),
+
+    TypegooseModule.forFeature([{
+      typegooseClass: ConsultaAgendamento,
+      schemaOptions: {
+        collection: 'Pedilandia_ConsultaAgendamento',
         timestamps: true
       }
     }]),
@@ -56,13 +66,20 @@ import { Usuario } from './usuario/usuario.model';
 
     // TODO: Criar índice único para firebaseUid
     TypegooseModule.forFeature([{
-      typegooseClass: Usuario,
-      schemaOptions: {
-        collection: 'Pedilandia_Usuario',
-        timestamps: true
-      }
+        typegooseClass: Usuario,
+        schemaOptions: {
+          collection: 'Pedilandia_Usuario',
+          timestamps: true
+        }
     }]),
-
+    TypegooseModule.forFeature([{
+        typegooseClass: UsuarioDTO,
+        schemaOptions: {
+          collection: 'Pedilandia_Usuario',
+          timestamps: true
+        }
+      }]),
+      
     TypegooseModule.forFeature([{
       typegooseClass: ConsultaTipo,
       schemaOptions: {

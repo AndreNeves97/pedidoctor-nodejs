@@ -1,10 +1,9 @@
 import { UsoMedicamentoInput, UsoMedicamentoUpdate } from './usomedicamento.model';
 import { UsoMedicamento } from './usomedicamento.model';
-import { AcontecimentoInput, AcontecimentoUpdate } from './../acontecimento/acontecimento.model';
+import { AcontecimentoInput, AcontecimentoUpdate } from '../acontecimento/acontecimento.model';
 
 import { ObjectType, InputType, Field, ID, Int } from 'type-graphql';
 import { Acontecimento } from '../acontecimento/acontecimento.model';
-import { User, UserUpdate, UserInput } from '../../../common/security/user/user.model';
 import { IsString, IsArray } from 'class-validator';
 import { prop, Typegoose } from '@typegoose/typegoose';
 
@@ -125,4 +124,3 @@ export class UsuarioUpdate {
     @Field(type => [AcontecimentoUpdate], { nullable: true} )
     acontecimentos : AcontecimentoUpdate[];
 }
-

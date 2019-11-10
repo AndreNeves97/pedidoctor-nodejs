@@ -1,33 +1,33 @@
 import { AgendamentoRealizacaoInput, AgendamentoRealizacaoUpdate } from './agendamento-realizacao.model';
-import { AgendamentoRealizacao } from './agendamento-realizacao.model';
-import { DiagnosticoInput, DiagnosticoUpdate } from './../diagnostico/diagnostico.model';
+import { AgendamentoRealizacao } from './agendamento-realizacao.model';;
 import { SintomaInput, SintomaUpdate } from './../sintoma/sintoma.model';
 import { ConsultaTipoInput, ConsultaTipoUpdate } from './../consulta-tipo/consulta-tipo.model';
-import { UsuarioInput, UsuarioUpdate } from './../usuario/usuario.model';
-import * as mongoose from 'mongoose';
+import { UsuarioInput, UsuarioUpdate } from '../usuario/usuario.model';
 
 import { prop, Typegoose } from '@typegoose/typegoose';
-import { IsString, IsOptional } from 'class-validator';
-import { ObjectType, Field, InputType, ID } from 'type-graphql';
-
-import { User, UserInputRef } from '../../../common/security/user/user.model';
-import { Usuario } from '../usuario/usuario.model';
-import { Diagnostico } from '../diagnostico/diagnostico.model';
+import { ObjectType, Field, InputType, ID, Int } from 'type-graphql';
 import { ConsultaTipo } from '../consulta-tipo/consulta-tipo.model';
 import { Sintoma } from '../sintoma/sintoma.model';
 import { Clinica } from '../clinica/clinica.model';
 import { InputRef } from '../../../common/general/shared/input-ref.model';
+import { UsuarioDTO } from '../usuario/usuario.dto';
 
 @ObjectType()
 export class ConsultaAgendamento extends Typegoose {
     @Field()
     dataAgendada: Date;
-    @Field(type => Usuario)
-    paciente : Usuario;
+
+    @prop({ required: true })
+    @Field(type => UsuarioDTO, { nullable : true })
+    paciente : UsuarioDTO;
+
     @Field(type => Clinica)
     clinica : Clinica;
-    @Field(type => Usuario)
-    medico : Usuario; 
+    
+    @prop({ required: true })
+    @Field(type => UsuarioDTO, { nullable : true })
+    medico : UsuarioDTO; 
+
     @Field(type => ConsultaTipo)
     tipo: ConsultaTipo;
     @Field(type => [Sintoma])
