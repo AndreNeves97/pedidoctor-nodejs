@@ -1,13 +1,19 @@
-import { Typegoose } from 'typegoose';
+
+import { prop, Typegoose } from '@typegoose/typegoose';
 import { ObjectType, InputType, Field } from 'type-graphql';
 import { Diagnostico, DiagnosticoUpdate, DiagnosticoInput } from './../diagnostico/diagnostico.model';
 
 @ObjectType()
 export class AgendamentoRealizacao extends Typegoose{
+    @prop({ required: true })
     @Field()
     horarioInicio: Date;
+
+    @prop({ required: true })
     @Field()
     horarioFinalizacao : Date;
+    
+    @prop({ required: true })
     @Field(type => Diagnostico)
     diagnostico: Diagnostico;
 }

@@ -36,6 +36,8 @@ import { Sintoma } from './sintoma/sintoma.model';
 import { Usuario } from './usuario/usuario.model';
 import { ConsultaAgendamento } from './consulta-agendamento/consulta-agendamento.model';
 import { UsuarioDTO } from './usuario/usuario.dto';
+import { ClinicaDTO } from './clinica/clinica.dto';
+import { ConsultaAgendamentoDTO } from './consulta-agendamento/consulta-agendamento.dto';
 
 @Module({
   imports: [
@@ -57,7 +59,24 @@ import { UsuarioDTO } from './usuario/usuario.dto';
     }]),
 
     TypegooseModule.forFeature([{
+      typegooseClass: ConsultaAgendamentoDTO,
+      schemaOptions: {
+        collection: 'Pedilandia_ConsultaAgendamento',
+        timestamps: true
+      }
+    }]),
+
+    
+    TypegooseModule.forFeature([{
       typegooseClass: Clinica,
+      schemaOptions: {
+        collection: 'Pedilandia_Clinica',
+        timestamps: true
+      }
+    }]),
+
+    TypegooseModule.forFeature([{
+      typegooseClass: ClinicaDTO,
       schemaOptions: {
         collection: 'Pedilandia_Clinica',
         timestamps: true
@@ -78,8 +97,9 @@ import { UsuarioDTO } from './usuario/usuario.dto';
           collection: 'Pedilandia_Usuario',
           timestamps: true
         }
-      }]),
+    }]),
       
+
     TypegooseModule.forFeature([{
       typegooseClass: ConsultaTipo,
       schemaOptions: {

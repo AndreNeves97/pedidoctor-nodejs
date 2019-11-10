@@ -2,7 +2,7 @@ import { AgendamentoRealizacaoInput, AgendamentoRealizacaoUpdate } from './agend
 import { AgendamentoRealizacao } from './agendamento-realizacao.model';;
 import { SintomaInput, SintomaUpdate } from './../sintoma/sintoma.model';
 import { ConsultaTipoInput, ConsultaTipoUpdate } from './../consulta-tipo/consulta-tipo.model';
-import { UsuarioInput, UsuarioUpdate } from '../usuario/usuario.model';
+import { UsuarioInput, UsuarioUpdate, Usuario } from '../usuario/usuario.model';
 
 import { prop, Typegoose } from '@typegoose/typegoose';
 import { ObjectType, Field, InputType, ID, Int } from 'type-graphql';
@@ -19,19 +19,19 @@ export class ConsultaAgendamento extends Typegoose {
     @Field()
     dataAgendada: Date;
 
-    @prop({ required: true })
+    @prop({ required: true, ref: UsuarioDTO })
     @Field(type => UsuarioDTO, { nullable : true })
     paciente : UsuarioDTO;
 
-    @prop({ required: true })
+    @prop({ required: true, ref: ClinicaDTO })
     @Field(type => ClinicaDTO)
     clinica : ClinicaDTO;
     
-    @prop({ required: true })
+    @prop({ required: true, ref: UsuarioDTO })
     @Field(type => UsuarioDTO, { nullable : true })
     medico : UsuarioDTO; 
 
-    @prop({ required: true })
+    @prop({ required: true, ref: ConsultaTipo })
     @Field(type => ConsultaTipo)
     tipo: ConsultaTipo;
 

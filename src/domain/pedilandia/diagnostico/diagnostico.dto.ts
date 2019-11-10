@@ -15,9 +15,10 @@ import { Exame } from '../exame/exame.model';
 import { Vacina } from '../vacina/vacina.model';
 import { Medicamento } from '../medicamento/medicamento.model';
 import { ConsultaAgendamentoDTO } from '../consulta-agendamento/consulta-agendamento.dto';
+import { arrayProp } from 'typegoose';
 
 @ObjectType()
-export class Diagnostico extends Typegoose {
+export class DiagnosticoDTO extends Typegoose {
     @prop({ required: true })
     @Field()
     descricao: string;
@@ -26,15 +27,12 @@ export class Diagnostico extends Typegoose {
     @Field(type => DiagnosticoTipo)
     tipo: DiagnosticoTipo;
 
-    @prop({ required: true, ref: ConsultaAgendamentoDTO })
-    @Field(type => ConsultaAgendamentoDTO, { nullable : true })
-    remarcacaoConsulta : ConsultaAgendamentoDTO;
-
 
     /**
      * Doenças diagnosticadas anteriormente que agora
      * foram consideradas como curadas
      */
+    @prop({ required: true, ref: Doenca })
     @Field(type => [Doenca])
     doencasCuradas : Doenca[];
     
@@ -43,54 +41,23 @@ export class Diagnostico extends Typegoose {
      * foram reportados problemas específicas, e de acordo com o 
      * diagnóstico atual, foram dadas como resolvidos
      */
-    @Field(type => Diagnostico)
-    diagnosticosAnterioresResolvidos : Diagnostico;
+    @prop({ required: true, ref: DiagnosticoDTO })
+    @Field(type => DiagnosticoDTO)
+    diagnosticosAnterioresResolvidos : DiagnosticoDTO;
+
+    @arrayProp({ itemsRef: Doenca })
     @Field(type => [Doenca])
     doencasDiagnosticadas : Doenca[];
+
+    @prop()
     @Field(type => [Exame])
     examesExigidos : Exame[];
+
+    @arrayProp({ itemsRef: Vacina })
     @Field(type => [Vacina])
     vacinasExigidas : Vacina[];
+
+    @arrayProp({ itemsRef: Medicamento })
+    @Field(type => [Medicamento])
     medicamentosReceitados : Medicamento[];
 }
-
-@InputType()
-export class DiagnosticoInput {
-    @Field(type => [DoencaInput])
-    doencasCuradas : DoencaInput[];
-    @Field(type => DiagnosticoInput, { nullable : true })
-    diagnosticosAnterioresResolvidos : DiagnosticoInput;
-    @Field()
-    descricao: string;
-    @Field(type => DiagnosticoTipoInput)
-    tipo: DiagnosticoTipoInput;
-    @Field(type => ConsultaAgendamentoInput, { nullable : true })
-    remarcacaoConsulta : ConsultaAgendamentoInput;
-    @Field(type => [DoencaInput])
-    doencasDiagnosticadas : DoencaInput[];
-    @Field(type => [ExameInput])
-    examesExigidos : ExameInput[];
-    @Field(type => [VacinaInput])
-    vacinasExigidas : VacinaInput[];
-}
-
-@InputType()
-export class DiagnosticoUpdate {
-    @Field(type => [DoencaUpdate])
-    doencasCuradas : DoencaUpdate[];
-    @Field(type => DiagnosticoUpdate, { nullable : true })
-    diagnosticosAnterioresResolvidos : DiagnosticoUpdate;
-    @Field()
-    descricao: string;
-    @Field(type => DiagnosticoTipoUpdate)
-    tipo: DiagnosticoTipoUpdate;
-    @Field(type => ConsultaAgendamentoUpdate, { nullable : true })
-    remarcacaoConsulta : ConsultaAgendamentoUpdate;
-    @Field(type => [DoencaUpdate])
-    doencasDiagnosticadas : DoencaUpdate[];
-    @Field(type => [ExameUpdate])
-    examesExigidos : ExameUpdate[];
-    @Field(type => [VacinaUpdate])
-    vacinasExigidas : VacinaUpdate[];
-}
-

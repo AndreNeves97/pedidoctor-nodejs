@@ -10,15 +10,15 @@ import { Sintoma } from '../sintoma/sintoma.model';
 import { ExameTipo } from '../exame-tipo/exame-tipo.model';
 import { ConsultaAgendamento } from '../consulta-agendamento/consulta-agendamento.model';
 import { Diagnostico } from '../diagnostico/diagnostico.model';
+import { DiagnosticoDTO } from '../diagnostico/diagnostico.dto';
 
 @ObjectType()
 export class Exame extends Typegoose {
     @Field(type => ExameTipo)
     tipo : ExameTipo;
+    
     @Field(type => ConsultaAgendamento)
     consultaParaApresentacao : ConsultaAgendamento;
-    @Field(type => Diagnostico)
-    diagnostico : Diagnostico;
 }
 
 @InputType()
