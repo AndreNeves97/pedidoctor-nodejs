@@ -2,7 +2,7 @@ import { UsoMedicamento } from './usomedicamento.model';
 
 import { ObjectType, Field, ID, Int } from 'type-graphql';
 import { Acontecimento } from '../acontecimento/acontecimento.model';
-import { Typegoose } from '@typegoose/typegoose';
+import { prop, Typegoose, arrayProp } from '@typegoose/typegoose';
 import { Usuario } from './usuario.model';
 
 
@@ -11,23 +11,30 @@ export class UsuarioDTO  extends Typegoose {
     @Field(type => ID)
     _id: string;
 
+    @prop()
     firebaseUid: string;
 
+    @prop( { required: true } )
     @Field()
     nome: string
 
+    @prop({ required: true, unique: true })
     @Field()
     email: string;
 
+    @prop({ required: false })
     @Field({ nullable: true })
     telefone: string;
 
+    @prop({ required: false })
     @Field({ nullable: true })
     fotoUrl: string;
 
+    @prop({ required: false })
     @Field(type => [String], { nullable: false })
     roles: string[];
 
+    @prop({ required: true })
     @Field(type => Int)
     tipo: number = 0;
 
@@ -42,9 +49,12 @@ export class UsuarioDTO  extends Typegoose {
     isPaciente: boolean;
 
     
+
+    @arrayProp({ itemsRef: UsuarioDTO, required: true })
     @Field(type => [Usuario], { nullable: true} )
     responsavelPor : Usuario[];
     
+    @arrayProp({ itemsRef: UsoMedicamento, required: true })
     @Field(type => [UsoMedicamento], { nullable: true} )
     usoMedicamentos : UsoMedicamento[];
 

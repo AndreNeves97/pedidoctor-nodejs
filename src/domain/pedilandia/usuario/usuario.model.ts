@@ -5,7 +5,7 @@ import { AcontecimentoInput, AcontecimentoUpdate } from '../acontecimento/aconte
 import { ObjectType, InputType, Field, ID, Int } from 'type-graphql';
 import { Acontecimento } from '../acontecimento/acontecimento.model';
 import { IsString, IsArray } from 'class-validator';
-import { prop, Typegoose } from '@typegoose/typegoose';
+import { prop, Typegoose, arrayProp } from '@typegoose/typegoose';
 
 @ObjectType()
 export class Usuario extends Typegoose {
@@ -62,9 +62,11 @@ export class Usuario extends Typegoose {
     @Field()
     isPaciente: boolean;
     
+    @arrayProp({ itemsRef: Usuario, required: true })
     @Field(type => [Usuario], { nullable: true} )
     responsavelPor : Usuario[];
     
+    @arrayProp({ itemsRef: Usuario, required: true })
     @Field(type => [UsoMedicamento], { nullable: true} )
     usoMedicamentos : UsoMedicamento[];
 

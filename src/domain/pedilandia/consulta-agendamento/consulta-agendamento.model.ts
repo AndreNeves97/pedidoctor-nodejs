@@ -11,6 +11,8 @@ import { Sintoma } from '../sintoma/sintoma.model';
 import { Clinica } from '../clinica/clinica.model';
 import { InputRef } from '../../../common/general/shared/input-ref.model';
 import { UsuarioDTO } from '../usuario/usuario.dto';
+import { ClinicaDTO } from '../clinica/clinica.dto';
+import { arrayProp } from 'typegoose';
 
 @ObjectType()
 export class ConsultaAgendamento extends Typegoose {
@@ -21,21 +23,30 @@ export class ConsultaAgendamento extends Typegoose {
     @Field(type => UsuarioDTO, { nullable : true })
     paciente : UsuarioDTO;
 
-    @Field(type => Clinica)
-    clinica : Clinica;
+    @prop({ required: true })
+    @Field(type => ClinicaDTO)
+    clinica : ClinicaDTO;
     
     @prop({ required: true })
     @Field(type => UsuarioDTO, { nullable : true })
     medico : UsuarioDTO; 
 
+    @prop({ required: true })
     @Field(type => ConsultaTipo)
     tipo: ConsultaTipo;
+
+    @arrayProp({ itemsRef: Sintoma })
     @Field(type => [Sintoma])
     sintomasObservados: Sintoma[];
+
+    @prop()
     @Field(type => [String])
     informacoesAdicionais: string[];
+
+    @prop()
     @Field(type => AgendamentoRealizacao)
     realizacao : AgendamentoRealizacao;
+    
     @prop()
     @Field()
     createdAt: Date;
