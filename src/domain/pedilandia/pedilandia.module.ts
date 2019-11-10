@@ -83,16 +83,17 @@ import { ConsultaAgendamentoDTO } from './consulta-agendamento/consulta-agendame
       }
     }]),
 
-    // TODO: Criar índice único para firebaseUid
     TypegooseModule.forFeature([{
-        typegooseClass: Usuario,
+        typegooseClass: UsuarioDTO,
         schemaOptions: {
           collection: 'Pedilandia_Usuario',
           timestamps: true
         }
     }]),
+    
+    // TODO: Criar índice único para firebaseUid
     TypegooseModule.forFeature([{
-        typegooseClass: UsuarioDTO,
+        typegooseClass: Usuario,
         schemaOptions: {
           collection: 'Pedilandia_Usuario',
           timestamps: true

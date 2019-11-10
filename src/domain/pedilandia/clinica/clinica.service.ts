@@ -1,7 +1,7 @@
 import { Clinica, ClinicaCreateInput, ClinicaUpdateInput } from './clinica.model';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
-import { ModelType } from 'typegoose';
+import { ModelType } from '@typegoose/typegoose/lib/types';
 
 @Injectable()
 export class ClinicaService {
@@ -20,8 +20,8 @@ export class ClinicaService {
             .lean();
     }
 
-    async findAll (): Promise<Clinica> {
-        return this.model
+    async findAll (): Promise<Clinica[]> {
+        const itens = await this.model
             .find()
             .populate('secretarios')
             .populate('medicos')
@@ -29,6 +29,8 @@ export class ClinicaService {
             .populate('clientes')
             .sort({ nome: 'asc' })
             .lean();
+        
+        return itens;
     }
 
     async create (obj: ClinicaCreateInput): Promise<Clinica> {

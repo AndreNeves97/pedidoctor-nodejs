@@ -2,7 +2,7 @@ import { UsuarioInput, UsuarioUpdate } from './../usuario/usuario.model';
 import { CoordenadaGeografica, CoordenadaGeograficaInput, CoordenadaGeograficaUpdate } from './../util/coordenadaGeografica';
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from '@typegoose/typegoose';
+import { prop, Typegoose, arrayProp } from '@typegoose/typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
 import { Usuario } from '../usuario/usuario.model';
@@ -33,19 +33,19 @@ export class Clinica extends Typegoose {
     coordGeo: CoordenadaGeografica;
 
     @Field(type => [Usuario], { nullable: true })
-    @prop()
+    @arrayProp({ required: true, itemsRef: Usuario })
     secretarios : Usuario[];
     
     @Field(type => [Usuario], { nullable: true })
-    @prop()
+    @arrayProp({ required: true, itemsRef: Usuario })
     medicos : Usuario[];
     
     @Field(type => [Usuario], { nullable: true })
-    @prop()
+    @arrayProp({ required: true, itemsRef: Usuario })
     enfermeiros : Usuario[];
     
     @Field(type => [Usuario], { nullable: true })
-    @prop()
+    @arrayProp({ required: true, itemsRef: Usuario })
     clientes : Usuario[];
 }
 

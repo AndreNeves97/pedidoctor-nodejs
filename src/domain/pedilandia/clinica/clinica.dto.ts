@@ -2,7 +2,7 @@ import { UsuarioInput, UsuarioUpdate } from './../usuario/usuario.model';
 import { CoordenadaGeografica, CoordenadaGeograficaInput, CoordenadaGeograficaUpdate } from './../util/coordenadaGeografica';
 import * as mongoose from 'mongoose';
 
-import { prop, Typegoose } from '@typegoose/typegoose';
+import { prop, Typegoose, arrayProp } from '@typegoose/typegoose';
 import { IsString, IsArray } from 'class-validator';
 import { ObjectType, InputType, Field, ID } from 'type-graphql';
 import { Usuario } from '../usuario/usuario.model';
