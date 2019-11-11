@@ -11,33 +11,24 @@ import { ExameTipo } from '../exame-tipo/exame-tipo.model';
 import { ConsultaAgendamento } from '../consulta-agendamento/consulta-agendamento.model';
 import { Diagnostico } from '../diagnostico/diagnostico.model';
 import { DiagnosticoDTO } from '../diagnostico/diagnostico.dto';
+import { InputRef } from '../../../common/general/shared/input-ref.model';
 
 @ObjectType()
 export class Exame extends Typegoose {
     @Field(type => ExameTipo)
     tipo : ExameTipo;
     
-    @Field(type => ConsultaAgendamento)
-    consultaParaApresentacao : ConsultaAgendamento;
 }
 
 @InputType()
 export class ExameInput {
-    @Field(type => ExameTipoInput)
-    tipo : ExameTipoInput;
-    @Field(type => ConsultaAgendamentoInput)
-    consultaParaApresentacao : ConsultaAgendamentoInput;
-    @Field(type => DiagnosticoInput)
-    diagnostico : DiagnosticoInput;
+    @Field(type => InputRef)
+    tipo : InputRef;
 }
 
 @InputType()
 export class ExameUpdate {
-    @Field(type => ExameTipoUpdate)
-    tipo : ExameTipoUpdate;
-    @Field(type => ConsultaAgendamentoUpdate)
-    consultaParaApresentacao : ConsultaAgendamentoUpdate;
-    @Field(type => DiagnosticoUpdate)
-    diagnostico : DiagnosticoUpdate;
+    @Field(type => InputRef)
+    tipo : InputRef;
 }
 

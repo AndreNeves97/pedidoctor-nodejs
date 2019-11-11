@@ -19,11 +19,10 @@ export class ConsultaAgendamentoService {
         return objs[0];
     }
 
-    async findAll(conditions = {}, projection = {}, offset = 0, limit = 0) : Promise<ConsultaAgendamento> {
-        return this.getBaseFindQuery(conditions, projection)
+    async findAll(conditions = {}, projection = {}, offset = 0, limit = 0) : Promise<ConsultaAgendamento[]> {
+        return await this.getBaseFindQuery(conditions, projection)
             .skip(offset)
             .limit(limit)
-            .sort({ dataAgendada: -1 })
             .lean();
     }
 
@@ -38,40 +37,42 @@ export class ConsultaAgendamentoService {
     }
 
     async delete(id: string) {
-        return await this.model
+        const query = this.model
             .findOneAndRemove({_id: id})
-            .populate('paciente')
-            .populate('clinica')
-            .populate('medico')
-            .populate('tipo')
-            .populate('sintomasObservados')
-            .populate('realizacao');
+            .lean();
+
+        return await this.populateQuery(query);
     }
 
 
     async update(id: string, obj: ConsultaAgendamentoUpdate) {    
-        return await this.model
+        const query = this.model
             .findOneAndUpdate({_id: id}, obj)
-            .populate('paciente')
-            .populate('clinica')
-            .populate('medico')
-            .populate('tipo')
-            .populate('sintomasObservados')
-            .populate('realizacao')
             .lean();
+        
+        return await this.populateQuery(query);
     }
 
 
 
     getBaseFindQuery(conditions = {}, projection = {}) {
-        return this.model
-            .find(conditions, projection)
+        const query = this.model.find(conditions, projection)
+            
+        return this.populateQuery(query)
+    }
+
+    populateQuery(query) {
+        return query
             .populate('paciente')
             .populate('clinica')
             .populate('medico')
             .populate('tipo')
             .populate('sintomasObservados')
-            .populate('realizacao')
+            .populate('realizacao.diagnostico.tipo')
+            .populate('realizacao.diagnostico.remarcacaoConsulta')
+            .populate('realizacao.diagnostico.doencasCuradas')
+            .populate('realizacao.diagnostico.doencasDiagnosticadas')
+            .populate('realizacao.diagnostico.medicamentosReceitados');
     }
 
 

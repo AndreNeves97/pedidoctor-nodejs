@@ -38,7 +38,7 @@ export class ConsultaAgendamentoDTO extends Typegoose {
     @Field(type => [String])
     informacoesAdicionais: string[];
 
-    @prop()
+    @prop({ _id: false, required: false })
     @Field(type => AgendamentoRealizacaoDTO)
     realizacao : AgendamentoRealizacaoDTO;
     

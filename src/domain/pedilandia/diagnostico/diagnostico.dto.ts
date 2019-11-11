@@ -36,14 +36,6 @@ export class DiagnosticoDTO extends Typegoose {
     @Field(type => [Doenca])
     doencasCuradas : Doenca[];
     
-    /**
-     * Usado em caso de haver algum diagnóstico anterior no qual
-     * foram reportados problemas específicas, e de acordo com o 
-     * diagnóstico atual, foram dadas como resolvidos
-     */
-    @prop({ required: true, ref: DiagnosticoDTO })
-    @Field(type => DiagnosticoDTO)
-    diagnosticosAnterioresResolvidos : DiagnosticoDTO;
 
     @arrayProp({ itemsRef: Doenca })
     @Field(type => [Doenca])

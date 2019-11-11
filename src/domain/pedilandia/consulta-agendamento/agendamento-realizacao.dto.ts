@@ -6,7 +6,7 @@ import { DiagnosticoDTO } from '../diagnostico/diagnostico.dto';
 
 
 @ObjectType()
-export class AgendamentoRealizacaoDTO extends Typegoose{
+export class AgendamentoRealizacaoDTO {
     @prop({ required: true })
     @Field()
     horarioInicio: Date;
@@ -15,7 +15,7 @@ export class AgendamentoRealizacaoDTO extends Typegoose{
     @Field()
     horarioFinalizacao : Date;
     
-    @prop({ required: true })
+    @prop({ _id: false, required: true })
     @Field(type => DiagnosticoDTO)
     diagnostico: DiagnosticoDTO;
 }

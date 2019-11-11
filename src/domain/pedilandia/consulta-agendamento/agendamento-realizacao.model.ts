@@ -4,7 +4,7 @@ import { ObjectType, InputType, Field } from 'type-graphql';
 import { Diagnostico, DiagnosticoUpdate, DiagnosticoInput } from './../diagnostico/diagnostico.model';
 
 @ObjectType()
-export class AgendamentoRealizacao extends Typegoose{
+export class AgendamentoRealizacao {
     @prop({ required: true })
     @Field()
     horarioInicio: Date;
@@ -13,7 +13,7 @@ export class AgendamentoRealizacao extends Typegoose{
     @Field()
     horarioFinalizacao : Date;
     
-    @prop({ required: true })
+    @prop({ _id: false, required: true })
     @Field(type => Diagnostico)
     diagnostico: Diagnostico;
 }
@@ -24,6 +24,7 @@ export class AgendamentoRealizacaoInput {
     horarioInicio: Date;
     @Field()
     horarioFinalizacao : Date;
+
     @Field(type => DiagnosticoInput)
     diagnostico: DiagnosticoInput;
 }
