@@ -4,7 +4,7 @@ import { SintomaInput, SintomaUpdate } from './../sintoma/sintoma.model';
 import { ConsultaTipoInput, ConsultaTipoUpdate } from './../consulta-tipo/consulta-tipo.model';
 import { UsuarioInput, UsuarioUpdate, Usuario } from '../usuario/usuario.model';
 
-import { prop, Typegoose } from '@typegoose/typegoose';
+import { arrayProp, prop, Typegoose, Ref } from '@typegoose/typegoose';
 import { ObjectType, Field, InputType, ID, Int } from 'type-graphql';
 import { ConsultaTipo } from '../consulta-tipo/consulta-tipo.model';
 import { Sintoma } from '../sintoma/sintoma.model';
@@ -12,16 +12,19 @@ import { Clinica } from '../clinica/clinica.model';
 import { InputRef } from '../../../common/general/shared/input-ref.model';
 import { UsuarioDTO } from '../usuario/usuario.dto';
 import { ClinicaDTO } from '../clinica/clinica.dto';
-import { arrayProp } from 'typegoose';
 
 @ObjectType()
 export class ConsultaAgendamento extends Typegoose {
+    @Field(type => ID)
+    _id: string;
+
+    @prop({ required: true })
     @Field()
     dataAgendada: Date;
 
     @prop({ required: true, ref: UsuarioDTO })
     @Field(type => UsuarioDTO, { nullable : true })
-    paciente : UsuarioDTO;
+    paciente : Ref<UsuarioDTO>;
 
     @prop({ required: true, ref: ClinicaDTO })
     @Field(type => ClinicaDTO)
@@ -29,7 +32,7 @@ export class ConsultaAgendamento extends Typegoose {
     
     @prop({ required: true, ref: UsuarioDTO })
     @Field(type => UsuarioDTO, { nullable : true })
-    medico : UsuarioDTO; 
+    medico : Ref<UsuarioDTO>; 
 
     @prop({ required: true, ref: ConsultaTipo })
     @Field(type => ConsultaTipo)
@@ -43,8 +46,8 @@ export class ConsultaAgendamento extends Typegoose {
     @Field(type => [String])
     informacoesAdicionais: string[];
 
-    @prop()
-    @Field(type => AgendamentoRealizacao)
+    @prop({ required: false})
+    @Field(type => AgendamentoRealizacao, { nullable: true})
     realizacao : AgendamentoRealizacao;
     
     @prop()
@@ -56,43 +59,74 @@ export class ConsultaAgendamento extends Typegoose {
 export class ConsultaAgendamentoInput {
     @Field()
     dataAgendada: Date;
-    @Field(type => UsuarioInput)
-    paciente : UsuarioInput;
+
+    @Field(type => InputRef)
+    paciente : InputRef;
+
     @Field(type => InputRef)
     clinica : InputRef;
-    @Field(type => UsuarioInput)
-    medico : UsuarioInput; 
-    @Field(type => ConsultaTipoInput)
-    tipo: ConsultaTipoInput;
-    @Field(type => [SintomaInput])
-    sintomasObservados: SintomaInput[];
+
+    @Field(type => InputRef)
+    medico : InputRef; 
+
+    @Field(type => InputRef)
+    tipo: InputRef;
+
+    @Field(type => [InputRef])
+    sintomasObservados: InputRef[];
+    
     @Field(type => [String])
     informacoesAdicionais: string[];
-    @Field(type => AgendamentoRealizacaoInput)
-    realizacao : AgendamentoRealizacao;
-    @Field()
-    createdAt: Date;
 }
 
 @InputType()
 export class ConsultaAgendamentoUpdate {
-    @Field()
-    dataAgendada: Date;
-    @Field(type => UsuarioUpdate)
-    paciente : UsuarioUpdate;
-    @Field(type => InputRef)
-    clinica : InputRef;
-    @Field(type => UsuarioUpdate)
-    medico : UsuarioUpdate; 
-    @Field(type => ConsultaTipoUpdate)
-    tipo: ConsultaTipoUpdate;
-    @Field(type => [SintomaUpdate])
-    sintomasObservados: SintomaUpdate[];
-    @Field(type => [String])
-    informacoesAdicionais: string[];
-    @Field(type => AgendamentoRealizacaoUpdate)
-    realizacao : AgendamentoRealizacaoUpdate;
-    @Field()
-    createdAt: Date;
+    @Field({ nullable: true })
+    dataAgendada? : Date;
+
+    @Field(type => InputRef, { nullable: true })
+    paciente?: InputRef;
+
+    @Field(type => InputRef, { nullable: true })
+    clinica?: InputRef;
+
+    @Field(type => InputRef, { nullable: true })
+    medico?: InputRef; 
+
+    @Field(type => InputRef, { nullable: true })
+    tipo?: InputRef;
+
+    @Field(type => [InputRef], { nullable: true })
+    sintomasObservados?: InputRef[];
+    
+    @Field(type => [String], { nullable: true })
+    informacoesAdicionais?: string[];
+
+    @Field(type => AgendamentoRealizacaoInput, { nullable: true})
+    realizacao?: AgendamentoRealizacaoInput;
 }
     
+
+
+
+@InputType()
+export class SolicitacaoAgendamentoInput {
+    @Field()
+    dataAgendada: Date;
+
+
+    @Field(type => InputRef)
+    clinica : InputRef;
+
+    @Field(type => InputRef)
+    medico : InputRef; 
+
+    @Field(type => InputRef)
+    tipo: InputRef;
+
+    @Field(type => [InputRef])
+    sintomasObservados: InputRef[];
+    
+    @Field(type => [String])
+    informacoesAdicionais: string[];
+}

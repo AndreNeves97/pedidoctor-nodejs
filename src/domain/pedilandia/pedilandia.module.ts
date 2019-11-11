@@ -38,6 +38,8 @@ import { ConsultaAgendamento } from './consulta-agendamento/consulta-agendamento
 import { UsuarioDTO } from './usuario/usuario.dto';
 import { ClinicaDTO } from './clinica/clinica.dto';
 import { ConsultaAgendamentoDTO } from './consulta-agendamento/consulta-agendamento.dto';
+import { ConsultaAgendamentoService } from './consulta-agendamento/consulta-agendamento.service';
+import { ConsultaAgendamentoResolver } from './consulta-agendamento/consulta-agendamento.resolver';
 
 @Module({
   imports: [
@@ -179,6 +181,8 @@ import { ConsultaAgendamentoDTO } from './consulta-agendamento/consulta-agendame
     MedicamentoService,
     SintomaService,
     UsuarioService,
+    ConsultaAgendamentoService,
+    ConsultaAgendamentoResolver,
   
   ]
 })
