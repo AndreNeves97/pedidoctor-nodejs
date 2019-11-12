@@ -28,7 +28,7 @@ export class AppController {
     @HttpCode(200)
     async loginFirebase(@Request() req) {
         const user : User = await this.userService.findOrCreateFromFirebase(req.user);
-        const {_id, nome, email, fotoUrl} = user;
+        const {_id, nome, email, fotoUrl, roles} = user;
 
 
         const jwt = await this.authService.login(user);
@@ -37,7 +37,7 @@ export class AppController {
 
         return {
             jwt,
-            user : {_id,  nome, email, fotoUrl}    
+            user : {_id,  nome, email, fotoUrl, roles}    
         }
     }
 
