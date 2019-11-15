@@ -12,6 +12,8 @@ import { Clinica } from '../clinica/clinica.model';
 import { InputRef } from '../../../common/general/shared/input-ref.model';
 import { UsuarioDTO } from '../usuario/usuario.dto';
 import { ClinicaDTO } from '../clinica/clinica.dto';
+import { Doenca } from '../doenca/doenca.model';
+import { Medicamento } from '../medicamento/medicamento.model';
 
 @ObjectType()
 export class ConsultaAgendamento extends Typegoose {
@@ -41,6 +43,15 @@ export class ConsultaAgendamento extends Typegoose {
     @arrayProp({ itemsRef: Sintoma })
     @Field(type => [Sintoma])
     sintomasObservados: Sintoma[];
+
+    @arrayProp({ itemsRef: Medicamento })
+    @Field(type => [Medicamento])
+    medicamentos: Medicamento[];
+
+    @arrayProp({ itemsRef: Doenca })
+    @Field(type => [Doenca])
+    doencas: Doenca[];
+
 
     @prop()
     @Field(type => [String])
@@ -74,6 +85,13 @@ export class ConsultaAgendamentoInput {
 
     @Field(type => [InputRef])
     sintomasObservados: InputRef[];
+
+    @Field(type => [InputRef])
+    medicamentos: InputRef[];
+
+    @Field(type => [InputRef])
+    doencas: InputRef[];
+
     
     @Field(type => [String])
     informacoesAdicionais: string[];
@@ -98,6 +116,13 @@ export class ConsultaAgendamentoUpdate {
 
     @Field(type => [InputRef], { nullable: true })
     sintomasObservados?: InputRef[];
+
+    @Field(type => [InputRef], { nullable: true })
+    medicamentos?: InputRef[];
+
+    @Field(type => [InputRef], { nullable: true })
+    doencas?: InputRef[];
+
     
     @Field(type => [String], { nullable: true })
     informacoesAdicionais?: string[];
@@ -126,6 +151,12 @@ export class SolicitacaoAgendamentoInput {
 
     @Field(type => [InputRef])
     sintomasObservados: InputRef[];
+
+    @Field(type => [InputRef])
+    medicamentos: InputRef[];
+
+    @Field(type => [InputRef])
+    doencas: InputRef[];
     
     @Field(type => [String])
     informacoesAdicionais: string[];

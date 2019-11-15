@@ -7,6 +7,8 @@ import { UsuarioDTO } from '../usuario/usuario.dto';
 import { ClinicaDTO } from '../clinica/clinica.dto';
 import { arrayProp } from 'typegoose';
 import { AgendamentoRealizacaoDTO } from './agendamento-realizacao.dto';
+import { Doenca } from '../doenca/doenca.model';
+import { Medicamento } from '../medicamento/medicamento.model';
 
 
 @ObjectType()
@@ -30,9 +32,18 @@ export class ConsultaAgendamentoDTO extends Typegoose {
     @Field(type => ConsultaTipo)
     tipo: ConsultaTipo;
 
+
     @arrayProp({ itemsRef: Sintoma })
     @Field(type => [Sintoma])
     sintomasObservados: Sintoma[];
+
+    @arrayProp({ itemsRef: Medicamento })
+    @Field(type => [Medicamento])
+    medicamentos: Medicamento[];
+
+    @arrayProp({ itemsRef: Doenca })
+    @Field(type => [Doenca])
+    doencas: Doenca[];
 
     @prop()
     @Field(type => [String])
