@@ -29,6 +29,17 @@ export class ConsultaAgendamentoResolver {
         return await this.service.findById(id);
     }
 
+
+
+
+    @Query(returns => [Date])
+    @Roles('user', 'cliente', 'gerente')
+    async horariosIndisponiveis (
+        @Args('dia') dia: string
+    ) {
+        return this.service.getHorariosIndisponiveis(dia);
+    }
+
     @Mutation(returns => ConsultaAgendamento)
     @Roles('user', 'gerente')
     async createAgendamento(@Args('obj') obj: ConsultaAgendamentoInput ) {

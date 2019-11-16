@@ -76,4 +76,32 @@ export class ConsultaAgendamentoService {
     }
 
 
+    async getHorariosIndisponiveis(dia : string) : Promise<Date[]> {
+
+        // Offset de três horas de fuso horário
+        const timezoneOffset = 3 * 60 * 60 * 1000;
+
+        let start : Date = new Date(`${dia}T00:00:00.000Z`);
+        let end : Date = new Date(`${dia}T23:59:59.999Z`);
+
+        start   = new Date( start.getTime() + timezoneOffset );
+        end     = new Date( end.getTime() + timezoneOffset );
+
+        
+
+        const filters = {
+            $gte: start,
+            $lte : end
+        };
+
+        const conditions = {
+            dataAgendada: filters
+        };
+
+        const agendamentos = await this.findAll(conditions);
+
+        const horarios = agendamentos.map(v => v.dataAgendada);
+
+        return horarios;
+    }
 }
