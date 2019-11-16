@@ -28,6 +28,12 @@ export class UsuarioResolver {
         }) onlyAdmins?: boolean,
 
         @Args({ 
+            name: 'onlyPacientes', 
+            nullable: true,
+            type: () => Boolean 
+        }) onlyPacientes?: boolean,
+
+        @Args({ 
             name: 'offset', 
             nullable: true,
             type: () => Int
@@ -52,6 +58,10 @@ export class UsuarioResolver {
 
         if(onlyAdmins) {
             condition['roles'] = 'admin';
+        }
+
+        if(onlyPacientes) {
+            condition['isPaciente'] = true;
         }
         
         return this.service

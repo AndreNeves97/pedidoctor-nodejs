@@ -22,11 +22,12 @@ export class AgendamentoRealizacao {
 export class AgendamentoRealizacaoInput {
     @Field()
     horarioInicio: Date;
-    @Field()
-    horarioFinalizacao : Date;
 
-    @Field(type => DiagnosticoInput)
-    diagnostico: DiagnosticoInput;
+    @Field({ nullable : true })
+    horarioFinalizacao? : Date;
+
+    @Field(type => DiagnosticoInput, { nullable: true })
+    diagnostico?: DiagnosticoInput;
 }
     
 @InputType()

@@ -61,6 +61,7 @@ export class Usuario extends Typegoose {
      * Usuário pode ser o pai ou a criança.
      * Se for criança, isPaciente = true
      */
+    @prop()
     @Field()
     isPaciente: boolean;
     
