@@ -12,8 +12,26 @@ export class SintomaResolver {
 
     @Query(returns => [ Sintoma ])
     @Roles('user', 'cliente', 'gerente')
-    async sintomas () {
-        return await this.service.findAll();
+    async sintomas (
+        @Args({ 
+            name: 'query', 
+            nullable: true,
+            type: () => String 
+        }) query?: string,
+    ) {
+        const condition = {};
+        const projection = {};
+        const sort = {};
+
+
+        if(query !== undefined && query !== "") {
+            condition['nome'] = new RegExp(`${query}`, 'i');
+        }
+
+       
+
+        return await 
+            this.service.findAll(condition, projection);
     }
 
     @Query(returns => Sintoma)
