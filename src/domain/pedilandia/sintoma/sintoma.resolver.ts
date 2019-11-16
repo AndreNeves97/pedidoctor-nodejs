@@ -18,16 +18,46 @@ export class SintomaResolver {
             nullable: true,
             type: () => String 
         }) query?: string,
+
+        @Args({ 
+            name: 'exclude', 
+            nullable: true,
+            type: () => [String] 
+        }) exclude?: [string],
     ) {
-        const condition = {};
+        const condition = {
+            $and: [ {} ]
+        };
         const projection = {};
         const sort = {};
 
 
         if(query !== undefined && query !== "") {
-            condition['nome'] = new RegExp(`${query}`, 'i');
+            condition['$and'].push({
+                nome: new RegExp(`${query}`, 'i')
+            });
         }
 
+        if(exclude !== undefined && exclude.length > 0) {
+            condition['$and'].push({
+                nome: {$nin: exclude}
+            });
+        }
+
+
+        console.log(condition);
+
+        // db.getCollection('Pedilandia_Sintoma').find({
+        //         $and: [
+        //             {},
+        //             {
+        //             nome: RegExp('dor', 'i')   
+        //             },
+        //             {
+        //                 nome: {$nin: ["Dor de cabeça", "Dor de barriga"]}
+        //             }
+        //         ]
+        // })
        
 
         return await 
