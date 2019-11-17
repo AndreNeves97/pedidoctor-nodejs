@@ -41,7 +41,7 @@ export class ClinicaDTO extends Typegoose {
     
     @Field(type => [Usuario], { nullable: true })
     @prop()
-    enfermeiros : Usuario[];
+    gerentes : Usuario[];
     
     @Field(type => [Usuario], { nullable: true })
     @prop()

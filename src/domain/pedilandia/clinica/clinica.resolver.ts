@@ -50,7 +50,7 @@ export class ClinicaResolver {
     *   - O grupo ao qual adicionar o usuário. Deve ser:
     *     - secretarios
     *     - medicos
-    *     - enfermeiros
+    *     - gerentes
     *     - clientes
     * 
     *   - A API não filtrará valores inválidos, mas a inserção gerará lixo no banco

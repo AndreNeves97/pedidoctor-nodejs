@@ -42,7 +42,7 @@ export class Clinica extends Typegoose {
     
     @Field(type => [Usuario], { nullable: true })
     @arrayProp({ required: true, itemsRef: Usuario })
-    enfermeiros : Usuario[];
+    gerentes : Usuario[];
     
     @Field(type => [Usuario], { nullable: true })
     @arrayProp({ required: true, itemsRef: Usuario })
@@ -64,7 +64,7 @@ export class ClinicaCreateInput {
     @Field(type => [UsuarioInput], { nullable: true })
     medicos : UsuarioInput[];
     @Field(type => [UsuarioInput], { nullable: true })
-    enfermeiros : UsuarioInput[];
+    gerentes : UsuarioInput[];
     @Field(type => [UsuarioInput], { nullable: true })
     clientes : UsuarioInput[];
 }
@@ -84,7 +84,7 @@ export class ClinicaUpdateInput extends BaseUpdate {
     @Field(type => [UsuarioUpdate], { nullable: true })
     medicos? : UsuarioUpdate[];
     @Field(type => [UsuarioUpdate], { nullable: true })
-    enfermeiros? : UsuarioUpdate[];
+    gerentes? : UsuarioUpdate[];
     @Field(type => [UsuarioUpdate], { nullable: true })
     clientes? : UsuarioUpdate[];
 }
