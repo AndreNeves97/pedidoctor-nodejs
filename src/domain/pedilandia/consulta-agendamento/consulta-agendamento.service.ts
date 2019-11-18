@@ -77,18 +77,24 @@ export class ConsultaAgendamentoService {
     }
 
 
+
+    defaultHorarios = ['07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00',
+        '10:30', '11:00', '11:30', '13:00', '13:30', '14:00',
+        '14:30', '15:00', '15:30'];
+
+
     async getHorariosIndisponiveis(dia : string) : Promise<Date[]> {
 
         // Offset de três horas de fuso horário
         const timezoneOffset = 3 * 60 * 60 * 1000;
+
+        const curDate = new Date()
 
         let start : Date = new Date(`${dia}T00:00:00.000Z`);
         let end : Date = new Date(`${dia}T23:59:59.999Z`);
 
         start   = new Date( start.getTime() + timezoneOffset );
         end     = new Date( end.getTime() + timezoneOffset );
-
-        
 
         const filters = {
             $gte: start,
@@ -102,6 +108,18 @@ export class ConsultaAgendamentoService {
         const agendamentos = await this.findAll(conditions);
 
         const horarios = agendamentos.map(v => v.dataAgendada);
+
+        if(start <= curDate && curDate <= end) {
+            this.defaultHorarios.forEach((v) => {
+                
+                let tempDate    = new Date(`${dia}T${v}:00.000Z`);
+                tempDate        = new Date( tempDate.getTime() + timezoneOffset );
+
+                if(tempDate < curDate) {
+                    horarios.push(tempDate);
+                }
+            })
+        }
 
         return horarios;
     }
