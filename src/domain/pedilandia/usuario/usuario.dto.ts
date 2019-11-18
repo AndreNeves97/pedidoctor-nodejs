@@ -22,6 +22,10 @@ export class UsuarioDTO  extends Typegoose {
     @Field()
     email: string;
 
+    @prop({ required: true, unique: true })
+    @Field()
+    senha: string;
+
     @prop({ required: false })
     @Field({ nullable: true })
     telefone: string;

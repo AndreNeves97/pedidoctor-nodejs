@@ -37,6 +37,10 @@ export class Usuario extends Typegoose {
 
     @IsString()
     @prop({ required: false })
+    senha: string;
+
+    @IsString()
+    @prop({ required: false })
     @Field({ nullable: true })
     telefone: string;
 
@@ -50,7 +54,7 @@ export class Usuario extends Typegoose {
     @Field(type => [String], { nullable: false })
     roles: string[];
 
-    @prop({ required: true })
+    @prop({ required: false })
     @Field(type => Int)
     tipo: number = 0;
 
@@ -62,7 +66,7 @@ export class Usuario extends Typegoose {
      * Se for criança, isPaciente = true
      */
     @prop()
-    @Field()
+    @Field({ nullable: true })
     isPaciente: boolean;
     
     @arrayProp({ itemsRef: Usuario, required: true })
@@ -86,7 +90,10 @@ export class UsuarioInput {
     @Field(type => String, { nullable: false })
     email: string;
 
-    @Field(type => Int)
+    @Field(type => String, { nullable: true })
+    senha: string;
+
+    @Field(type => Int, { nullable: true })
     tipo: number;
 
     @Field(type => Int, { nullable: true })
@@ -118,10 +125,16 @@ export class UsuarioUpdate extends BaseUpdate {
     qtConsultas?: number = 0;
     @Field(type => String, { nullable: true })
     email? : string;
-    @Field(type => Int)
+
+    @Field(type => String, { nullable: true })
+    senha?: string;
+
+    @Field(type => Int, { nullable : true})
     tipo? : number;
+    
     @Field(type => Boolean, { nullable: true} )
     isPaciente? : boolean;
+
     @Field(type => [UsuarioUpdate], { nullable: true} )
     responsavelPor? : Usuario[];
     @Field(type => [UsoMedicamentoUpdate], { nullable: true} )

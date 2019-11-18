@@ -73,6 +73,8 @@ export class UsuarioService extends UserService<Usuario> {
                     "firebaseUid": 1,
                     "nome": 1,
                     "email": 1,
+                    "telefone": 1,
+                    "isPaciente": 1,
                     "fotoUrl": 1,
                     "createdAt": 1,
                     "updatedAt": 1,
@@ -103,11 +105,13 @@ export class UsuarioService extends UserService<Usuario> {
     }
 
     async create(obj: UserCreateFromFirebaseInput | UsuarioInput): Promise<Usuario> {
+        
         const created = await this.model.create({
             ...obj
         });
 
         return this.findById(created._id);
+        
     }
 
     async delete(id: string) {
