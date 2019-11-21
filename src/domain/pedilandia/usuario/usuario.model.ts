@@ -8,6 +8,20 @@ import { IsString, IsArray } from 'class-validator';
 import { prop, Typegoose, arrayProp } from '@typegoose/typegoose';
 import { BaseUpdate } from '../../../common/general/shared/base-update.model';
 
+@ObjectType()
+export class AtribuicaoUsuarioModel {
+    @Field(type => [String], { nullable: true })
+    cliente: string[];
+
+    @Field(type => [String], { nullable: true })
+    gerente: string[];
+
+    @Field(type => [String], { nullable: true })
+    medico: string[];
+
+    @Field(type => [String], { nullable: true })
+    secretario: string[]; 
+}
 
 @ObjectType()
 export class Usuario extends Typegoose {
@@ -53,6 +67,10 @@ export class Usuario extends Typegoose {
     @prop({ required: false })
     @Field(type => [String], { nullable: false })
     roles: string[];
+
+    @IsArray()
+    @Field(type => AtribuicaoUsuarioModel, { nullable: true })
+    atribuicoes: AtribuicaoUsuarioModel;
 
     @prop({ required: false })
     @Field(type => Int)

@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { FirebaseService } from '../../firebase/firebase.service';
 import { FirebaseModule } from '../../firebase/firebase.module';
 import { FirebaseStrategy } from './firebase.strategy';
+import { LocalStrategy } from './local.strategy';
 
 
 @Module({
@@ -20,6 +21,7 @@ import { FirebaseStrategy } from './firebase.strategy';
 
         JwtStrategy,
         FirebaseStrategy,
+        LocalStrategy,
         
         FirebaseService
     ],  

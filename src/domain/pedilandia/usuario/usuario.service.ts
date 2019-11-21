@@ -4,24 +4,66 @@ import { InjectModel } from 'nestjs-typegoose';
 import { ModelType } from 'typegoose';
 import { UserService } from '../../../common/security/user/user.service';
 import { User, UserCreateFromFirebaseInput } from '../../../common/security/user/user.model';
+import { ClinicaService } from '../clinica/clinica.service';
+import { ObjectId } from 'bson';
 
 @Injectable()
 export class UsuarioService extends UserService<Usuario> {
 
     constructor(
-        @InjectModel(Usuario) private model: ModelType<Usuario>
+        @InjectModel(Usuario) private model: ModelType<Usuario>,
+        private clinicaService : ClinicaService
     ) {
         super(model);
     }
 
     async findById(id: string): Promise<Usuario> {
-        return await this.model
-            .findById(id)
+        
+        const conditions = {_id: id};
+        return await this.find(conditions);
+
+    }
+
+
+    async findByEmail(email: string ) : Promise<Usuario> {
+
+        const conditions = {email: email};
+        return await this.find(conditions);
+
+    }
+
+    async findByFirebaseUid(uid: string): Promise<Usuario> {
+
+        const conditions = {firebaseUid: uid};
+        return await this.find(conditions);
+        
+    }
+
+    async find(conditions = {}, projection = {}) : Promise<Usuario> {
+        let user;
+        
+        user = await this.model
+            .findOne(conditions)
             .populate('responsavelPor')
             .populate('usoMedicamentos')
             .populate('acontecimentos')
             .lean();
+
+        user.atribuicoes = {
+            cliente: await this.clinicaService.findAll({clientes: new ObjectId(user._id)}, { _id: 1 } ),
+            gerente: await this.clinicaService.findAll({gerentes: new ObjectId(user._id)}, { _id: 1 } ),
+            medico: await this.clinicaService.findAll({medicos: new ObjectId(user._id)}, { _id: 1 } ),
+            secretario: await this.clinicaService.findAll({secretarios: new ObjectId(user._id)}, { _id: 1 } )
+        };
+
+        user.atribuicoes.cliente = user.atribuicoes.cliente.map(v => v._id);
+        user.atribuicoes.gerente = user.atribuicoes.gerente.map(v => v._id);
+        user.atribuicoes.medico = user.atribuicoes.medico.map(v => v._id);
+        user.atribuicoes.secretario = user.atribuicoes.secretario.map(v => v._id);
+
+        return user;
     }
+
 
     async findAll(conditions = {}, projection = {}, offset = 0, limit = 0): Promise<Usuario[]> {
         let result = await this.model.aggregate([
@@ -97,8 +139,8 @@ export class UsuarioService extends UserService<Usuario> {
 
         // return await this.model
         //     .find()
-        //     .populate('responsavelPor')
-        //     .populate('usoMedicamentos')
+        //     .populate('reponsavelPor')
+        //     .populate('us            this['success'](user);Medicamentos')
         //     .populate('acontecimentos')
         //     .lean();
 

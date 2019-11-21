@@ -4,6 +4,7 @@ import { jwt as jwtInfo } from '../../../common/config/config.service';
 import * as jwt from 'jsonwebtoken';
 import { UserService } from '../user/user.service';
 import { User } from '../user/user.model';
+import { UsuarioService } from '../../../domain/pedilandia/usuario/usuario.service';
 
 
 
@@ -15,7 +16,7 @@ import { User } from '../user/user.model';
  */
 @Injectable()
 export class JwtGuard implements CanActivate {
-    constructor(private readonly userService: UserService<User>) { }
+    constructor(private readonly userService: UsuarioService) { }
     
     getRequest(context: ExecutionContext) : Request {
         let req = context.switchToHttp().getRequest();
@@ -46,7 +47,10 @@ export class JwtGuard implements CanActivate {
                         }
                     );
 
-                    req['user'] = await this.userService.findByFirebaseUid( payload['uid'] );
+                    req['user'] = await this.userService.findById( payload['id'] );
+
+                    console.log('Usuario enviou requisição...:');
+                    console.log(req['user']);
                 }
             }
         } catch(e) {

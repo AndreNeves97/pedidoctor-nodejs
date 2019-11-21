@@ -3,7 +3,7 @@ import { Resolver, Query, Args, Mutation, Subscription, Context } from '@nestjs/
 import { UseGuards, SetMetadata } from '@nestjs/common';
 import { Roles, RolesGuard } from '../../../common/security/user/roles.guard';
 import { UserHaveAccessRule } from '../../../common/security/user/user-have-access.rule.guard';
-import { UserInputRef } from '../../../common/security/user/user.model';
+import { UserInputRef, User } from '../../../common/security/user/user.model';
 
 import { ConsultaAgendamento, ConsultaAgendamentoInput, SolicitacaoAgendamentoInput, ConsultaAgendamentoUpdate } from './consulta-agendamento.model';
 import { ConsultaAgendamentoService } from './consulta-agendamento.service';
@@ -19,8 +19,21 @@ export class ConsultaAgendamentoResolver {
 
     @Query(returns => [ ConsultaAgendamento ])
     @Roles('user', 'cliente', 'gerente')
-    async agendamentos () {
-        return await this.service.findAll();
+    async agendamentos (
+        @Context() ctx
+    ) {
+        const user : User = ctx.req.user;
+
+        const conditions = {};
+
+        if(!user.roles.includes('admin')) {
+            conditions['paciente'] = user._id;
+        }
+
+
+
+        return await this.service.findAll(conditions);
+
     }
 
     @Query(returns => ConsultaAgendamento)

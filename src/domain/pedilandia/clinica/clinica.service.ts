@@ -20,13 +20,20 @@ export class ClinicaService {
             .lean();
     }
 
-    async findAll (): Promise<Clinica[]> {
-        return await this.model
-            .find()
+    async findAll (conditions = {}, projection = {}): Promise<Clinica[]> {
+        const query = this.model
+            .find(conditions, projection)
+
+
+        if(Object.keys(projection).length == 0) {
+            query
             .populate('secretarios')
             .populate('medicos')
             .populate('enfermeiros')
             .populate('clientes')
+        }
+
+        return await query
             .sort({ nome: 'asc' })
             .lean();
     }

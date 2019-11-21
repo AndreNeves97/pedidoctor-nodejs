@@ -6,6 +6,8 @@ import { AuthService } from './common/security/auth/auth.service';
 import { ConfigService } from './common/config/config.service';
 import { UserService } from './common/security/user/user.service';
 import { User } from './common/security/user/user.model';
+import { UsuarioService } from './domain/pedilandia/usuario/usuario.service';
+import { Usuario } from './domain/pedilandia/usuario/usuario.model';
 
 
 
@@ -14,7 +16,7 @@ export class AppController {
     constructor(
         private readonly service: AppService,
         private readonly authService: AuthService,
-        private readonly userService: UserService<User>,
+        private readonly userService: UsuarioService,
         private readonly configService: ConfigService
     ) { }
 
@@ -27,17 +29,32 @@ export class AppController {
     @Post('login')
     @HttpCode(200)
     async loginFirebase(@Request() req) {
-        const user : User = await this.userService.findOrCreateFromFirebase(req.user);
-        const {_id, nome, email, fotoUrl, roles} = user;
-
+        const user : Usuario = await this.userService.findOrCreateFromFirebase(req.user);
+        const {_id, nome, email, fotoUrl, roles, atribuicoes} = user;
 
         const jwt = await this.authService.login(user);
 
-        console.log(jwt);
+        console.log(jwt, user);
 
         return {
             jwt,
-            user : {_id,  nome, email, fotoUrl, roles}    
+            user : {_id,  nome, email, fotoUrl, roles, atribuicoes}    
+        }
+    }
+
+    @UseGuards(AuthGuard('local'))
+    @Post('login-email')
+    @HttpCode(200)
+    async loginEmail(@Request() req) {
+        const user : Usuario = req.user;
+        const {_id, nome, email, fotoUrl, roles, atribuicoes} = user;
+
+        const jwt = await this.authService.login(user);
+
+
+        return {
+            jwt,
+            user : {_id,  nome, email, fotoUrl, roles, atribuicoes}    
         }
     }
 

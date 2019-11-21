@@ -156,7 +156,8 @@ import { ConsultaAgendamentoResolver } from './consulta-agendamento/consulta-age
   exports: [
     // userModelModule,
     TypegooseModule,
-    UsuarioService
+    UsuarioService,
+    ClinicaService
   ],
   providers: [
 
