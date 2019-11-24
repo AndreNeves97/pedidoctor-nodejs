@@ -40,6 +40,7 @@ import { ClinicaDTO } from './clinica/clinica.dto';
 import { ConsultaAgendamentoDTO } from './consulta-agendamento/consulta-agendamento.dto';
 import { ConsultaAgendamentoService } from './consulta-agendamento/consulta-agendamento.service';
 import { ConsultaAgendamentoResolver } from './consulta-agendamento/consulta-agendamento.resolver';
+import { MedicamentoDosagemService } from './medicamento-dosagem/medicamento-dosagem.service';
 
 @Module({
   imports: [
@@ -184,6 +185,7 @@ import { ConsultaAgendamentoResolver } from './consulta-agendamento/consulta-age
     UsuarioService,
     ConsultaAgendamentoService,
     ConsultaAgendamentoResolver,
+    MedicamentoDosagemService,
   
   ]
 })
