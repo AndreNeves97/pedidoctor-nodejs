@@ -20,7 +20,7 @@ export class MedicamentoService {
             .lean();
     }
 
-    async findAll (): Promise<Medicamento> {
+    async findAll (): Promise<Medicamento[]> {
         return await this.model
             .find()
             .populate({

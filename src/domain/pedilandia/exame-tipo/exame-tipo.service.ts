@@ -17,7 +17,7 @@ export class ExameTipoService {
             .lean();
     }
 
-    async findAll ( ): Promise<ExameTipo> {
+    async findAll ( ): Promise<ExameTipo[]> {
         return await this.model
             .find()
             .sort({ nome : 'asc' })

@@ -16,7 +16,7 @@ export class SintomaService {
             .lean();
     }
 
-    async findAll (conditions = {}, projection = {}, offset = 0, limit = 0): Promise<Sintoma> {
+    async findAll (conditions = {}, projection = {}, offset = 0, limit = 0): Promise<Sintoma[]> {
         return this.model
             .find(conditions, projection)
             .sort({ nome : 'asc' })
