@@ -49,17 +49,20 @@ export class UsuarioService extends UserService<Usuario> {
             .populate('acontecimentos')
             .lean();
 
-        user.atribuicoes = {
-            cliente: await this.clinicaService.findAll({clientes: new ObjectId(user._id)}, { _id: 1 } ),
-            gerente: await this.clinicaService.findAll({gerentes: new ObjectId(user._id)}, { _id: 1 } ),
-            medico: await this.clinicaService.findAll({medicos: new ObjectId(user._id)}, { _id: 1 } ),
-            secretario: await this.clinicaService.findAll({secretarios: new ObjectId(user._id)}, { _id: 1 } )
-        };
+        if(user != null && user._id != null) {
+            user.atribuicoes = {
+                cliente: await this.clinicaService.findAll({clientes: new ObjectId(user._id)}, { _id: 1 } ),
+                gerente: await this.clinicaService.findAll({gerentes: new ObjectId(user._id)}, { _id: 1 } ),
+                medico: await this.clinicaService.findAll({medicos: new ObjectId(user._id)}, { _id: 1 } ),
+                secretario: await this.clinicaService.findAll({secretarios: new ObjectId(user._id)}, { _id: 1 } )
+            };
 
-        user.atribuicoes.cliente = user.atribuicoes.cliente.map(v => v._id);
-        user.atribuicoes.gerente = user.atribuicoes.gerente.map(v => v._id);
-        user.atribuicoes.medico = user.atribuicoes.medico.map(v => v._id);
-        user.atribuicoes.secretario = user.atribuicoes.secretario.map(v => v._id);
+            user.atribuicoes.cliente = user.atribuicoes.cliente.map(v => v._id);
+            user.atribuicoes.gerente = user.atribuicoes.gerente.map(v => v._id);
+            user.atribuicoes.medico = user.atribuicoes.medico.map(v => v._id);
+            user.atribuicoes.secretario = user.atribuicoes.secretario.map(v => v._id);
+        }
+        
 
         return user;
     }
