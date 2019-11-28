@@ -49,6 +49,7 @@ export class UsuarioService extends UserService<Usuario> {
             .populate('acontecimentos')
             .lean();
 
+
         if(user != null && user._id != null) {
             user.atribuicoes = {
                 cliente: await this.clinicaService.findAll({clientes: new ObjectId(user._id)}, { _id: 1 } ),
@@ -62,8 +63,8 @@ export class UsuarioService extends UserService<Usuario> {
             user.atribuicoes.medico = user.atribuicoes.medico.map(v => v._id);
             user.atribuicoes.secretario = user.atribuicoes.secretario.map(v => v._id);
         }
-        
 
+        console.log(user);
         return user;
     }
 

@@ -39,8 +39,8 @@ describe('MedicamentoDosagemService', () => {
     it('Teste 5', () => {
 
         expect(
-            service.calculoDosagem(4, 0, 6)
-        ).toBe('Posologia: 1 ml de 12 em 12 horas.');
+            service.calculoDosagem(4, 0, 10)
+        ).toBe('Posologia: 1,5 ml de 12 em 12 horas.');
 
     });
 
