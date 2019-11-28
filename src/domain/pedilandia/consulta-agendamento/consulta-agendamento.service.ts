@@ -21,7 +21,7 @@ export class ConsultaAgendamentoService {
 
     async findAll(conditions = {}, projection = {}, offset = 0, limit = 0) : Promise<ConsultaAgendamento[]> {
         return await this.getBaseFindQuery(conditions, projection)
-            .sort({dataAgendada: 1})
+            .sort({dataAgendada: -1})
             .skip(offset)
             .limit(limit)
             .lean();
