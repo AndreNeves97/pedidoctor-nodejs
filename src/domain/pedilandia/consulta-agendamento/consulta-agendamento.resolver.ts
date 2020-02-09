@@ -24,10 +24,21 @@ export class ConsultaAgendamentoResolver {
     ) {
         const user : User = ctx.req.user;
 
-        const conditions = {};
+        const conditions = {
+        };
+
 
         if(!user.roles.includes('admin')) {
-            conditions['paciente'] = user._id;
+            conditions['$or'] = [ ];
+            
+            conditions['$or'].push({
+                paciente: user._id
+            });
+
+            conditions['$or'].push({
+                medico: user._id
+            });
+
         }
 
 

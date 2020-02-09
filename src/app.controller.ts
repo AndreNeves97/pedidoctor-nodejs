@@ -30,15 +30,14 @@ export class AppController {
     @HttpCode(200)
     async loginFirebase(@Request() req) {
         const user : Usuario = await this.userService.findOrCreateFromFirebase(req.user);
-        const {_id, nome, email, fotoUrl, roles, atribuicoes} = user;
+        const {_id, nome, email, fotoUrl, roles, atribuicoes, isPaciente} = user;
 
         const jwt = await this.authService.login(user);
 
-        console.log(jwt, user);
 
-        return {
+        return { 
             jwt,
-            user : {_id,  nome, email, fotoUrl, roles, atribuicoes}    
+            user : {_id,  nome, email, fotoUrl, roles, atribuicoes, isPaciente}    
         }
     }
 
@@ -47,14 +46,14 @@ export class AppController {
     @HttpCode(200)
     async loginEmail(@Request() req) {
         const user : Usuario = req.user;
-        const {_id, nome, email, fotoUrl, roles, atribuicoes} = user;
+        const {_id, nome, email, fotoUrl, roles, atribuicoes, isPaciente} = user;
 
         const jwt = await this.authService.login(user);
 
 
         return {
             jwt,
-            user : {_id,  nome, email, fotoUrl, roles, atribuicoes}    
+            user : {_id,  nome, email, fotoUrl, roles, atribuicoes, isPaciente}    
         }
     }
 

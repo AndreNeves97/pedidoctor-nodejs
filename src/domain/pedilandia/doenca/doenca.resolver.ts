@@ -15,7 +15,7 @@ export class DoencaResolver {
     async doencas () {
         return await this.service.findAll();
     }
-
+    
     @Query(returns => Doenca)
     @Roles('user', 'cliente', 'gerente')
     async doenca ( @Args('id') id: string ) {
