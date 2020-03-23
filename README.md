@@ -1,49 +1,73 @@
 
+# Pedidoctor
 
-# Parâmetros
+Sistema que tem como objetivo centralizar a marcação de consultas para diferentes clínicas médicas
 
-## Usuários do sistema
-
-- Administrador de clínica
-    - Ator que coordena as funcionalidades que requerem credenciais mais elevadas. Está no topo da hierarquia de permissões do sistema no contexto de uma clínica médica.
-
-    - Método de autorização: Deve ter um atributo que indique que o ator é administrador de tal clínica
+Backend (Node.js): https://github.com/AndreNeves97/pedidoctor-nodejs
+Frontend (Angular): https://github.com/AndreNeves97/pedidoctor-angular
 
 
-- Secretário 
-    - Ator que realiza funções de agendamento e que opera o núcleo do sistema, para organizar horários dos pacientes  
+## Imagens
 
-    - Método de autorização: Deve ter um atributo que indique que o ator é secretário de tal clínica
+### Marcação de consultas
+![Marcação de consultas](img/pedidoctor-1.png)
 
+![Marcação de consultas](img/pedidoctor-2.png)
 
-- Enfermeiro
-    - Ator que tem acesso às informações sobre os pacientes e pode inserir informações sobre novas consultas realizadas
-    
-    - Método de autorização: Deve ter um atributo que indique que o ator é enfermeiro de tal clínica
+<br>
 
+### Dashboard
+![Marcação de consultas](img/pedidoctor-3.png)
 
-- Médico
-    - Ator que tem acesso às informações dos pacientes e pode inserir informações sobre novas consultas realizadas. 
+<br>
 
-    - Método de autorização: Deve ter um atributo que indique que o ator é médico de tal clínica
-    
-        
-- Pais de crianças
-    - Ator que tem acesso às informações inseridas sobre as consultas realizadas em seu filho, além de ter uso de inserção de algumas informações úteis a respeito do desenvolvimento do mesmo &
-        Variável
-        
-    - Método de autorização: Deve ter um atributo que indique que o ator é responsável por tal paciênte
-    
+### Cadastros gerais
+![Marcação de consultas](img/pedidoctor-4.png)
 
 
-- Adm. do sistema
-    - Ator que tem acesso total à todos os controles do sistema. Esse ator faz parte do núcleo de analista de sistemas e gerencial da empresa que fornece o Software como um Serviço 
+<br>
 
-    - Método de autorização: Role 'admin'
+### Cadastro de clínicas
+![Marcação de consultas](img/pedidoctor-5.png)
 
 
 
-## Description
+## Instalação de dependências
+
+```bash
+$ npm install
+```
+
+
+
+## Execução em desenvolvimento
+
+```bash
+# Sem debug
+$ npm run start:dev
+
+# Com debug
+$ npm run start:debug
+
+```
+
+
+
+## Execução em produção
+
+```bash
+# Compilação
+$ npm run build
+
+# Execução
+$ npm run start
+
+```
+
+
+
+
+## Ferramentas utilizadas
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
