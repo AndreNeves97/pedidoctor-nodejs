@@ -4,8 +4,6 @@ import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './common/security/auth/auth.service';
 import { ConfigService } from './common/config/config.service';
-import { UserService } from './common/security/user/user.service';
-import { User } from './common/security/user/user.model';
 import { UsuarioService } from './domain/pedilandia/usuario/usuario.service';
 import { Usuario } from './domain/pedilandia/usuario/usuario.model';
 

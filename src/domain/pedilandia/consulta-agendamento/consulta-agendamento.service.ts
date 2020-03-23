@@ -28,7 +28,6 @@ export class ConsultaAgendamentoService {
     }
 
     async create(obj: ConsultaAgendamentoInput): Promise<ConsultaAgendamento> {
-        console.log(obj)
         
         const created = await this.model.create({
             ...obj

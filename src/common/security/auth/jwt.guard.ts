@@ -49,8 +49,7 @@ export class JwtGuard implements CanActivate {
 
                     req['user'] = await this.userService.findById( payload['id'] );
 
-                    console.log('Usuario enviou requisição...:');
-                    console.log(req['user']);
+                    
                 }
             }
         } catch(e) {

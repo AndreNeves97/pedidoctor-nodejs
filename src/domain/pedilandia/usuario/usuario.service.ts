@@ -64,7 +64,6 @@ export class UsuarioService extends UserService<Usuario> {
             user.atribuicoes.secretario = user.atribuicoes.secretario.map(v => v._id);
         }
 
-        console.log(user);
         return user;
     }
 
@@ -136,8 +135,7 @@ export class UsuarioService extends UserService<Usuario> {
             }
         )
 
-        // console.log(result);
-
+        
         return result;
 
 

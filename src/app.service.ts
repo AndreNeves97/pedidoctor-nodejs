@@ -11,7 +11,7 @@ export class AppService {
 
     }
 
-    private msg = 'Página inicial do servidor DALPHAM';
+    private msg = 'Página inicial do servidor';
 
 
     index() {

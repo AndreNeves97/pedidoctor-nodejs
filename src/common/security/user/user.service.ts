@@ -31,13 +31,13 @@ export abstract class UserService<T extends User> {
 
 
     async findByFirebaseUid(uid: string): Promise<T> {
-        const filter = {firebaseUid: uid};
+        const filter: any = {firebaseUid: uid};
 
         return await this.userModel.findOne(filter).lean();
     }
 
     async findByEmail(email: string ) : Promise<T> {
-        const filter = {email: email};
+        const filter: any = {email: email};
 
         return await this.userModel.findOne(filter).lean();
     }

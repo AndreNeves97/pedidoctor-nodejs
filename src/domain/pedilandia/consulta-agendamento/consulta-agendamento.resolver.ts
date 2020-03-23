@@ -81,7 +81,7 @@ export class ConsultaAgendamentoResolver {
         @Context() ctx 
     ) {
 
-        console.log(obj, ctx.req.user._id)
+        
 
         return await this.service.create({
             ...obj,
