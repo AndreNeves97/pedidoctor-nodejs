@@ -3,8 +3,8 @@
 
 Sistema que tem como objetivo centralizar a marcação de consultas para diferentes clínicas médicas
 
-Backend (Node.js): https://github.com/AndreNeves97/pedidoctor-nodejs
-Frontend (Angular): https://github.com/AndreNeves97/pedidoctor-angular
+- Backend (Node.js): https://github.com/AndreNeves97/pedidoctor-nodejs
+- Frontend (Angular): https://github.com/AndreNeves97/pedidoctor-angular
 
 
 ## Imagens
