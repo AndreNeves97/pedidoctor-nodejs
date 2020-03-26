@@ -5,13 +5,13 @@ import { DomainService } from './domain/domain.service';
 @Injectable()
 export class AppService {
     constructor(
-        private monitoring: MonitoringService,
-        private domain : DomainService
+        public monitoring: MonitoringService,
+        public domain : DomainService
     ) {
 
     }
 
-    private msg = 'Página inicial do servidor';
+    public msg = 'Página inicial do servidor';
 
 
     index() {

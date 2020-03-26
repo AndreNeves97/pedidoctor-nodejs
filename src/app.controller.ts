@@ -12,10 +12,10 @@ import { Usuario } from './domain/pedilandia/usuario/usuario.model';
 @Controller()
 export class AppController {
     constructor(
-        private readonly service: AppService,
-        private readonly authService: AuthService,
-        private readonly userService: UsuarioService,
-        private readonly configService: ConfigService
+        public readonly service: AppService,
+        public readonly authService: AuthService,
+        public readonly userService: UsuarioService,
+        public readonly configService: ConfigService
     ) { }
 
     @Get()

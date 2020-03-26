@@ -13,7 +13,7 @@ async function bootstrap() {
     );
 
     app.enableCors({
-        origin: 'http://localhost:4200'
+        origin: 'https://pedi-doctor.firebaseapp.com'
     });
 
     await app.listen(parseInt(process.env.PORT) || 3000, '0.0.0.0');

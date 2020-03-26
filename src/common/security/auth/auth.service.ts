@@ -12,8 +12,8 @@ import { UsuarioService } from '../../../domain/pedilandia/usuario/usuario.servi
 export class AuthService {
 
     constructor(
-        private readonly firebaseService: FirebaseService,
-        private readonly userService : UsuarioService
+        public readonly firebaseService: FirebaseService,
+        public readonly userService : UsuarioService
     ) { }
 
 
